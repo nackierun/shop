@@ -16,17 +16,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('products', function() {
-
-    $categories = \App\Category::all();
-
-    foreach($categories as $category) {
-        dump($category->products);
-    }
-
-
-});
-
 
 
 Auth::routes();
