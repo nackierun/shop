@@ -15,6 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('products', function() {
+
+    $categories = \App\Category::all();
+
+    foreach($categories as $category) {
+        dump($category->products);
+    }
+
+
+});
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
