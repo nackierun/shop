@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('caegory_id');
             $table->string('name');
+            $table->text('description')->nullable();
             $table->integer('qty');
             $table->float('price');
             $table->timestamps();
