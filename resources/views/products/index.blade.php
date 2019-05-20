@@ -12,16 +12,18 @@
                         <p>Qty: {{  $product->qty  }}</p>
                         <p>Price: {{  $product->price  }}</p>
                     </div>
-                    @endforeach
+                @endforeach
+                {{$products->render()}}
             </div>
             <div class="col-md-6">
                 <h1><p>Categories</p></h1>
                 <p><a href="{{  url('categories/create')  }}">Add</a></p>
                 @foreach($categories as $category)
-            <div class="table-bordered">
-                <p>{{  $category->name  }}</p>
-            </div>
-                    @endforeach
+                    <div class="table-bordered">
+                        <p>{{  $category->name  }}</p>
+                    </div>
+                @endforeach
+                {{$categories->render()}}
             </div>
         </div>
     </div>
