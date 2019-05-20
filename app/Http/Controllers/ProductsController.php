@@ -33,7 +33,7 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        $categories = Category::all();
+        $categories = Category::paginate(3);
         return view('categories.create',compact('categories'));
     }
 

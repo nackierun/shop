@@ -25,6 +25,7 @@
                   <p>ID: {{  $category->id }}</p>
                   <p>NAME: {{ $category->name }}</p>
                   @endforeach
+              {{$categories->render()}}
           </div>
       </div>
 
