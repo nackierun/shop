@@ -14,16 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/products','ProductsController@index');
 Route::get('categories/create', 'ProductsController@create');
 Route::post('categories/create','ProductsController@store');
-
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
 Route::get('test', function() {
     return 'test';
 });
