@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Route::get('/products','ProductsController@index');
+Route::get('categories/create', 'ProductsController@create');
+Route::post('categories/create','ProductsController@store');
 
 
 Auth::routes();

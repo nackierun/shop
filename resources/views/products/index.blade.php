@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h1>Products</h1>
-                <p><a href="{{  url('/create')  }}">Add</a></p>
+                <p><a href="{{  url('#')  }}">Add</a></p>
                 @foreach($products as $product)
                     <div class="table-bordered">
                         <p>Categories: {{  $product->category->name  }}</p>
@@ -15,8 +15,8 @@
                     @endforeach
             </div>
             <div class="col-md-6">
-                <h1><p>Categories:</p></h1>
-                <p><a href="{{  url('/create')  }}">Add</a></p>
+                <h1><p>Categories</p></h1>
+                <p><a href="{{  url('categories/create')  }}">Add</a></p>
                 @foreach($categories as $category)
             <div class="table-bordered">
                 <p>{{  $category->name  }}</p>

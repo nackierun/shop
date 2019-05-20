@@ -19,7 +19,7 @@ class ProductsController extends Controller
         $products = Product::all();
         $categories = Category::all();
         //
-        return view('products',compact('products','categories'));
+        return view('products.index',compact('products','categories'));
     }
 
     /**
@@ -30,6 +30,8 @@ class ProductsController extends Controller
     public function create()
     {
         //
+        $categories = Category::all();
+        return view('categories.create',compact('categories'));
     }
 
     /**
@@ -41,6 +43,13 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //
+        $data = request()->validate([
+            'name'=>'required|min:3',
+        ]);
+        $categories = new Category($data);
+        //$categories->name = request('name');
+        $categories->save();
+        redirect('categories.create');
     }
 
     /**

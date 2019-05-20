@@ -73,12 +73,15 @@
     </style>
 </head>
 <body>
+@include('layouts.nav')
 <div id="app">
 
+    <div class="container">
+        <main class="py-4">
+            @yield('content')
+        </main>
+    </div>
 
-    <main class="py-4">
-        @yield('content')
-    </main>
 </div>
 </body>
 </html>
