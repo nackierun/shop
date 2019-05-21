@@ -5,25 +5,33 @@
             <div class="col-md-6">
                 <h1>Products</h1>
                 <p><a href="{{  url('#')  }}">Add</a></p>
-                @foreach($products as $product)
-                    <div class="table-bordered">
-                        <p>Categories: {{  $product->category->name  }}</p>
-                        <p>Products :{{  $product->name  }}</p>
-                        <p>Qty: {{  $product->qty  }}</p>
-                        <p>Price: {{  $product->price  }}</p>
-                    </div>
-                @endforeach
+
+                    <table class="table table-striped">
+                        <tr>
+                        <th>Categories</th>
+                        <th>Products</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        </tr>
+                        @foreach($products as $product)
+                        <tr>
+                            <td>
+                                {{  $product->category->name  }}
+                            </td>
+                            <td>
+                                {{  $product->name  }}
+                            </td>
+                            <td>
+                                {{  $product->qty  }}
+                            </td>
+                            <td>
+                                {{  $product->price  }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </table>
+
                 {{$products->render()}}
-            </div>
-            <div class="col-md-6">
-                <h1><p>Categories</p></h1>
-                <p><a href="{{  url('categories/create')  }}">Add</a></p>
-                @foreach($categories as $category)
-                    <div class="table-bordered">
-                        <p>{{  $category->name  }}</p>
-                    </div>
-                @endforeach
-                {{$categories->render()}}
             </div>
         </div>
     </div>

@@ -15,8 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/products','ProductsController@index');
-Route::get('categories/create', 'ProductsController@create');
-Route::post('categories/create','ProductsController@store');
+Route::get('/categories','CategoriesController@index');
+Route::get('categories/create', 'CategoriesController@create');
+Route::post('categories/create','CategoriesController@store');
+Route::get('categories/edit{id}','CategoriesController@edit');
+Route::post('categories/edit{id}', 'CategoriesController@update');
+Route::get('categories/show{id}','CategoriesController@show');
+Route::get('categories/delete{id}','CategoriesController@destroy');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('test', function() {

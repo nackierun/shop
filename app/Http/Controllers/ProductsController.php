@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use DemeterChain\C;
 use Illuminate\Filesystem\Cache;
 use Illuminate\Http\Request;
 use App\Product;
@@ -19,10 +20,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(1);
-        $categories = Category::paginate(3);
+        $products = Product::paginate(3);
         //
-        return view('products.index',compact('products','categories'));
+        return view('products.index',compact('products',));
     }
 
     /**
@@ -33,8 +33,6 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        $categories = Category::paginate(3);
-        return view('categories.create',compact('categories'));
     }
 
     /**
@@ -46,13 +44,6 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //
-        $data = request()->validate([
-            'name'=>'required|min:3',
-        ]);
-        $categories = new Category($data);
-        //$categories->name = request('name');
-        $categories->save();
-        redirect('categories.create');
     }
 
     /**

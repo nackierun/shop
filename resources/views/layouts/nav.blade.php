@@ -8,7 +8,7 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link active" href="{{ url('home') }}">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="{{  url('products')  }}">Products</a>
-                <a class="nav-item nav-link" href="{{  url('categories/create')  }}">Categories</a>
+                <a class="nav-item nav-link" href="{{  url('categories')  }}">Categories</a>
             </div>
         </div>
         <ul class="navbar-nav ml-auto">
