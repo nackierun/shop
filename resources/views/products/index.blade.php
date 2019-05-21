@@ -15,15 +15,17 @@
                 @endforeach
                 {{$products->render()}}
             </div>
-            <div class="col-md-6">
-                <h1><p>Categories</p></h1>
-                <p><a href="{{  url('categories/create')  }}">Add</a></p>
-                @foreach($categories as $category)
-                    <div class="table-bordered">
-                        <p>{{  $category->name  }}</p>
-                    </div>
-                @endforeach
-                {{$categories->render()}}
+            <div class="row">
+                <div class="col-md-12">
+                    <h1><p>Categories</p></h1>
+                    <p><a href="{{  url('categories/create')  }}">Add</a></p>
+                    @foreach($categories as $category)
+                        <div class="table-bordered">
+                            <p>{{  $category->name  }}</p>
+                        </div>
+                    @endforeach
+                    {{$categories->render()}}
+                </div>
             </div>
         </div>
     </div>

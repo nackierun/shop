@@ -1,33 +1,56 @@
 @extends('layouts.myapp')
 @section('content')
-  <div class="container">
-      <div class="row">
-          <div class="col-md-6">
-              <h1>Create categories</h1>
-              <form action="/categories/create"  method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Create categories</h1>
+                <form action="/categories/create" method="post">
 
-                  <div class="form-group">
-                      <input type="text" name="name" value="{{  old('name')  }}">
-                  </div>
-                  <div>
-                      <button class="btn btn-primary">Save</button>
-                  </div>
-                  @csrf
-                  {{ $errors->first('name') }}
+                    <div class="form-group">
+                        <input type="text" name="name" value="{{  old('name')  }}" placeholder="Category name">
+                    </div>
+                    <div>
+                        <button class="btn btn-primary">Save</button>
+                    </div>
+                    @csrf
+                    {{ $errors->first('name') }}
 
-              </form>
-          </div>
-      </div>
-      <div class="row">
-          <div class="col-md-6">
-              <h2>result</h2>
-              @foreach($categories as $category)
-                  <p>ID: {{  $category->id }}</p>
-                  <p>NAME: {{ $category->name }}</p>
-                  @endforeach
-              {{$categories->render()}}
-          </div>
-      </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <h2>result</h2>
 
-  </div>
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            <div class="badge badge-success">Id</div>
+                        </th>
+                        <th>
+                            <div class="badge badge-info">Name</div>
+                        </th>
+                        <th>
+                            <div class="badge badge-warning">Action</div>
+                        </th>
+                    </tr>
+                    @foreach($categories as $category)
+                        <tr>
+                            <td>
+                                {{  $category->id }}
+                            </td>
+                            <td>
+                                {{ $category->name }}
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" href="{{ url('/categories/edit'.$category->id) }}">Edit</a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
+
+
+                {{$categories->render()}}
+            </div>
+
+        </div>
+    </div>
 @stop

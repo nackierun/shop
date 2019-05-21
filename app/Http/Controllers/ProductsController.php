@@ -52,7 +52,7 @@ class ProductsController extends Controller
         $categories = new Category($data);
         //$categories->name = request('name');
         $categories->save();
-        redirect('categories.create');
+        return redirect('categories.create');
     }
 
     /**
@@ -75,6 +75,8 @@ class ProductsController extends Controller
     public function edit($id)
     {
         //
+        $categories = Category::findOrFail($id);
+        return view('categories.edit',['categories'=>$categories]);
     }
 
     /**
@@ -87,6 +89,10 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $categories = Category::find($id);
+        $categories->name = $request->name;
+        $categories->save();
+        return redirect()->action('ProductsController@create');
     }
 
     /**
