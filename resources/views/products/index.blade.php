@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Products<a class="badge badge-success" href="{{  url('products/create')  }}">Add</a></h1>
-                <table class="table table-striped">
+                <table class="table table-bordered table-striped">
                     <tr>
                         <th>Products</th>
                         <th>Categories</th>
@@ -31,9 +31,9 @@
                                 {{  $product->price  }}
                             </td>
                             <td>
-                                <a href="" class="btn btn-primary">Detail</a>
-                                <a href="" class="btn btn-primary">Edit</a>
-                                <a href="" class="btn btn-danger">Delete</a>
+                                <a href="{{ url('/products/show'.$product->id) }}" class="btn btn-primary">Detail</a>
+                                <a href="{{ url('/products/edit'.$product->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url('products/delete'.$product->id) }}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     @endforeach

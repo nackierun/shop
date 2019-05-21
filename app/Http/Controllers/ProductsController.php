@@ -22,7 +22,7 @@ class ProductsController extends Controller
     {
         $products = Product::paginate(3);
         //
-        return view('products.index',compact('products',));
+        return view('products.index',compact('products'));
     }
 
     /**
@@ -67,6 +67,8 @@ class ProductsController extends Controller
     public function show($id)
     {
         //
+        $products = Product::find($id);
+        return view('products.show',compact('products'));
     }
 
     /**
@@ -78,6 +80,9 @@ class ProductsController extends Controller
     public function edit($id)
     {
         //
+        $products = Product::findOrFail($id);
+        $categories = Category::all();
+        return view('products.edit',['products'=>$products,'categories'=>$categories]);
     }
 
     /**
@@ -90,6 +95,14 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $products = Product::find($id);
+        $products->name = $request->name;
+        //$products->category_id = $request->category_id;
+        $products->description = $request->description;
+        $products->qty = $request->qty;
+        $products->price = $request->price;
+        $products->save();
+        return redirect()->action('ProductsController@index');
     }
 
     /**
@@ -101,5 +114,8 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+        $products = Product::find($id);
+        $products->delete();
+        return redirect()->action('ProductsController@index');
     }
 }
