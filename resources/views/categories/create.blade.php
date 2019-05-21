@@ -8,13 +8,12 @@
 
                     <div class="form-group">
                         <input type="text" name="name" value="{{  old('name')  }}" placeholder="Category name">
+                        {{ $errors->first('name') }}
                     </div>
                     <div>
                         <button class="btn btn-primary">Save</button>
                     </div>
                     @csrf
-                    {{ $errors->first('name') }}
-
                 </form>
             </div>
         </div>
