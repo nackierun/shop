@@ -5,7 +5,7 @@
             <div class="col-md-6">
                 <h1>Products</h1>
                 <p><a href="{{  url('#')  }}">Add</a></p>
-                @foreach($products as $product)
+
                     <table class="table table-striped">
                         <tr>
                         <th>Categories</th>
@@ -13,6 +13,7 @@
                         <th>Qty</th>
                         <th>Price</th>
                         </tr>
+                        @foreach($products as $product)
                         <tr>
                             <td>
                                 {{  $product->category->name  }}
@@ -27,8 +28,9 @@
                                 {{  $product->price  }}
                             </td>
                         </tr>
+                        @endforeach
                     </table>
-                @endforeach
+
                 {{$products->render()}}
             </div>
         </div>

@@ -3,16 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use DemeterChain\C;
-use Illuminate\Filesystem\Cache;
-use Illuminate\Http\Request;
 use App\Product;
+use Illuminate\Http\Request;
 
-class ProductsController extends Controller
+class CategoriesController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -20,9 +15,9 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(3);
+        $categories = Category::paginate(3);
         //
-        return view('products.index',compact('products',));
+        return view('categories.index',compact('categories',));
     }
 
     /**
@@ -33,6 +28,8 @@ class ProductsController extends Controller
     public function create()
     {
         //
+        $categories = Category::paginate(3);
+        return view('categories.create',compact('categories'));
     }
 
     /**
@@ -44,6 +41,13 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //
+        $data = request()->validate([
+            'name'=>'required|min:3',
+        ]);
+        $categories = new Category($data);
+        //$categories->name = request('name');
+        $categories->save();
+        return redirect()->action('CategoriesController@index');
     }
 
     /**
@@ -55,6 +59,8 @@ class ProductsController extends Controller
     public function show($id)
     {
         //
+        $categories = Category::find($id);
+        return view('categories.show',compact('categories'));
     }
 
     /**
@@ -66,6 +72,8 @@ class ProductsController extends Controller
     public function edit($id)
     {
         //
+        $categories = Category::findOrFail($id);
+        return view('categories.edit',['categories'=>$categories]);
     }
 
     /**
@@ -78,6 +86,10 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $categories = Category::find($id);
+        $categories->name = $request->name;
+        $categories->save();
+        return redirect()->action('CategoriesController@index');
     }
 
     /**
@@ -89,5 +101,8 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+        $categories = Category::find($id);
+        $categories->delete();
+        return redirect()->action('CategoriesController@index');
     }
 }
