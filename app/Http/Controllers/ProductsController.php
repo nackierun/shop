@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use DemeterChain\C;
 use Illuminate\Filesystem\Cache;
 use Illuminate\Http\Request;
 use App\Product;
@@ -19,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(1);
+        $products = Product::paginate(3);
         $categories = Category::paginate(3);
         //
         return view('products.index',compact('products','categories'));
@@ -64,6 +65,8 @@ class ProductsController extends Controller
     public function show($id)
     {
         //
+        $categories = Category::find($id);
+        return view('categories.show',compact('categories'));
     }
 
     /**
@@ -104,5 +107,8 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+        $categories = Category::find($id);
+        $categories->delete();
+        return redirect('categories/create');
     }
 }

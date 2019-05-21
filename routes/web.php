@@ -19,6 +19,8 @@ Route::get('categories/create', 'ProductsController@create');
 Route::post('categories/create','ProductsController@store');
 Route::get('categories/edit{id}','ProductsController@edit');
 Route::post('categories/edit{id}', 'ProductsController@update');
+Route::get('categories/show{id}','ProductsController@show');
+Route::get('categories/delete{id}','ProductsController@destroy');
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('test', function() {

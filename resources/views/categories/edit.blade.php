@@ -6,7 +6,7 @@
             <form action="{{ url('categories/edit'.$categories->id) }}" method="post">
 
                 <div class="form-group">
-                    <input type="text" name="name" value="{{ $categories->name }}" placeholder="">
+                    <input type="text" name="name" value="{{ $categories->name }}">
                 </div>
                 <div>
                     <button class="btn btn-primary">Save</button>

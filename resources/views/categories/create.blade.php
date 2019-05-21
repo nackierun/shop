@@ -42,6 +42,8 @@
                             </td>
                             <td>
                                 <a class="btn btn-primary" href="{{ url('/categories/edit'.$category->id) }}">Edit</a>
+                                <a class="btn btn-primary" href="{{ url('/categories/show'.$category->id) }}">Detail</a>
+                                <a class="btn btn-danger" href="{{ url('/categories/delete'.$category->id) }}">Delete</a>
                             </td>
                         </tr>
                     @endforeach
