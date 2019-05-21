@@ -2,24 +2,27 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <h1>Products</h1>
-                <p><a href="{{  url('#')  }}">Add</a></p>
-
-                    <table class="table table-striped">
-                        <tr>
-                        <th>Categories</th>
+            <div class="col-md-12">
+                <h1>Products<a class="badge badge-success" href="{{  url('products/create')  }}">Add</a></h1>
+                <table class="table table-striped">
+                    <tr>
                         <th>Products</th>
-                        <th>Qty</th>
+                        <th>Categories</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
                         <th>Price</th>
-                        </tr>
-                        @foreach($products as $product)
+                        <th>Action</th>
+                    </tr>
+                    @foreach($products as $product)
                         <tr>
+                            <td>
+                                {{  $product->name  }}
+                            </td>
                             <td>
                                 {{  $product->category->name  }}
                             </td>
                             <td>
-                                {{  $product->name  }}
+                                {{ $product->description }}
                             </td>
                             <td>
                                 {{  $product->qty  }}
@@ -27,9 +30,14 @@
                             <td>
                                 {{  $product->price  }}
                             </td>
+                            <td>
+                                <a href="" class="btn btn-primary">Detail</a>
+                                <a href="" class="btn btn-primary">Edit</a>
+                                <a href="" class="btn btn-danger">Delete</a>
+                            </td>
                         </tr>
-                        @endforeach
-                    </table>
+                    @endforeach
+                </table>
 
                 {{$products->render()}}
             </div>

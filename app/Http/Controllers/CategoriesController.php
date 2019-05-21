@@ -33,8 +33,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-        $categories = Category::paginate(3);
-        return view('categories.create', compact('categories'));
+        return view('categories.create');
     }
 
     /**
@@ -50,7 +49,6 @@ class CategoriesController extends Controller
             'name' => 'required|min:3',
         ]);
         $categories = new Category($data);
-        //$categories->name = request('name');
         $categories->save();
         return redirect()->action('CategoriesController@index');
     }
