@@ -3,7 +3,7 @@
     <div class="col-sm-6">
         <h1>Categories<a class="badge badge-success" href="{{ url('categories/create') }}">Add</a></h1>
 
-        <table class="table table-striped">
+        <table class="table table-bordered table-striped">
             <tr>
                 <th>
                     <div class="badge badge-success">Id</div>
@@ -24,8 +24,8 @@
                         {{ $category->name }}
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ url('/categories/edit'.$category->id) }}">Edit</a>
                         <a class="btn btn-primary" href="{{ url('/categories/show'.$category->id) }}">Detail</a>
+                        <a class="btn btn-primary" href="{{ url('/categories/edit'.$category->id) }}">Edit</a>
                         <a class="btn btn-danger" href="{{ url('/categories/delete'.$category->id) }}">Delete</a>
                     </td>
                 </tr>

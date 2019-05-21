@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::get('/products','ProductsController@index');
 Route::get('products/create','ProductsController@create');
 Route::post('products/create','ProductsController@store');
+Route::get('products/show{id}','ProductsController@show');
+Route::get('products/edit{id}','ProductsController@edit');
+Route::post('products/edit{id}','ProductsController@update');
+Route::get('products/delete{id}','ProductsController@destroy');
 //End Products
 //Categories
 Route::get('/categories','CategoriesController@index');
