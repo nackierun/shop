@@ -24,7 +24,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::paginate(3);
         //
-        return view('categories.index', compact('categories',));
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -47,18 +47,23 @@ class CategoriesController extends Controller
     public function store(CategoriesRequest $request)
     {
         //
-        $originalImage = $request->file('image');
-        $resizeImage = Image::make($originalImage);
-        $resizePath = public_path().'/resize/';
-        $originalPath = public_path().'/images/';
-        $resizeImage->save($originalPath.time().$originalImage->getClientOriginalName());
-        $resizeImage->resize(50,50);
-        $resizeImage->save($resizePath.time().$originalImage->getClientOriginalName());
-        //$categories->name = $request->name;
-        $categories = new Category();
-        $categories->filename=time().$originalImage->getClientOriginalName();
-        $categories->save();
-        return redirect()->action('CategoriesController@index');
+        // $originalImage = $request->file('image');
+        // $resizeImage = Image::make($originalImage);
+        // $resizePath = public_path().'/resize/';
+        // $originalPath = public_path().'/images/';
+        // $resizeImage->save($originalPath.time().$originalImage->getClientOriginalName());
+        // $resizeImage->resize(50,50);
+        // $resizeImage->save($resizePath.time().$originalImage->getClientOriginalName());
+        // //$categories->name = $request->name;
+        // $categories = new Category();
+        // $categories->filename=time().$originalImage->getClientOriginalName();
+        // $categories->save();
+        // return redirect()->action('CategoriesController@index');
+
+        \App\Category::create([
+            'name' => request()->name,
+            'image' => $request->file('image')->store('images', 'public'),
+        ]);
     }
 
     /**
