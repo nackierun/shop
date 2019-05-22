@@ -11,6 +11,7 @@
                         <th>Description</th>
                         <th>Quantity</th>
                         <th>Price</th>
+                        <th>Picture</th>
                         <th>Action</th>
                     </tr>
                     @foreach($products as $product)
@@ -29,6 +30,9 @@
                             </td>
                             <td>
                                 {{  $product->price  }}
+                            </td>
+                            <td>
+                                {{ $product->image }}
                             </td>
                             <td>
                                 <a href="{{ url('/products/show'.$product->id) }}" class="btn btn-primary">Detail</a>

@@ -7,6 +7,8 @@ use DemeterChain\C;
 use Illuminate\Filesystem\Cache;
 use Illuminate\Http\Request;
 use App\Product;
+use Intervention\Image\Image;
+use  App\Http\Requests\ProductsRequest;
 
 class ProductsController extends Controller
 {
@@ -43,17 +45,16 @@ class ProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductsRequest $request)
     {
         //
-        $data = request()->validate([
-            'name' => 'required',
-        'category_id' => 'required',
-        'description' => 'required',
-        'qty' => 'required',
-        'price' => 'required',
-    ]);
-        $products = new Product($data);
+        $products = new Product();
+        $products->name = $request->name;
+        //$products->category_id = $request->category_id;
+        $products->description = $request->description;
+        $products->qty = $request->qty;
+        $products->price = $request->price;
+        $products->images = $request->images;
         $products->save();
         return redirect()->action('ProductsController@index');
     }
@@ -92,7 +93,7 @@ class ProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductsRequest $request, $id)
     {
         //
         $products = Product::find($id);

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\CategoriesRequest;
+use Image;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -42,13 +44,19 @@ class CategoriesController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
         //
-        $data = request()->validate([
-            'name' => 'required|min:3',
-        ]);
-        $categories = new Category($data);
+        $originalImage = $request->file('image');
+        $resizeImage = Image::make($originalImage);
+        $resizePath = public_path().'/resize/';
+        $originalPath = public_path().'/images/';
+        $resizeImage->save($originalPath.time().$originalImage->getClientOriginalName());
+        $resizeImage->resize(50,50);
+        $resizeImage->save($resizePath.time().$originalImage->getClientOriginalName());
+        //$categories->name = $request->name;
+        $categories = new Category();
+        $categories->filename=time().$originalImage->getClientOriginalName();
         $categories->save();
         return redirect()->action('CategoriesController@index');
     }
@@ -86,7 +94,7 @@ class CategoriesController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriesRequest $request, $id)
     {
         //
         $categories = Category::find($id);
