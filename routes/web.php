@@ -32,6 +32,14 @@ Route::post('categories/edit{id}', 'CategoriesController@update');
 Route::get('categories/show{id}','CategoriesController@show');
 Route::get('categories/delete{id}','CategoriesController@destroy');
 //End categories
+//Customers
+Route::get('/customers','CustomersController@index');
+Route::get('customers/categories','CustomersController@cat');
+Route::get('customers/categories/show{id}','CustomersController@showcat');
+Route::get('customers/products','CustomersController@products');
+Route::get('customers/products/show{id}','CustomersController@show');
+//end Customers
+//Administrator
 
 Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
