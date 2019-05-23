@@ -11,30 +11,54 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-//Products
-Route::get('/products','ProductsController@index');
-Route::get('products/create','ProductsController@create');
-Route::post('products/create','ProductsController@store');
-Route::get('products/show{id}','ProductsController@show');
-Route::get('products/edit{id}','ProductsController@edit');
-Route::post('products/edit{id}','ProductsController@update');
-Route::get('products/delete{id}','ProductsController@destroy');
-//End Products
-//Categories
-Route::get('/categories','CategoriesController@index');
-Route::get('categories/create', 'CategoriesController@create');
-Route::post('categories/create','CategoriesController@store');
-Route::get('categories/edit{id}','CategoriesController@edit');
-Route::post('categories/edit{id}', 'CategoriesController@update');
-Route::get('categories/show{id}','CategoriesController@show');
-Route::get('categories/delete{id}','CategoriesController@destroy');
-//End categories
+Route::get('/', 'CustomersController@index');
+
+
+
+
+
+//*****Customers*****
+Route::get('/customers','CustomersController@index');
+//category
+Route::get('customers/categories','CustomersController@cat');
+Route::get('customers/categories/show{id}','CustomersController@showcat');
+Route::get('customers/showcat{id}','CustomersController@showcatproducts');
+//product
+Route::get('customers/products','CustomersController@products');
+Route::get('customers/products/show{id}','CustomersController@show');
+//checkout
+Route::get('/checkout{id}','CustomersController@checkout');
+//Cart
+//Route::post('/Cart','CartController');
+//Route::get('/cart','CartController');
+//Route::get('/cart/','CartController');
+//Route::get('/cart/','CartController');
+//end Customers
+
+
+
+
+
+//*****Administrator*****
+Route::get('/admin','AdminController@index');
+//category
+Route::get('admin/categories','CategoriesController@index');
+Route::get('admin/categories/create', 'CategoriesController@create');
+Route::post('admin/categories/create','CategoriesController@store');
+Route::get('admin/categories/edit{id}','CategoriesController@edit');
+Route::post('admin/categories/edit{id}', 'CategoriesController@update');
+Route::get('admin/categories/show{id}','CategoriesController@show');
+Route::get('admin/categories/delete{id}','CategoriesController@destroy');
+//product
+Route::get('admin/products','ProductsController@index');
+Route::get('admin/products/create','ProductsController@create');
+Route::post('admin/products/create','ProductsController@store');
+Route::get('admin/products/show{id}','ProductsController@show');
+Route::get('admin/products/edit{id}','ProductsController@edit');
+Route::post('admin/products/edit{id}','ProductsController@update');
+Route::get('admin/products/delete{id}','ProductsController@destroy');
+//End Admin
 
 Auth::routes();
+
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('test', function() {
-    return 'test';
-});

@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\CategoriesRequest;
+use Image;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class CategoriesController extends Controller
 {
-    public function __construct()
+    /**public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('index','show');
     }
-
+*/
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +24,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::paginate(3);
         //
-        return view('categories.index', compact('categories',));
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -33,7 +35,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -42,15 +44,13 @@ class CategoriesController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
-        //
-        $data = request()->validate([
-            'name' => 'required|min:3',
+        \App\Category::create([
+            'name' => request()->name,
+            //'image' => $request->file('image')->store('images', 'public'),
         ]);
-        $categories = new Category($data);
-        $categories->save();
-        return redirect()->action('CategoriesController@index');
+        return redirect('admin/categories');
     }
 
     /**
@@ -63,7 +63,7 @@ class CategoriesController extends Controller
     {
         //
         $categories = Category::find($id);
-        return view('categories.show', compact('categories'));
+        return view('admin.categories.show', compact('categories'));
     }
 
     /**
@@ -76,7 +76,7 @@ class CategoriesController extends Controller
     {
         //
         $categories = Category::findOrFail($id);
-        return view('categories.edit', ['categories' => $categories]);
+        return view('admin.categories.edit', ['categories' => $categories]);
     }
 
     /**
@@ -86,13 +86,13 @@ class CategoriesController extends Controller
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriesRequest $request, $id)
     {
         //
         $categories = Category::find($id);
         $categories->name = $request->name;
         $categories->save();
-        return redirect()->action('CategoriesController@index');
+        return redirect('admin/categories');
     }
 
     /**
@@ -106,6 +106,6 @@ class CategoriesController extends Controller
         //
         $categories = Category::find($id);
         $categories->delete();
-        return redirect()->action('CategoriesController@index');
+        return redirect('admin/categories');
     }
 }
