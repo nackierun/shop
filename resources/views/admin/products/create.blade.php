@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <h1>Add Products</h1>
-            <form action="/products/create" method="post">
+            <form action="/admin/products/create" method="post">
                 <div class="form-group col-md-12">
                     <p>Name</p>
                     <input type="text" name="name">

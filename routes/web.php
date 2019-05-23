@@ -26,10 +26,10 @@ Route::get('customers/categories/show{id}','CustomersController@showcat');
 Route::get('customers/products','CustomersController@products');
 Route::get('customers/products/show{id}','CustomersController@show');
 //Cart
-Route::post('/Cart','CartController');
-Route::get('/cart','CartController');
-Route::get('/cart/','CartController');
-Route::get('/cart/','CartController');
+//Route::post('/Cart','CartController');
+//Route::get('/cart','CartController');
+//Route::get('/cart/','CartController');
+//Route::get('/cart/','CartController');
 //end Customers
 
 
@@ -55,3 +55,7 @@ Route::get('admin/products/edit{id}','ProductsController@edit');
 Route::post('admin/products/edit{id}','ProductsController@update');
 Route::get('admin/products/delete{id}','ProductsController@destroy');
 //End Admin
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

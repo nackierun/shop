@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <h1>Add Products</h1>
-            <form action="{{ url('products/edit'.$products->id) }}" method="post">
+            <form action="{{ url('admin/products/edit'.$products->id) }}" method="post">
                 <div class="form-group col-md-12">
                     <p>Name</p>
                     <input type="text" name="name" value="{{ $products->name }}">

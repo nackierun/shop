@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-6">
                 <h1>Create categories</h1>
-                <form action="/categories/create" method="post" enctype="multipart/form-data">
+                <form action="/admin/categories/create" method="post" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <input type="text" name="name" value="{{  old('name')  }}" placeholder="Category name">

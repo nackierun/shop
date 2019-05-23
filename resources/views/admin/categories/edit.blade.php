@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-md-6">
             <h1>Create categories</h1>
-            <form action="{{ url('categories/edit'.$categories->id) }}" method="post">
+            <form action="{{ url('admin/categories/edit'.$categories->id) }}" method="post">
 
                 <div class="form-group">
                     <input type="text" name="name" value="{{ $categories->name }}">
