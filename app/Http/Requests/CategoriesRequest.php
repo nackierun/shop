@@ -26,7 +26,7 @@ class CategoriesRequest extends FormRequest
         return [
             //
             'name' => 'required|min:3',
-            'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
+            //'image' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
         ];
     }
 }

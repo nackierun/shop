@@ -28,11 +28,12 @@
                     </td>
                     <td>
 
-                            <img src="{{ $category->image }}" alt="{{ $category->image }}">
+                        <img src="{{ $category->image }}" alt="{{ $category->image }}">
 
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ url('customers/categories/show'.$category->id) }}">Detail</a>
+                        <a class="btn btn-primary"
+                           href="{{ url('customers/categories/show'.$category->id) }}">Detail</a>
                     </td>
                 </tr>
             @endforeach

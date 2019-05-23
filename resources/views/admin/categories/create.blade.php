@@ -10,10 +10,10 @@
                         <input type="text" name="name" value="{{  old('name')  }}" placeholder="Category name">
                         {{ $errors->first('name') }}
                     </div>
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <input type="file" name="image" placeholder="Category name">
-                        {{ $errors->first('image') }}
-                    </div>
+                        {{-- $errors->first('image') --}}
+                    </div>-->
                     <div>
                         <button class="btn btn-primary">Save</button>
                     </div>
