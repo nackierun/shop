@@ -21,6 +21,8 @@
                     </tr>
 
                 </table>
+                <a href="#" class="btn btn-success">ซื้อ</a>
+                <a href="#" class="btn btn-warning">ใส่ในตะกร้า</a>
             </div>
         </div>
     </div>

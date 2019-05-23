@@ -25,7 +25,9 @@
                             </div>
                             <ul class="list-group category_block">
                                 @foreach($categories as $category)
-                                    <li class="list-group-item"><a href="#">{{ $category->name }}</a></li>
+                                    <li class="list-group-item"><a
+                                            href="{{ url('customers/showcat'.$category->id) }}">{{ $category->name }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>
@@ -37,8 +39,8 @@
                                     <h4 class="card-title">{{ $product->name }}</h4>
                                     <h6 class="card-subtitle text-muted">{{ $product->category->name }}</h6>
                                     <p class="card-text p-y-1">${{ $product->price }}</p>
-                                    <a href="#" class="btn btn-primary">ข้อมูล</a>
-                                    <a href="#" class="btn btn-success">ซื้อ</a>
+                                    <a href="{{ url('customers/products/show'.$product->id) }}" class="btn btn-primary">ข้อมูล</a>
+                                    <a href="{{ url('/checkout'.$product->id) }}" class="btn btn-success">ซื้อ</a>
                                     <a href="#" class="btn btn-warning">ใส่ในตะกร้า</a>
                                 </div>
                             </div>

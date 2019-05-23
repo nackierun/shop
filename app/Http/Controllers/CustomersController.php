@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
 use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\Product;
@@ -32,6 +33,17 @@ class CustomersController extends Controller
     {
         $categories = Category::paginate(3);
         return view('customers.categories.index',compact('categories'));
+    }
+    public function showcatproducts($id)
+    {
+        $categories = Category::find($id);
+        $products = Product::find($id);
+        return view('customers.showcat',compact('categories','products'));
+    }
+    public function checkout($id)
+    {
+        $products = Product::find($id);
+        return view('checkout.index',compact('products'));
     }
 
     /**
