@@ -1,7 +1,7 @@
-@extends('layouts.myapp')
+@extends('admin.layouts.app')
 @section('content')
     <div class="col-sm-6">
-        <h1>Categories<a class="badge badge-success" href="{{ url('categories/create') }}">Add</a></h1>
+        <h1>Categories<a class="badge badge-success" href="{{ url('admin/categories/create') }}">Add</a></h1>
 
         <table class="table table-bordered table-striped">
             <tr>

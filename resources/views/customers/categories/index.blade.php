@@ -1,4 +1,4 @@
-@extends('layouts.myapp')
+@extends('customers.layouts.app')
 @section('content')
     <div class="col-sm-6">
         <h1>Categories</h1>
@@ -32,7 +32,7 @@
 
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ url('/categories/show'.$category->id) }}">Detail</a>
+                        <a class="btn btn-primary" href="{{ url('customers/categories/show'.$category->id) }}">Detail</a>
                     </td>
                 </tr>
             @endforeach

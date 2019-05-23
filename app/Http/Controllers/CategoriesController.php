@@ -10,11 +10,11 @@ use Illuminate\Http\Response;
 
 class CategoriesController extends Controller
 {
-    public function __construct()
+    /**public function __construct()
     {
         $this->middleware('auth')->except('index','show');
     }
-
+*/
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +24,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::paginate(3);
         //
-        return view('categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -35,7 +35,7 @@ class CategoriesController extends Controller
     public function create()
     {
         //
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -50,7 +50,7 @@ class CategoriesController extends Controller
             'name' => request()->name,
             'image' => $request->file('image')->store('images', 'public'),
         ]);
-        return redirect()->action('CategoriesController@index');
+        return redirect('admin/categories');
     }
 
     /**
@@ -63,7 +63,7 @@ class CategoriesController extends Controller
     {
         //
         $categories = Category::find($id);
-        return view('categories.show', compact('categories'));
+        return view('admin.categories.show', compact('categories'));
     }
 
     /**
@@ -76,7 +76,7 @@ class CategoriesController extends Controller
     {
         //
         $categories = Category::findOrFail($id);
-        return view('categories.edit', ['categories' => $categories]);
+        return view('admin.categories.edit', ['categories' => $categories]);
     }
 
     /**
@@ -92,7 +92,7 @@ class CategoriesController extends Controller
         $categories = Category::find($id);
         $categories->name = $request->name;
         $categories->save();
-        return redirect()->action('CategoriesController@index');
+        return redirect('admin/categories');
     }
 
     /**
@@ -106,6 +106,6 @@ class CategoriesController extends Controller
         //
         $categories = Category::find($id);
         $categories->delete();
-        return redirect()->action('CategoriesController@index');
+        return redirect('admin/categories');
     }
 }

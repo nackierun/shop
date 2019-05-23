@@ -1,4 +1,4 @@
-@extends('layouts.myapp')
+@extends('admin.layouts.app')
 @section('content')
     <div class="container">
         <div class="row">
@@ -36,8 +36,8 @@
                 </div>
                 <div class="form-group col-md-12">
                     <p>Picture</p>
-                    <input type="file" name="images">
-                    {{ $errors->first('images') }}
+                    <!--<input type="file" name="images">-->
+                    {{-- $errors->first('images') --}}
                 </div>
                 <div>
                     <button class="btn btn-primary">Add</button>

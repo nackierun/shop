@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use DemeterChain\C;
 use Illuminate\Http\Request;
-use App\Product;
-use App\Category;
 
-class CustomersController extends Controller
+class Members extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,20 +14,6 @@ class CustomersController extends Controller
     public function index()
     {
         //
-        $products = Product::paginate(5);
-        return view('customers.index',compact('products'));
-    }
-    public function products()
-    {
-
-        $products = Product::paginate(3);
-        //
-        return view('customers.products.index',compact('products'));
-    }
-    public function cat()
-    {
-        $categories = Category::paginate(3);
-        return view('customers.categories.index',compact('categories'));
     }
 
     /**
@@ -63,13 +46,6 @@ class CustomersController extends Controller
     public function show($id)
     {
         //
-        $products = Product::find($id);
-        return view('customers.products.show',compact('products'));
-    }
-    public function showcat($id)
-    {
-        $categories = Category::find($id);
-        return view('customers.categories.show',compact('categories'));
     }
 
     /**
