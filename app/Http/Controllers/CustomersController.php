@@ -34,27 +34,6 @@ class CustomersController extends Controller
         $categories = Category::paginate(3);
         return view('customers.categories.index',compact('categories'));
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public function showcatproducts($id)
-    {
-
-        $categories = Category::find($id);
-        $products = Product::find($id);
-        return view('customers.showcat',compact('categories','products'));
-    }
-    public function checkout($id)
-    {
-        $products = Product::find($id);
-        return view('checkout.index',compact('products'));
-    }
-=======
->>>>>>> parent of 4ff9100... cart
-=======
->>>>>>> parent of 4ff9100... cart
-=======
->>>>>>> parent of 4ff9100... cart
 
     /**
      * Show the form for creating a new resource.
