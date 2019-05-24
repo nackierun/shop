@@ -33,6 +33,9 @@ Route::get('customers/categories/show{id}','CustomersController@showcat');
 Route::get('customers/products','CustomersController@products');
 Route::get('customers/products/show{id}','CustomersController@show');
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 4ff9100... cart
+=======
 >>>>>>> parent of 4ff9100... cart
 =======
 >>>>>>> parent of 4ff9100... cart

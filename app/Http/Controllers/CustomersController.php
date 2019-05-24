@@ -36,6 +36,7 @@ class CustomersController extends Controller
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function showcatproducts($id)
     {
 
@@ -48,6 +49,8 @@ class CustomersController extends Controller
         $products = Product::find($id);
         return view('checkout.index',compact('products'));
     }
+=======
+>>>>>>> parent of 4ff9100... cart
 =======
 >>>>>>> parent of 4ff9100... cart
 =======

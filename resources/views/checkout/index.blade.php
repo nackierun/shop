@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @extends('customers.layouts.app')
 @section('content')
     <div class="container">
@@ -79,6 +80,8 @@
     </div>
 
 @stop
+=======
+>>>>>>> parent of 4ff9100... cart
 =======
 >>>>>>> parent of 4ff9100... cart
 =======
