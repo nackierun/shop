@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Http\Requests\ProductsRequest;
 use App\Product;
+use Image;
 
 class ProductsController extends Controller
 {
@@ -44,14 +45,30 @@ class ProductsController extends Controller
     public function store(ProductsRequest $request)
     {
         //
-        \App\Product::create([
-            'name' => request()->name,
-            'category_id' => request()->category_id,
-            'description' => request()->description,
-            'qty' => request()->qty,
-            'price' => request()->price,
-            //'image' => $request->file('image')->store('images', 'public'),
-        ]);
+        //  \App\Product::create([
+        //'name' => request()->name,
+        //'category_id' => request()->category_id,
+        //'description' => request()->description,
+        //'qty' => request()->qty,
+        //'price' => request()->price,
+        //'image' => $request->file('image')->store('images', 'public'),
+        //]);
+        $data = $request->all();
+        if ($request->file('image')) {
+            $image = $request->file('image');
+            if ($image->isValid()) {
+                $fileName = time() . '-' . str_slug($data['name'], "-") . '.' . $image->getClientOriginalExtension();
+                $large_image_path = public_path('products/large/' . $fileName);
+                $medium_image_path = public_path('products/medium/' . $fileName);
+                $small_image_path = public_path('products/small/' . $fileName);
+                //Resize Image
+                Image::make($image)->save($large_image_path);
+                Image::make($image)->resize(600, 600)->save($medium_image_path);
+                Image::make($image)->resize(300, 300)->save($small_image_path);
+                $data['image'] = $fileName;
+            }
+        }
+        Product::create($data);
         //$products = new Product();
         //$products->name = $request->name;
         //$products->category_id = $request->category_id;
@@ -60,7 +77,7 @@ class ProductsController extends Controller
         //$products->price = $request->price;
         //$products->images = $request->images;
         //$products->save();
-        return redirect('admin/products');
+        return redirect('admin/products',);
     }
 
     /**

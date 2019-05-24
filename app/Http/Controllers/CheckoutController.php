@@ -2,18 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
         //
+        $products = Product::find($id);
+        $users = User::find($id);
+        if(auth()->user()->isAdmin()) {
+            return view('admin.index');
+        } else {
+            return view('checkout.index',compact('products','users'));
+        }
     }
 
     /**

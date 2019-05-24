@@ -21,6 +21,7 @@ class CustomersController extends Controller
         $categories = Category::all();
         $products = Product::paginate(20);
         return view('customers.index',compact('products','categories'));
+
     }
     public function products()
     {
@@ -36,6 +37,7 @@ class CustomersController extends Controller
     }
     public function showcatproducts($id)
     {
+
         $categories = Category::find($id);
         $products = Product::find($id);
         return view('customers.showcat',compact('categories','products'));

@@ -32,7 +32,7 @@
                                 {{  $product->price  }}
                             </td>
                             <td>
-                                {{ $product->image }}
+                                <a href="{{ $product->image }}"><img src="{{ $product->image }}"/></a>
                             </td>
                             <td>
                                 <a href="{{ url('admin/products/show'.$product->id) }}" class="btn btn-primary">Detail</a>

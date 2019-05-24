@@ -36,8 +36,8 @@
                 </div>
                 <div class="form-group col-md-12">
                     <p>Picture</p>
-                    <!--<input type="file" name="images">-->
-                    {{-- $errors->first('images') --}}
+                    <input type="file" name="image">
+                    {{ $errors->first('image') }}
                 </div>
                 <div>
                     <button class="btn btn-primary">Add</button>

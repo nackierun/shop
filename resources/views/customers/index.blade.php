@@ -6,11 +6,15 @@
             <div class="row">
                 <div class="col">
                     <nav aria-label="breadcrumb">
+                        <h2>Categories</h2>
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="category.html">Category</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">#</li>
+                            @foreach($categories as $category)
+
+                            <li class="breadcrumb-item"><a href="{{ url('customers/showcat'.$category->id) }}">{{ $category->name }}</a></li>
+
+                            @endforeach
                         </ol>
+
                     </nav>
                 </div>
             </div>
@@ -18,24 +22,11 @@
         <div class="py-5">
             <div class="container">
                 <div class="row hidden-md-up">
-                    <div class="row pr-5">
-                        <div class="card bg-light mb-3">
-                            <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
-                                Categories
-                            </div>
-                            <ul class="list-group category_block">
-                                @foreach($categories as $category)
-                                    <li class="list-group-item"><a
-                                            href="{{ url('customers/showcat'.$category->id) }}">{{ $category->name }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
                     @foreach($products as $product)
                         <div class="col-md-3 pt-3">
                             <div class="card">
                                 <div class="card-block">
+                                    <img src="{{ url('products/small'.$product->name) }}">
                                     <h4 class="card-title">{{ $product->name }}</h4>
                                     <h6 class="card-subtitle text-muted">{{ $product->category->name }}</h6>
                                     <p class="card-text p-y-1">${{ $product->price }}</p>

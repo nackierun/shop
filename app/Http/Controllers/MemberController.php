@@ -14,6 +14,11 @@ class MemberController extends Controller
     public function index()
     {
         //
+        if(auth()->user()->isAdmin()) {
+            return view('admin.index');
+        } else {
+            return view('home');
+        }
     }
 
     /**
