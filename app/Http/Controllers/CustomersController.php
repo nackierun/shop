@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
 use DemeterChain\C;
 use Illuminate\Http\Request;
 use App\Product;
@@ -35,6 +34,7 @@ class CustomersController extends Controller
         $categories = Category::paginate(3);
         return view('customers.categories.index',compact('categories'));
     }
+<<<<<<< HEAD
     public function showcatproducts($id)
     {
 
@@ -47,6 +47,8 @@ class CustomersController extends Controller
         $products = Product::find($id);
         return view('checkout.index',compact('products'));
     }
+=======
+>>>>>>> parent of 4ff9100... cart
 
     /**
      * Show the form for creating a new resource.

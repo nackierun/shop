@@ -22,6 +22,21 @@
         <div class="py-5">
             <div class="container">
                 <div class="row hidden-md-up">
+<<<<<<< HEAD
+=======
+                    <div class="row pr-5">
+                        <div class="card bg-light mb-3">
+                            <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
+                                Categories
+                            </div>
+                            <ul class="list-group category_block">
+                                @foreach($categories as $category)
+                                    <li class="list-group-item"><a href="#">{{ $category->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+>>>>>>> parent of 4ff9100... cart
                     @foreach($products as $product)
                         <div class="col-md-3 pt-3">
                             <div class="card">
@@ -30,8 +45,8 @@
                                     <h4 class="card-title">{{ $product->name }}</h4>
                                     <h6 class="card-subtitle text-muted">{{ $product->category->name }}</h6>
                                     <p class="card-text p-y-1">${{ $product->price }}</p>
-                                    <a href="{{ url('customers/products/show'.$product->id) }}" class="btn btn-primary">ข้อมูล</a>
-                                    <a href="{{ url('/checkout'.$product->id) }}" class="btn btn-success">ซื้อ</a>
+                                    <a href="#" class="btn btn-primary">ข้อมูล</a>
+                                    <a href="#" class="btn btn-success">ซื้อ</a>
                                     <a href="#" class="btn btn-warning">ใส่ในตะกร้า</a>
                                 </div>
                             </div>
