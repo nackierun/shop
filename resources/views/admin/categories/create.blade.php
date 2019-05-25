@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row pt-5">
             <div class="col-md-6">
                 <h1>Create categories</h1>
                 <form action="/admin/categories/create" method="post" enctype="multipart/form-data">

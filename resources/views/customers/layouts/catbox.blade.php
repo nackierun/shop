@@ -1,10 +1,12 @@
 <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        หมวดหมู่
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        @foreach($categories as $category)
-        <a class="dropdown-item" href="{{ url('#'.$category->id) }}">{{ $category->name }}</a>
-        @endforeach
+    <div class="col-lg-3">
+        <h1 class="my-4">Shop Name</h1>
+        <div class="list-group position-fixed">
+            @foreach($categories as $category)
+                <a href="{{ url('customers/showcat'.$category->id) }}"
+                   class="list-group-item">{{ $category->name }}</a>
+            @endforeach
+        </div>
     </div>
 </div>
+

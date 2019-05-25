@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row pt-5">
             <div class="col-md-12">
                 <h1>Products<a class="badge badge-success" href="{{  url('admin/products/create')  }}">Add</a></h1>
                 <table class="table table-bordered table-striped">
@@ -20,7 +20,7 @@
                                 {{  $product->name  }}
                             </td>
                             <td>
-                                {{  $product->category->name  }}
+                                {{ $product->category->name  }}
                             </td>
                             <td>
                                 {{ $product->description }}
@@ -35,9 +35,11 @@
                                 {{ $product->image }}
                             </td>
                             <td>
-                                <a href="{{ url('admin/products/show'.$product->id) }}" class="btn btn-primary">Detail</a>
+                                <a href="{{ url('admin/products/show'.$product->id) }}"
+                                   class="btn btn-primary">Detail</a>
                                 <a href="{{ url('admin/products/edit'.$product->id) }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url('admin/products/delete'.$product->id) }}" class="btn btn-danger">Delete</a>
+                                <a href="{{ url('admin/products/delete'.$product->id) }}"
+                                   class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     @endforeach
