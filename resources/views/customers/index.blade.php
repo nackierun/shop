@@ -1,53 +1,118 @@
 @extends('customers.layouts.app')
 @section('content')
+    <!-- Page Content -->
     <div class="container">
-        <h2 class="title text-center">สินค้าทั้งหมด</h2>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="category.html">Category</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">#</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-        <div class="py-5">
-            <div class="container">
-                <div class="row hidden-md-up">
-                    <div class="row pr-5">
-                        <div class="card bg-light mb-3">
-                            <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
-                                Categories
-                            </div>
-                            <ul class="list-group category_block">
-                                @foreach($categories as $category)
-                                    <li class="list-group-item"><a
-                                            href="{{ url('customers/showcat'.$category->id) }}">{{ $category->name }}</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
+
+        <!-- Page Heading -->
+        <h1 class="my-4">สินค้า
+            <small>ใหม่</small>
+        </h1>
+
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Project One</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
+                            euismod odio, gravida pellentesque urna varius vitae.</p>
                     </div>
-                    @foreach($products as $product)
-                        <div class="col-md-3 pt-3">
-                            <div class="card">
-                                <div class="card-block">
-                                    <h4 class="card-title">{{ $product->name }}</h4>
-                                    <h6 class="card-subtitle text-muted">{{ $product->category->name }}</h6>
-                                    <p class="card-text p-y-1">${{ $product->price }}</p>
-                                    <a href="{{ url('customers/products/show'.$product->id) }}" class="btn btn-primary">ข้อมูล</a>
-                                    <a href="{{ url('/checkout'.$product->id) }}" class="btn btn-success">ซื้อ</a>
-                                    <a href="#" class="btn btn-warning">ใส่ในตะกร้า</a>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    {{$products->render()}}
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Project Two</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam
+                            aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum
+                            eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Project Three</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
+                            euismod odio, gravida pellentesque urna varius vitae.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Project Four</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam
+                            aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum
+                            eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Project Five</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
+                            euismod odio, gravida pellentesque urna varius vitae.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Project Six</a>
+                        </h4>
+                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit aliquam
+                            aperiam nulla perferendis dolor nobis numquam, rem expedita, aliquid optio, alias illum
+                            eaque. Non magni, voluptates quae, necessitatibus unde temporibus.</p>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- /.row -->
+
+        <!-- Pagination -->
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <!-- /.container -->
+    {{$products->render()}}
 @stop
