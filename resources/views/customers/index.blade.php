@@ -10,7 +10,9 @@
                         <ol class="breadcrumb">
                             @foreach($categories as $category)
 
-                            <li class="breadcrumb-item"><a href="{{ url('customers/showcat'.$category->id) }}">{{ $category->name }}</a></li>
+                                <li class="breadcrumb-item"><a
+                                        href="{{ url('customers/showcat'.$category->id) }}">{{ $category->name }}</a>
+                                </li>
 
                             @endforeach
                         </ol>
@@ -22,8 +24,8 @@
         <div class="py-5">
             <div class="container">
                 <div class="row hidden-md-up">
-<<<<<<< HEAD
-=======
+                    <<<<<<< HEAD
+                    =======
                     <div class="row pr-5">
                         <div class="card bg-light mb-3">
                             <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i>
@@ -36,7 +38,7 @@
                             </ul>
                         </div>
                     </div>
->>>>>>> parent of 4ff9100... cart
+                    >>>>>>> parent of 4ff9100... cart
                     @foreach($products as $product)
                         <div class="col-md-3 pt-3">
                             <div class="card">
