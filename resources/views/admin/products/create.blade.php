@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row pt-5">
             <h1>Add Products</h1>
             <form action="/admin/products/create" method="post">
                 <div class="form-group col-md-12">

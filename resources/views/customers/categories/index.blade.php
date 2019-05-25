@@ -1,6 +1,6 @@
 @extends('customers.layouts.app')
 @section('content')
-    <div class="col-sm-6">
+    <div class="col-sm-6 pt-5">
         <h1>Categories</h1>
 
         <table class="table table-bordered table-striped">
