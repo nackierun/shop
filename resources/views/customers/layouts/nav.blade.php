@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">ร้านค้า</a>
+        <a class="navbar-brand" href="{{ route('home') }}">ร้านค้า</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
                     <a class="nav-link" href="{{ url('customers/categories') }}">หมวดหมู่</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">#</a>
+                    <a class="nav-link" href="{{ route('cart') }}">Cart</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">#</a>

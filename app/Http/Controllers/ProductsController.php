@@ -8,9 +8,11 @@ use App\Product;
 
 class ProductsController extends Controller
 {
-    /** public function __construct(){
-     * $this->middleware('auth')->except('index','show');
-     * }*/
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        //$this->authorize('index',Product::class);
         $products = Product::paginate(3);
         //
         return view('admin.products.index', compact('products'));
@@ -60,6 +63,8 @@ class ProductsController extends Controller
         //$products->price = $request->price;
         //$products->images = $request->images;
         //$products->save();
+
+        session()->flash('status', 'เรียบร้อย');
         return redirect('admin/products');
     }
 
@@ -107,6 +112,7 @@ class ProductsController extends Controller
         $products->qty = $request->qty;
         $products->price = $request->price;
         $products->save();
+        session()->flash('status', 'อัปเดทแล้ว');
         return redirect('admin.products');
     }
 
@@ -119,8 +125,10 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         //
+
         $products = Product::find($id);
         $products->delete();
+        session()->flash('status', 'ลบแล้ว');
         return redirect('admin/products');
     }
 }

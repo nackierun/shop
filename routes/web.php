@@ -18,7 +18,7 @@ Route::get('/', 'CustomersController@index');
 
 
 //*****Customers*****
-Route::get('/customers','CustomersController@index');
+Route::get('/customers','CustomersController@index')->name('home');
 //category
 Route::get('customers/categories','CustomersController@cat');
 Route::get('customers/categories/show{id}','CustomersController@showcat');
@@ -29,8 +29,8 @@ Route::get('customers/products/show{id}','CustomersController@show');
 //checkout
 Route::get('/checkout{id}','CustomersController@checkout');
 //Cart
-//Route::post('/Cart','CartController');
-//Route::get('/cart','CartController');
+Route::post('/AddToCart','CartController@AddToCart')->name('AddToCart');
+Route::get('customers/cart','CartController@index')->name('cart');
 //Route::get('/cart/','CartController');
 //Route::get('/cart/','CartController');
 //end Customers
