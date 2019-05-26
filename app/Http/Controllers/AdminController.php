@@ -22,8 +22,6 @@ class AdminController extends Controller
     {
         //
         //$this->authorize('index', Admin::class);
-        $role_id = Session()->get('role_id');
-        $data = User::find('id',$role_id)->get();
         return view('admin.index');
     }
 
