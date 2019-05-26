@@ -1,7 +1,12 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="container">
         <div class="row pt-5">
+            <div class="container">
+                @if(Session()->has('status'))
+                    <div class="alert alert-success">
+                        {{ Session()->get('status') }}
+                    </div>
+                @endif
             <div class="col-md-12">
                 <h1>Products<a class="badge badge-success" href="{{  url('admin/products/create')  }}">Add</a></h1>
                 <table class="table table-bordered table-striped">
@@ -39,7 +44,7 @@
                                    class="btn btn-primary">Detail</a>
                                 <a href="{{ url('admin/products/edit'.$product->id) }}" class="btn btn-primary">Edit</a>
                                 <a href="{{ url('admin/products/delete'.$product->id) }}"
-                                   class="btn btn-danger">Delete</a>
+                                   class="btn btn-danger" onclick="return confirm('ยืนยันที่จะลบ?')">Delete</a>
                             </td>
                         </tr>
                     @endforeach

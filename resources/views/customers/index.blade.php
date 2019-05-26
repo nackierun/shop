@@ -46,7 +46,7 @@
                         <div class="col-lg-4 col-md-6 mb-4">
 
                             <div class="card h-100">
-                                <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+                                <a href="#"><img class="card-img-top" src="https://images.officeworks.com.au/api/2/img/https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_300x300/BRHWNV3IBK_huawei_nova_3i_unlocked_mobile_phone_128gb_black.jpg/resize?size=300&auth=MjA5OTcwODkwMg__"  alt=""></a>
                                 <div class="card-body">
                                     <h4 class="card-title">
                                         <a href="#">{{ $product->name }}</a>

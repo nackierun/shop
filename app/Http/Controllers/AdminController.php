@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +20,7 @@ class AdminController extends Controller
     public function index()
     {
         //
+        //$this->authorize('index', Admin::class);
         return view('admin.index');
     }
 
@@ -25,6 +32,7 @@ class AdminController extends Controller
     public function create()
     {
         //
+        $this->authorize('create', Admin::class);
     }
 
     /**

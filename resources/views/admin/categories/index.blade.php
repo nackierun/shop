@@ -34,7 +34,7 @@
                     <td>
                         <a class="btn btn-primary" href="{{ url('admin/categories/show'.$category->id) }}">Detail</a>
                         <a class="btn btn-primary" href="{{ url('admin/categories/edit'.$category->id) }}">Edit</a>
-                        <a class="btn btn-danger" href="{{ url('admin/categories/delete'.$category->id) }}">Delete</a>
+                        <a class="btn btn-danger" href="{{ url('admin/categories/delete'.$category->id) }}" onclick="return confirm('ยืนยันที่จะลบ?')">Delete</a>
                     </td>
                 </tr>
             @endforeach
