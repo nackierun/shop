@@ -40,7 +40,9 @@
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
-
+                @if(session()->has('message'))
+                    <div class="alert-success">{{ session()->get('message') }}</div>
+                @endif
                 <div class="row">
                     @foreach($products as $product)
                         <div class="col-lg-4 col-md-6 mb-4">
@@ -56,9 +58,17 @@
                                     <p class="card-text">{{ $product->category->name }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted">
-                                        <a href="" class="btn btn-primary">ใส่ตระก้า</a>
-                                        <a href="" class="btn btn-success">ดูข้อมูล</a>
+                                    <small class="text-muted"><form action="{{ Route('AddToCart') }}" method="post">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="hidden" name="products_id" value="{{ $product->id }}">
+                                            <input type="hidden" name="product_name" value="{{ $product->name }}">
+                                            <input type="hidden" name="price" value="{{ $product->price}}">
+
+                                            <input type="hidden" name="quantity" value="1">
+                                            <button class="btn btn-primary">ใส่ตะกร้า</button>
+                                            <a href="{{ url('customers/products/show'.$product->id) }}" class="btn btn-success">ดูข้อมูล</a>
+                                        </form>
+
                                     </small>
                                 </div>
                             </div>
