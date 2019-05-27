@@ -58,7 +58,8 @@
                                     <p class="card-text">{{ $product->category->name }}</p>
                                 </div>
                                 <div class="card-footer">
-                                    <small class="text-muted"><form action="{{ Route('AddToCart') }}" method="post">
+                                    <small class="text-muted">
+                                        <form action="{{ Route('AddToCart') }}" method="post">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="hidden" name="products_id" value="{{ $product->id }}">
                                             <input type="hidden" name="product_name" value="{{ $product->name }}">

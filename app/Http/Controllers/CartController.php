@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\User;
+use App\Product;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -22,13 +23,14 @@ class CartController extends Controller
         //
         $session_id = session()->get('session_id');
         $datas=Cart::where('session_id',$session_id)->get();
+        $qty_sum=Cart::where('session_id',$session_id)->sum('quantity');
         $total_price = 0;
         foreach ($datas as $data)
         {
-            $total_price+=$data->price*$data->qty;
+            $total_price+=$data->price*$data->quantity;
         }
 
-        return view('customers.cart',compact('datas','total_price'));
+        return view('customers.cart',compact('datas','total_price','qty_sum'));
     }
     public function addToCart(Request $request)
     {
