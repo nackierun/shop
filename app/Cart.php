@@ -8,4 +8,8 @@ class Cart extends Model
 {
     //
     protected $guarded = [];
+    public function category()
+    {
+        return $this->hasmany('App\Product');
+    }
 }
