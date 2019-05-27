@@ -33,6 +33,10 @@ Route::post('/AddToCart','CartController@AddToCart')->name('AddToCart');
 Route::get('customers/cart','CartController@index')->name('cart');
 //Route::get('/cart/','CartController');
 //Route::get('/cart/','CartController');
+
+//checkout
+Route::get('checkout/','CheckoutController@index')->name('checkout');
+Route::post('confirm/','CheckoutController@confirm')->name('confirm');
 //end Customers
 
 

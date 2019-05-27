@@ -7,6 +7,7 @@ use App\Cart;
 use App\User;
 use App\Product;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use vendor\project\StatusTest;
@@ -22,27 +23,29 @@ class CartController extends Controller
     {
         //
         $session_id = session()->get('session_id');
-        $datas=Cart::where('session_id',$session_id)->get();
-        $qty_sum=Cart::where('session_id',$session_id)->sum('quantity');
+        $datas = Cart::where('session_id', $session_id)->get();
+        $qty_sum = Cart::where('session_id', $session_id)->sum('quantity');
         $total_price = 0;
-        foreach ($datas as $data)
-        {
-            $total_price+=$data->price*$data->quantity;
+        foreach ($datas as $data) {
+            $total_price += $data->price * $data->quantity;
         }
 
-        return view('customers.cart',compact('datas','total_price','qty_sum'));
+        return view('customers.cart', compact('datas', 'total_price', 'qty_sum'));
     }
+
     public function addToCart(Request $request)
     {
         $data = $request->all();
-        $session_id=session()->get('session_id');
-        if(empty($session_id)){
+        $user = User::where('id', Auth::id())->get('email');
+        $session_id = session()->get('session_id');
+        if (empty($session_id)) {
             $session_id = str_random(40);
-            Session::put('session_id',$session_id);
+            Session::put('session_id', $session_id);
         }
-        $data['session_id']=$session_id;
+        $data['user_email'] = $user;
+        $data['session_id'] = $session_id;
         Cart::create($data);
-        session()->flash('message','เพิ่มแล้ว');
+        session()->flash('message', 'เพิ่มแล้ว');
         return back();
     }
 
@@ -59,7 +62,7 @@ class CartController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -70,7 +73,7 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -81,7 +84,7 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -92,8 +95,8 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -104,7 +107,7 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
