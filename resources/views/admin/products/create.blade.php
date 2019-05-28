@@ -21,7 +21,7 @@
                 </div>
                 <div class="form-group col-md-12">
                     <p>Description</p>
-                    <input type="text" name="description">
+                    <textarea type="text" name="description"></textarea>
                     {{ $errors->first('description') }}
                 </div>
                 <div class="form-group col-md-12">

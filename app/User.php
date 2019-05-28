@@ -8,6 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends \TCG\Voyager\Models\User
 {
+    public  function order()
+    {
+        $this->hasMany('App\Order');
+    }
     use Notifiable;
 
     /**

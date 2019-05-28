@@ -2,25 +2,29 @@
 @section('content')
     <div class="container">
 
-            <div class="row pt-5">
-        <div class="col-md-6">
-            <table class="table table-striped">
-                <tr>
-                    <th>ชื้อสินค้า</th>
-                    <th>ราคา</th>
-                    <th>จำนวน</th>
-                </tr>
-                @foreach($datas as $data)
+        <div class="row pt-5 justify-content-center">
+            <div class="col-md-6">
+                <table class="table table-striped">
                     <tr>
-                        <td>{{ $data->product_name }}</td>
-                        <td>{{ number_format($data->price) }}</td>
-                        <td>{{ $data->quantity }}</td>
+                        <th>ชื้อสินค้า</th>
+                        <th>ราคา</th>
+                        <th>จำนวน</th>
+                        <th>del</th>
                     </tr>
-                @endforeach
-            </table>
-            <p>จำนวนสินค้ารวม: {{ $qty_sum }} ชิ้น</p>
-            <p>ราคารวมทั้งสิ้น:  {{ number_format($total_price)  }} ฿</p>
-        </div>
+                    @foreach($datas as $data)
+                        <tr>
+                            <td>{{ $data->product_name }}</td>
+                            <td>{{ number_format($data->price) }}</td>
+                            <td>{{ $data->quantity }}</td>
+                            <td><a href="{{ url('delete'.$data->id) }}" class="btn btn-warning">del</a> </td>
+                        </tr>
+                    @endforeach
+                </table>
+                <p>จำนวนสินค้ารวม: {{ $qty_sum }} ชิ้น</p>
+                <p>ราคารวมทั้งสิ้น: {{ number_format($total_price)  }} ฿</p>
+                <a href="{{ url('/checkout') }}" class="btn btn-success">ยืนยันการซื้อซื้อ</a>
+            </div>
+
         </div>
     </div>
 @stop
