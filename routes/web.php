@@ -31,6 +31,7 @@ Route::get('customers/products/show{id}','CustomersController@show');
 //Cart
 Route::post('/AddToCart','CartController@AddToCart')->name('AddToCart');
 Route::get('customers/cart','CartController@index')->name('cart');
+Route::get('customers/cart/update-quantity/{id}/{quantity}','CartController@updatequantity');
 Route::get('delete{id}','CartController@delete');
 //Route::get('/cart/','CartController');
 //Route::get('/cart/','CartController');
