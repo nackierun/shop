@@ -48,9 +48,17 @@ class CartController extends Controller
         session()->flash('message', 'เพิ่มแล้ว');
         return back();
     }
-    public function delete($id=null){
+
+    public function delete($id = null)
+    {
         $del_item = Cart::findOrFail($id);
         $del_item->delete();
+        return back();
+    }
+
+    public function updatequantity($id, $quantity)
+    {
+        DB::table('carts')->where('id', $id)->increment('quantity', $quantity);
         return back();
     }
 
