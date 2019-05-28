@@ -45,15 +45,17 @@ class CheckoutController extends Controller
             'grand_total' => 'required',
 
         ]);
-        Order::create([
+        $data = [
             'users_id' => request()->users_id,
             'product_id' => request()->product_id,
             'users_email' => request()->users_email,
             'name' => request()->name,
             'address' => request()->address,
             'phone' => request()->phone,
+            'total_qty' => request()->total_qty,
             'grand_total' => request()->grand_total,
-        ]);
+        ];
+        Order::create($data);
         return redirect()->action('CustomersController@index');
     }
 

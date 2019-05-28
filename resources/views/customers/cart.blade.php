@@ -2,19 +2,21 @@
 @section('content')
     <div class="container">
 
-        <div class="row pt-5">
+        <div class="row pt-5 justify-content-center">
             <div class="col-md-6">
                 <table class="table table-striped">
                     <tr>
                         <th>ชื้อสินค้า</th>
                         <th>ราคา</th>
                         <th>จำนวน</th>
+                        <th>del</th>
                     </tr>
                     @foreach($datas as $data)
                         <tr>
                             <td>{{ $data->product_name }}</td>
                             <td>{{ number_format($data->price) }}</td>
                             <td>{{ $data->quantity }}</td>
+                            <td><a href="{{ url('delete'.$data->id) }}" class="btn btn-warning">del</a> </td>
                         </tr>
                     @endforeach
                 </table>

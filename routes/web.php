@@ -26,17 +26,19 @@ Route::get('customers/showcat{id}','CustomersController@showcatproducts');
 //product
 Route::get('customers/products','CustomersController@products');
 Route::get('customers/products/show{id}','CustomersController@show');
-//checkout
-Route::get('/checkout{id}','CustomersController@checkout');
+
+
 //Cart
 Route::post('/AddToCart','CartController@AddToCart')->name('AddToCart');
 Route::get('customers/cart','CartController@index')->name('cart');
+Route::get('delete{id}','CartController@delete');
 //Route::get('/cart/','CartController');
 //Route::get('/cart/','CartController');
 
 //checkout
 Route::get('checkout/','CheckoutController@index')->name('checkout');
 Route::post('confirm/','CheckoutController@confirm')->name('confirm');
+Route::get('/checkout{id}','CustomersController@checkout');
 //end Customers
 
 

@@ -21,9 +21,10 @@ class CreateOrdersTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('phone');
-            $table->string('order_status');
-            $table->string('payment_method');
+            $table->string('order_status')->default('รอการชำระเงิน');
+           // $table->string('payment_method');
             $table->string('grand_total');
+            $table->integer('total_qty');
             $table->timestamps();
         });
     }
