@@ -47,18 +47,21 @@
                             <div class="col-md-6">
                                 <input name="users_email" id="users_email" type="hidden" class="form-control"
                                        value="{{ $user_login->email }}">
+                                {{ $errors->first('users_email') }}
                             </div>
 
                             <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right">ที่อยู่ผู้รับ</label>
                                 <div class="col-md-6">
                                     <input name="address" id="address" type="text" class="form-control">
+                                    {{ $errors->first('address') }}
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="phone" class="col-md-4 col-form-label text-md-right">เบอร์ติดต่อ</label>
                                 <div class="col-md-6">
                                     <input name="phone" id="phone" type="text" class="form-control">
+                                    {{ $errors->first('phone') }}
                                 </div>
                             </div>
                             <div class="form-group row justify-content-center">

@@ -47,9 +47,6 @@ Route::get('/checkout{id}','CustomersController@checkout');
 
 
 //*****Administrator*****
-//Route::group(['prefix' => 'admin'], function () {
-  //  Voyager::routes();
-//     });
 Route::get('/admin','AdminController@index');
 //category
 Route::get('admin/categories','CategoriesController@index');
@@ -70,9 +67,3 @@ Route::get('admin/products/delete{id}','ProductsController@destroy');
 //End Admin
 
 Auth::routes();
-
-//Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
