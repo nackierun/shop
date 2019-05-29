@@ -14,9 +14,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('customers/categories') }}">หมวดหมู่</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="{{ route('cart') }}">Cart</a>
                 </li>
                 @guest
