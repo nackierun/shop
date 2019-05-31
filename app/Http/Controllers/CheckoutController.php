@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Order;
+use App\Order_details;
 use App\User;
 use App\Product;
 use Illuminate\Http\Request;
@@ -36,26 +37,28 @@ class CheckoutController extends Controller
 
     public function confirm(Request $request)
     {
-        $this->validate($request, [
 
 
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'grand_total' => 'required',
+        $orders = Order::create(
+            [
+                'customer_name' => request()->customer_name,
+                'address' => request()->address,
+                'phone' => request()->phone
+            ]
+        );
+        $product_id=request()->product_id;
+        $price=request()->price;
+        $qty=request()->qty;
+        foreach ($orders as $cart) {
 
-        ]);
-        $data = [
-            'users_id' => request()->users_id,
-            'product_id' => request()->product_id,
-            'users_email' => request()->users_email,
-            'name' => request()->name,
-            'address' => request()->address,
-            'phone' => request()->phone,
-            'total_qty' => request()->total_qty,
-            'grand_total' => request()->grand_total,
-        ];
-        Order::create($data);
+            Order_details::create([
+                'order_id' => $orders->id,
+                'product_id' =>$product_id[$cart],
+                'price' =>$price[$cart],
+                'qty' =>$qty[$cart],
+            ]);
+        }
+
         return redirect()->action('CustomersController@index');
     }
 

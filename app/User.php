@@ -8,6 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    public function orders()
+    {
+        $this->hasMany('App\Order');
+    }
+    public function cart()
+    {
+        $this->hasOne('App\Cart');
+    }
     use Notifiable;
 
     /**

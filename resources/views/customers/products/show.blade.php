@@ -34,6 +34,9 @@
                     <input type="text" name="quantity" value="">
                     <button class="btn btn-success">ใส่ตะกร้า</button>
                 </form>
+                <div class="row pt-3 pl-3">
+                    <a href="{{ url('customers/') }}" class="btn btn-dark">back</a>
+                </div>
             </div>
         </div>
     </div>

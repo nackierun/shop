@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-        <div class="row pt-5">
+        <div class="row pt-5 justify-content-center">
             <div class="container">
                 @if(Session()->has('status'))
                     <div class="alert alert-success">

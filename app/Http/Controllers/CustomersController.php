@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
+use App\Order_details;
+use App\Order;
 use DemeterChain\C;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Product;
 use App\Category;
 
@@ -88,6 +91,13 @@ class CustomersController extends Controller
     {
         $categories = Category::find($id);
         return view('customers.categories.show',compact('categories'));
+    }
+    public function vieworder()
+    {
+
+        $datas = Order_details::all();
+        $datas2 = Order::all();
+        return view('checkout.vieworder',compact('datas','datas2'));
     }
 
     /**

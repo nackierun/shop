@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-    <div class="row pt-5">
+    <div class="row pt-5 justify-content-center">
         <div class="col-md-6">
             <table class="table table-striped">
                 <h1>This is categories detail</h1>
