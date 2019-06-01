@@ -21,12 +21,12 @@
 
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             @foreach($datas as $data)
-                                <input type="text" name="product_id[]" value="{{$data->products_id}}">
+                                <input type="hidden" name="product_id" value="{{$data->products_id}}">
                                 <input type="hidden" name="users_id" value="{{$user_login->id}}">
                                 <input type="hidden" name="grand_total" value="{{$total_price}}">
-                                <input type="text" name="price[]" value="{{$data->price*$data->quantity}}">
+                                <input type="hidden" name="price" value="{{$data->price*$data->quantity}}">
                                 <input type="hidden" name="total_qty" value="{{$qty_sum}}">
-                                <input type="text" name="qty[]" value="{{ $data->quantity }}">
+                                <input type="hidden" name="qty" value="{{ $data->quantity }}">
                             @endforeach
                             <div class="form-group row">
                                 <label for="customer_name"

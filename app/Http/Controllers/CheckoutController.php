@@ -46,16 +46,20 @@ class CheckoutController extends Controller
                 'phone' => request()->phone
             ]
         );
-        $product_id=request()->product_id;
-        $price=request()->price;
-        $qty=request()->qty;
-        foreach ($orders as $cart) {
+        $carts = [
+            [
+                'product_id'=>request()->product_id,
+                'price'=>request()->price,
+                'qty'=>request()->qty
+            ],
+        ];
+        foreach ($carts as $cart) {
 
             Order_details::create([
                 'order_id' => $orders->id,
-                'product_id' =>$product_id[$cart],
-                'price' =>$price[$cart],
-                'qty' =>$qty[$cart],
+                'product_id' =>$cart['product_id'],
+                'price' =>$cart['price'],
+                'qty' =>$cart['qty'],
             ]);
         }
 
