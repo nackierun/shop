@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -13,7 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::where('customer_id', Auth::user()->id)->paginate();
+        return view('customers.orders', compact('orders'));
     }
 
     /**

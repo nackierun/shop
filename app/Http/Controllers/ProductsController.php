@@ -53,7 +53,7 @@ class ProductsController extends Controller
             'description' => request()->description,
             'qty' => request()->qty,
             'price' => request()->price,
-            //'image' => $request->file('image')->store('images', 'public'),
+            'image' => $request->file('image')->store('images', 'public'),
         ]);
         //$products = new Product();
         //$products->name = $request->name;
@@ -105,15 +105,14 @@ class ProductsController extends Controller
     public function update(ProductsRequest $request, $id)
     {
         //
-        $products = Product::find($id);
-        $products->name = $request->name;
-        //$products->category_id = $request->category_id;
-        $products->description = $request->description;
-        $products->qty = $request->qty;
-        $products->price = $request->price;
-        $products->save();
+        Product::where('id', $id)->update(request()->except('_token'));
+        
+        if ($request->hasFile('image')) {
+            Product::where('id', $id)->update(['image' => $request->file('image')->store('images', 'public')]);
+        }
+
         session()->flash('status', 'อัปเดทแล้ว');
-        return redirect('admin.products');
+        return redirect('admin/products');
     }
 
     /**

@@ -30,6 +30,9 @@ Route::post('/AddToCart', 'CartController@AddToCart')->name('AddToCart');
 Route::get('customers/cart', 'CartController@index')->name('cart');
 Route::get('customers/cart/update-quantity/{id}/{quantity}', 'CartController@updatequantity');
 Route::get('delete{id}', 'CartController@delete');
+
+Route::resource('customer/order', 'OrderController');
+
 //Route::get('/cart/','CartController');
 //Route::get('/cart/','CartController');
 
@@ -55,9 +58,9 @@ Route::get('admin/products', 'ProductsController@index');
 Route::get('admin/products/create', 'ProductsController@create');
 Route::post('admin/products/create', 'ProductsController@store');
 Route::get('admin/products/show{id}', 'ProductsController@show');
-Route::get('admin/products/edit{id}', 'ProductsController@edit');
-Route::post('admin/products/edit{id}', 'ProductsController@update');
-Route::get('admin/products/delete{id}', 'ProductsController@destroy');
+Route::get('admin/products/edit/{id}', 'ProductsController@edit');
+Route::post('admin/products/update/{id}', 'ProductsController@update');
+Route::get('admin/products/delete/{id}', 'ProductsController@destroy');
 //vieworder
 Route::get('admin/vieworder', 'AdminController@vieworder');
 //End Admin

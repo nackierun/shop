@@ -14,9 +14,13 @@
                         <th>del</th>
                     </tr>
                     @foreach($datas as $data)
+
+                        @php
+                            $product = \App\Product::find($data->product_id);
+                        @endphp
                         <tr>
-                            <td>{{ $data->product_name }}</td>
-                            <td>{{ number_format($data->price) }}</td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ number_format($product->price) }}</td>
                             <td>{{ $data->quantity }}</td>
                             <td>
                                 <a class="badge badge-success"
@@ -30,7 +34,7 @@
                                 @endif
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">$ {{$data->price*$data->quantity}}</p>
+                                <p class="cart_total_price">$ {{ number_format($product->price*$data->quantity,0)}}</p>
                             </td>
                             <td><a href="{{ url('delete'.$data->id) }}" class="btn btn-warning">del</a></td>
                         </tr>

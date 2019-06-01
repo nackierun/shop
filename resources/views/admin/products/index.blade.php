@@ -37,13 +37,13 @@
                                 {{  $product->price  }}
                             </td>
                             <td>
-                                {{ $product->image }}
+                                <img src="{{ asset($product->image) }}" alt="">
                             </td>
                             <td>
-                                <a href="{{ url('admin/products/show'.$product->id) }}"
+                                <a href="{{ url('admin/products/show/'.$product->id) }}"
                                    class="btn btn-primary">Detail</a>
-                                <a href="{{ url('admin/products/edit'.$product->id) }}" class="btn btn-primary">Edit</a>
-                                <a href="{{ url('admin/products/delete'.$product->id) }}"
+                                <a href="{{ url('admin/products/edit/'.$product->id) }}" class="btn btn-primary">Edit</a>
+                                <a href="{{ url('admin/products/delete/'.$product->id) }}"
                                    class="btn btn-danger" onclick="return confirm('ยืนยันที่จะลบ?')">Delete</a>
                             </td>
                         </tr>

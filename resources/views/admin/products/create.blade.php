@@ -3,10 +3,10 @@
     <div class="container">
         <div class="row pt-5 justify-content-center">
             <h1>Add Products</h1>
-            <form action="/admin/products/create" method="post">
+            <form action="/admin/products/create" method="post" enctype="multipart/form-data">
                 <div class="form-group col-md-12">
                     <p>Name</p>
-                    <input type="text" name="name">
+                    <input type="text" name="name" value="{{ old('name') }}">
                     {{ $errors->first('name') }}
                 </div>
                 <div class="form-group col-md-12">
@@ -36,8 +36,7 @@
                 </div>
                 <div class="form-group col-md-12">
                     <p>Picture</p>
-                    <!--<input type="file" name="images">-->
-                    {{-- $errors->first('images') --}}
+                    <input type="file" name="image">
                 </div>
                 <div>
                     <button class="btn btn-primary">Add</button>

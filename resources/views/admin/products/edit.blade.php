@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         <div class="row pt-5 justify-content-center">
-            <h1>Add Products</h1>
-            <form action="{{ url('admin/products/edit'.$products->id) }}" method="post">
+            <h1>Edit Products</h1>
+            <form action="{{ url('admin/products/update/'.$products->id) }}" method="post" enctype="multipart/form-data">
                 <div class="form-group col-md-12">
                     <p>Name</p>
                     <input type="text" name="name" value="{{ $products->name }}">
@@ -14,7 +14,7 @@
                     <select name="category_id" id="category_id">
                         <option value="" aria-disabled="true">Please select</option>
                         @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" @if ($products->category_id == $category->id) selected @endif>{{ $category->name }}</option>
                         @endforeach
                     </select>
                     {{ $errors->first('category_id') }}
@@ -32,6 +32,15 @@
                 <div class="form-group col-md-12">
                     <p>Price</p>
                     <input type="text" name="price" value="{{ $products->price }}">
+                    {{ $errors->first('price') }}
+                </div>
+                <div class="form-group col-md-12">
+                    <p>Image</p>
+                    <div>
+                        <img src="{{ asset($products->image) }}">
+                    </div>
+                    <p><input type="file" name="image"></p>
+                    
                     {{ $errors->first('price') }}
                 </div>
                 <div>

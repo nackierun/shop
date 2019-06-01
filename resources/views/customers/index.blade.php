@@ -48,7 +48,7 @@
                         <div class="col-lg-4 col-md-6 mb-4">
 
                             <div class="card h-100">
-                                <a href="#"><img class="card-img-top" src="https://images.officeworks.com.au/api/2/img/https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_300x300/BRHWNV3IBK_huawei_nova_3i_unlocked_mobile_phone_128gb_black.jpg/resize?size=300&auth=MjA5OTcwODkwMg__"  alt=""></a>
+                                <a href="#"><img class="card-img-top" src="{{ asset($product->image) }}"  alt=""></a>
                                 <div class="card-body">
                                     <h4 class="card-title">
                                         <a href="#">{{ $product->name }}</a>
@@ -61,9 +61,7 @@
                                     <small class="text-muted">
                                         <form action="{{ Route('AddToCart') }}" method="post">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" name="products_id" value="{{ $product->id }}">
-                                            <input type="hidden" name="product_name" value="{{ $product->name }}">
-                                            <input type="hidden" name="price" value="{{ $product->price}}">
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                                             <input type="hidden" name="quantity" value="1">
                                             <button class="btn btn-primary">ใส่ตะกร้า</button>

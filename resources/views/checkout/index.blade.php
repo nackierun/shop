@@ -20,14 +20,6 @@
                         <form method="POST" action="{{ route('confirm') }}">
 
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
-                            @foreach($datas as $data)
-                                <input type="hidden" name="product_id" value="{{$data->products_id}}">
-                                <input type="hidden" name="users_id" value="{{$user_login->id}}">
-                                <input type="hidden" name="grand_total" value="{{$total_price}}">
-                                <input type="hidden" name="price" value="{{$data->price*$data->quantity}}">
-                                <input type="hidden" name="total_qty" value="{{$qty_sum}}">
-                                <input type="hidden" name="qty" value="{{ $data->quantity }}">
-                            @endforeach
                             <div class="form-group row">
                                 <label for="customer_name"
                                        class="col-md-4 col-form-label text-md-right">ชื่อ-นามสกุล</label>

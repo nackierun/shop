@@ -27,7 +27,8 @@ class CartController extends Controller
         $qty_sum = Cart::where('session_id', $session_id)->sum('quantity');
         $total_price = 0;
         foreach ($datas as $data) {
-            $total_price += $data->price * $data->quantity;
+            $product = Product::find($data->product_id);
+            $total_price += $product->price * $data->quantity;
         }
 
         return view('customers.cart', compact('datas', 'total_price', 'qty_sum'));
@@ -36,14 +37,13 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $data = $request->all();
-        $user = User::where('id', Auth::id())->get('email');
         $session_id = session()->get('session_id');
         if (empty($session_id)) {
             $session_id = str_random(40);
             Session::put('session_id', $session_id);
         }
-        $data['user_email'] = $user;
         $data['session_id'] = $session_id;
+        $data['customer_id'] = Auth::user()->id;
         Cart::create($data);
         session()->flash('message', 'เพิ่มแล้ว');
         return back();

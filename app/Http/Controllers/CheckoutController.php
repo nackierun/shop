@@ -28,7 +28,8 @@ class CheckoutController extends Controller
 
         $total_price = 0;
         foreach ($datas as $data) {
-            $total_price += $data->price * $data->quantity;
+            $product = Product::find($data->product_id);
+            $total_price += $product->price * $data->quantity;
         }
 
         $user_login = User::where('id', Auth::id())->first();
@@ -37,31 +38,29 @@ class CheckoutController extends Controller
 
     public function confirm(Request $request)
     {
+        $session_id = session()->get('session_id');
+        $carts = Cart::where('session_id', $session_id)->get();
+        
+        $order = Order::create([
+                'customer_id' => Auth::user()->id,
+                'address'     => request()->address,
+                'phone'       => request()->phone,
+                'total'       => 0,
+                'status'      => 'pending',
+            ]);
 
-
-        $orders = Order::create(
-            [
-                'customer_name' => request()->customer_name,
-                'address' => request()->address,
-                'phone' => request()->phone
-            ]
-        );
-        $carts = [
-            [
-                'product_id'=>request()->product_id,
-                'price'=>request()->price,
-                'qty'=>request()->qty
-            ],
-        ];
         foreach ($carts as $cart) {
 
-            Order_details::create([
-                'order_id' => $orders->id,
-                'product_id' =>$cart['product_id'],
-                'price' =>$cart['price'],
-                'qty' =>$cart['qty'],
+            $product = Product::find($cart['product_id']);
+            \App\OrderDetail::create([
+                'order_id'   => $order->id,
+                'product_id' => $cart['product_id'],
+                'price'      => $product->price,
+                'qty'        => $cart['quantity'],
+                'total' => $product->price * $cart['quantity'],
             ]);
         }
+        Cart::where('session_id', $session_id)->delete();
 
         return redirect()->action('CustomersController@index');
     }
