@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "141ab7dbf15936469a6cabf30cdb8c34",
+    "content-hash": "22a016004f0736874bc6ebc4a3d91409",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -270,48 +270,6 @@
                 "validator"
             ],
             "time": "2019-05-16T22:02:54+00:00"
-        },
-        {
-            "name": "eklundkristoffer/seedster",
-            "version": "3.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/eklundkristoffer/seedster.git",
-                "reference": "f69023f35aafb6b745c6be78effefde1ed992b97"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/eklundkristoffer/seedster/zipball/f69023f35aafb6b745c6be78effefde1ed992b97",
-                "reference": "f69023f35aafb6b745c6be78effefde1ed992b97",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "5.5.* || 5.6.* || 5.7.* || 5.8.*"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Seedster\\SeedsterServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Seedster\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kristoffer Eklund",
-                    "email": "kristoffereklund1@gmail.com"
-                }
-            ],
-            "time": "2019-03-01T05:00:16+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -639,130 +597,6 @@
             "time": "2018-09-29T18:48:56+00:00"
         },
         {
-            "name": "jeremykenedy/laravel-roles",
-            "version": "v2.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeremykenedy/laravel-roles.git",
-                "reference": "d137fee4270a9b465b1509e3dfcdcc7d3b9f574c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jeremykenedy/laravel-roles/zipball/d137fee4270a9b465b1509e3dfcdcc7d3b9f574c",
-                "reference": "d137fee4270a9b465b1509e3dfcdcc7d3b9f574c",
-                "shasum": ""
-            },
-            "require": {
-                "eklundkristoffer/seedster": "^3.0",
-                "laravel/framework": "5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*",
-                "php": ">=5.6.4"
-            },
-            "require-dev": {
-                "illuminate/support": "^5.8",
-                "laravel/laravel": "5.8.*",
-                "orchestra/testbench": "~3.0",
-                "phpunit/phpunit": "^7.5"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "jeremykenedy\\LaravelRoles\\RolesServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "jeremykenedy\\LaravelRoles\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Roman Bičan",
-                    "email": "romanbican@seznam.cz"
-                },
-                {
-                    "name": "Jeremy Kenedy",
-                    "email": "jeremykenedy@gmail.com"
-                },
-                {
-                    "name": "Ultraware"
-                }
-            ],
-            "description": "Powerful package for handling roles, permissions, and levels in Laravel. Supports Laravel 5.3 and higher",
-            "keywords": [
-                "acl",
-                "laravel",
-                "laravel-levels",
-                "laravel-permissions",
-                "laravel-roles",
-                "levels",
-                "permissions",
-                "roles"
-            ],
-            "time": "2019-05-28T20:52:05+00:00"
-        },
-        {
-            "name": "jeremykenedy/laravel-users",
-            "version": "v3.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/jeremykenedy/laravel-users.git",
-                "reference": "081d3d3b2f6449cb68fcfd4bc48e0c3d2a48725c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/jeremykenedy/laravel-users/zipball/081d3d3b2f6449cb68fcfd4bc48e0c3d2a48725c",
-                "reference": "081d3d3b2f6449cb68fcfd4bc48e0c3d2a48725c",
-                "shasum": ""
-            },
-            "require": {
-                "laravelcollective/html": "^5.4|^5.5|^5.6|^5.7|^5.8",
-                "php": ">=7.1.3"
-            },
-            "require-dev": {
-                "illuminate/support": "^5.7",
-                "laravel/laravel": "5.7.*",
-                "orchestra/testbench": "~3.0",
-                "phpunit/phpunit": "^7.0"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "jeremykenedy\\laravelusers\\LaravelUsersServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "jeremykenedy\\laravelusers\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "jeremykenedy",
-                    "email": "jeremykenedy@gmail.com"
-                }
-            ],
-            "description": "Laravel Users Management CRUD Package",
-            "keywords": [
-                "Users",
-                "crud",
-                "laravel",
-                "management"
-            ],
-            "time": "2019-05-17T04:33:16+00:00"
-        },
-        {
             "name": "laravel/framework",
             "version": "v5.8.21",
             "source": {
@@ -973,74 +807,6 @@
             "time": "2018-10-12T19:39:35+00:00"
         },
         {
-            "name": "laravelcollective/html",
-            "version": "v5.8.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/LaravelCollective/html.git",
-                "reference": "0e360143d3476fe4141d267a260c140569fa207b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/LaravelCollective/html/zipball/0e360143d3476fe4141d267a260c140569fa207b",
-                "reference": "0e360143d3476fe4141d267a260c140569fa207b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/http": "5.8.*",
-                "illuminate/routing": "5.8.*",
-                "illuminate/session": "5.8.*",
-                "illuminate/support": "5.8.*",
-                "illuminate/view": "5.8.*",
-                "php": ">=7.1.3"
-            },
-            "require-dev": {
-                "illuminate/database": "5.8.*",
-                "mockery/mockery": "~1.0",
-                "phpunit/phpunit": "~7.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "5.8-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Collective\\Html\\HtmlServiceProvider"
-                    ],
-                    "aliases": {
-                        "Form": "Collective\\Html\\FormFacade",
-                        "Html": "Collective\\Html\\HtmlFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Collective\\Html\\": "src/"
-                },
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylorotwell@gmail.com"
-                },
-                {
-                    "name": "Adam Engebretson",
-                    "email": "adam@laravelcollective.com"
-                }
-            ],
-            "description": "HTML and Form Builders for the Laravel Framework",
-            "homepage": "https://laravelcollective.com",
-            "time": "2019-03-01T22:53:41+00:00"
-        },
-        {
             "name": "league/flysystem",
             "version": "1.0.52",
             "source": {
@@ -1123,6 +889,65 @@
                 "storage"
             ],
             "time": "2019-05-20T20:21:14+00:00"
+        },
+        {
+            "name": "melihovv/laravel-shopping-cart",
+            "version": "5.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/melihovv/laravel-shopping-cart.git",
+                "reference": "ba312574a7104569f33dd718276a2746dbd0c4ab"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/melihovv/laravel-shopping-cart/zipball/ba312574a7104569f33dd718276a2746dbd0c4ab",
+                "reference": "ba312574a7104569f33dd718276a2746dbd0c4ab",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/container": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/database": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/redis": "~5.5.0|~5.6.0|~5.7.0|~5.8.0",
+                "illuminate/support": "~5.5.0|~5.6.0|~5.7.0|~5.8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.5.0|~3.6.0|~3.7.0|~3.8.0",
+                "phpmd/phpmd": "^2.6",
+                "phpunit/phpunit": "~6.0|~7.0",
+                "predis/predis": "^1.1",
+                "sebastian/phpcpd": "^3.0",
+                "squizlabs/php_codesniffer": "^2.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Melihovv\\ShoppingCart\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Melihovv\\ShoppingCart\\": "src/ShoppingCart"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Melihov",
+                    "email": "amelihovv@ya.ru"
+                }
+            ],
+            "description": "Shopping cart package for laravel",
+            "keywords": [
+                "cart",
+                "laravel",
+                "shopping cart"
+            ],
+            "time": "2019-03-02T21:20:04+00:00"
         },
         {
             "name": "monolog/monolog",

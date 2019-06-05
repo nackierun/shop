@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
-use App\Order_details;
+use App\OrderDetail;
 use App\Order;
 use DemeterChain\C;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Product;
 use App\Category;
+use App\SlideShow;
 
 class CustomersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('create','edit','update','destroy');
+        $this->middleware('auth')->only('create', 'edit', 'update', 'destroy');
     }
 
     /**
@@ -26,32 +27,38 @@ class CustomersController extends Controller
     public function index()
     {
         //
+        $slideshow = SlideShow::all();
         $categories = Category::all();
         $products = Product::paginate(20);
-        return view('customers.index',compact('products','categories'));
+        return view('customers.index', compact('products', 'categories', 'slideshow'));
     }
+
     public function products()
     {
-
         $products = Product::paginate(3);
         //
-        return view('customers.products.index',compact('products'));
+        return view('customers.products.index', compact('products'));
     }
+
     public function cat()
     {
         $categories = Category::paginate(3);
-        return view('customers.categories.index',compact('categories'));
+        return view('customers.categories.index', compact('categories'));
     }
+
     public function showcatproducts($id)
     {
         $categories = Category::find($id);
-        $products = Product::find($id);
-        return view('customers.showcat',compact('categories','products'));
+        if ($categories !== null) {
+            $products = $categories->products;
+            return view('customers.showcat', compact('categories', 'products'));
+        }
     }
+
     public function checkout($id)
     {
         $products = Product::find($id);
-        return view('checkout.index',compact('products'));
+        return view('checkout.index', compact('products'));
     }
 
     /**
@@ -67,7 +74,7 @@ class CustomersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -78,32 +85,33 @@ class CustomersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         //
         $products = Product::find($id);
-        return view('customers.products.show',compact('products'));
+        return view('customers.products.show', compact('products'));
     }
+
     public function showcat($id)
     {
         $categories = Category::find($id);
-        return view('customers.categories.show',compact('categories'));
+        return view('customers.categories.show', compact('categories'));
     }
+
     public function vieworder()
     {
-
-        $datas = Order_details::all();
+        $datas = OrderDetail::all();
         $datas2 = Order::all();
-        return view('checkout.vieworder',compact('datas','datas2'));
+        return view('checkout.vieworder', compact('datas', 'datas2'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -114,8 +122,8 @@ class CustomersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -126,7 +134,7 @@ class CustomersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

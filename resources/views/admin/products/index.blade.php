@@ -49,7 +49,6 @@
                         </tr>
                     @endforeach
                 </table>
-
                 {{$products->render()}}
             </div>
         </div>

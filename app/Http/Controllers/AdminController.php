@@ -7,6 +7,9 @@ use App\Order;
 use App\OrderDetail;
 use App\User;
 use Illuminate\Http\Request;
+use App\SlideShow;
+use App\Product;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -26,11 +29,36 @@ class AdminController extends Controller
         //$this->authorize('index', Admin::class);
         return view('admin.index');
     }
+
     public function vieworder()
     {
-        $datas = OrderDetail::paginate(5);
-            $datas2 = Order::paginate(3);
-            return view('admin.vieworder',compact('datas','datas2'));
+        $datas2 = Order::paginate(3);
+        return view('admin.vieworder', compact('datas2'));
+    }
+
+    public function vieworderdetail($id)
+    {
+        $order= Order::where('id',$id)->first();
+            $orderdetail = $order->orderdetail;
+            return view('admin.orderdetail', compact('order','orderdetail'));
+
+
+    }
+
+    public function slideshow(Request $request)
+    {
+        $slideshow = SlideShow::all();
+        return view('admin.slideshow', compact('slideshow'));
+    }
+
+    public function addslide(Request $request)
+    {
+        SlideShow::create(
+            [
+                'image' => $request->file('slideshow')->store('images', 'public'),
+            ]
+        );
+        return redirect('admin/slideshow');
     }
 
     /**

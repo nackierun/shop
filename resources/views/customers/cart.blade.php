@@ -43,7 +43,7 @@
                 <p>จำนวนสินค้ารวม: {{ $qty_sum }} ชิ้น</p>
                 <p>ราคารวมทั้งสิ้น: {{ number_format($total_price)  }} ฿</p>
                 <a href="{{ url('/checkout') }}" class="btn btn-success">ยืนยันการซื้อซื้อ</a>
-                <a href="{{ url('customers/') }}" class="btn btn-dark">กลับ</a>
+                <a href="{{ url('customers/') }}" class="btn btn-dark">กลับซื้อของต่อ</a>
             </div>
 
         </div>

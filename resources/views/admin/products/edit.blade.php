@@ -45,6 +45,7 @@
                 </div>
                 <div>
                     <button class="btn btn-primary">Add</button>
+                    <a class="btn btn-warning" href="{{ url('admin/products') }}">cancel</a>
                 </div>
                 @csrf
             </form>

@@ -2,23 +2,23 @@
 @section('content')
     <div class="card card-body">
         <div class="card-header">
-
+            <h1>Detail</h1><a href="{{ url('admin/vieworder') }}">back</a>
         </div>
         <table class="table table-striped">
             <tr>
-                <th>detail_id</th>
-                <th>o_id</th>
-                <th>p_id</th>
-                <th>price</th>
-                <th>qty</th>
+                <th>#</th>
+                <th>หมายเลขคำสั่งซื้อ</th>
+                <th>สินค้า</th>
+                <th>ราคา</th>
+                <th>จำนวน</th>
             </tr>
-            @foreach($datas as $view)
+            @foreach ($orderdetail as $data)
                 <tr>
-                    <td>{{ $view->id }}</td>
-                    <td>{{ $view->order_id }}</td>
-                    <td>{{ $view->product_id }}</td>
-                    <td>{{ $view->price }}</td>
-                    <td>{{ $view->qty }}</td>
+                    <td>{{ $data->id }}</td>
+                    <td>{{ $data->order_id }}</td>
+                    <td>{{ $data->product_id }}</td>
+                    <td>{{ $data->price }}</td>
+                    <td>{{ $data->qty }}</td>
                 </tr>
             @endforeach
         </table>

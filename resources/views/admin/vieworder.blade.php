@@ -22,12 +22,12 @@
                             @foreach($datas2 as $view2)
                                 <tr>
                                     <td>{{ $view2->id }}</td>
-                                    <td>{{ $view2->customer_name }}</td>
+                                    <td>{{ $view2->customer_id }}</td>
                                     <td>{{ $view2->address }}</td>
                                     <td>{{ $view2->phone }}</td>
                                     <td>{{ $view2->created_at }}</td>
                                     <td>{{ $view2->updated_at }}</td>
-                                    <td>#</td>
+                                    <td><a href="{{ url('admin/orderdetail/'.$view2->id) }}">Detail</a></td>
                                 </tr>
                             @endforeach
                         </table>

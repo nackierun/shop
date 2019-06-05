@@ -46,7 +46,7 @@ class CartController extends Controller
         $data['customer_id'] = Auth::user()->id;
         Cart::create($data);
         session()->flash('message', 'เพิ่มแล้ว');
-        return back();
+        return redirect()->action('CartController@index');
     }
 
     public function delete($id = null)

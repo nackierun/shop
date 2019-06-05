@@ -2,8 +2,8 @@
 @section('content')
     <div class="container">
         <div class="row pt-5 justify-content-center">
-            <h1>Add Products</h1>
             <form action="/admin/products/create" method="post" enctype="multipart/form-data">
+                <h1>Add Products</h1>
                 <div class="form-group col-md-12">
                     <p>Name</p>
                     <input type="text" name="name" value="{{ old('name') }}">
@@ -40,6 +40,7 @@
                 </div>
                 <div>
                     <button class="btn btn-primary">Add</button>
+                    <a class="btn btn-warning" href="{{ url('admin/products') }}">cancel</a>
                 </div>
                 @csrf
             </form>

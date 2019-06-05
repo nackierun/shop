@@ -44,7 +44,7 @@ Route::get('/checkout{id}', 'CustomersController@checkout');
 
 
 //*****Administrator*****
-Route::get('/admin', 'AdminController@index')->name('users');
+Route::get('/admin', 'AdminController@index');
 //category
 Route::get('admin/categories', 'CategoriesController@index');
 Route::get('admin/categories/create', 'CategoriesController@create');
@@ -63,6 +63,10 @@ Route::post('admin/products/update/{id}', 'ProductsController@update');
 Route::get('admin/products/delete/{id}', 'ProductsController@destroy');
 //vieworder
 Route::get('admin/vieworder', 'AdminController@vieworder');
+Route::get('admin/orderdetail/{id}', 'AdminController@vieworderdetail');
+//slideshow
+Route::get('/admin/slideshow', 'AdminController@slideshow');
+Route::post('/admin/slideshow', 'AdminController@addslide');
 //End Admin
 
 Auth::routes();
