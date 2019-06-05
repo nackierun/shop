@@ -104,7 +104,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
       <path value="$PROJECT_DIR$/vendor/jeremykenedy/laravel-users" />
-      <path value="$PROJECT_DIR$/vendor/melihovv/laravel-shopping-cart" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />
