@@ -20,7 +20,10 @@
                     <a class="nav-link" href="{{ url('admin/categories') }}">หมวดหมู่</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">ออเดอร์</a>
+                    <a class="nav-link" href="{{ url('admin/vieworder') }}">ออเดอร์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/users') }}">users</a>
                 </li>
                 @guest
                     <li class="nav-item">

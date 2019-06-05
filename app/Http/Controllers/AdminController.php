@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Admin;
 use App\Order;
-use App\Order_details;
+use App\OrderDetail;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -28,7 +28,7 @@ class AdminController extends Controller
     }
     public function vieworder()
     {
-        $datas = Order_details::paginate(5);
+        $datas = OrderDetail::paginate(5);
             $datas2 = Order::paginate(3);
             return view('admin.vieworder',compact('datas','datas2'));
     }

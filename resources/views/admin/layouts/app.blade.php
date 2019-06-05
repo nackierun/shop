@@ -9,6 +9,23 @@
 
     <title>@yield( 'title','admin')</title>
 
+    {{-- Styles --}}
+    @if(config('laravelusers.enableBootstrapCssCdn'))
+        <link rel="stylesheet" type="text/css" href="{{ config('laravelusers.bootstrapCssCdn') }}">
+    @endif
+    @if(config('laravelusers.enableAppCss'))
+        <link rel="stylesheet" type="text/css" href="{{ asset(config('laravelusers.appCssPublicFile')) }}">
+    @endif
+
+    @yield('template_linked_css')
+
+    {{-- Scripts --}}
+    <script>
+        window.Laravel = {!! json_encode([
+                'csrfToken' => csrf_token(),
+            ]) !!};
+    </script>
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
@@ -70,6 +87,7 @@
             margin-bottom: 30px;
         }
     </style>
+
 </head>
 <body>
 @include('admin.layouts.nav')
@@ -77,7 +95,7 @@
 
     <div class="container">
         <main class="py-4">
-            @yield('content')
+            <div class="row pt-5 justify-content-center">@yield('content')</div>
         </main>
     </div>
 
