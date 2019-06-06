@@ -100,7 +100,7 @@
 @include('customers.layouts.nav')
 <div id="app">
 
-    <div class="container">
+    <div class="container pt-5">
         <main class="py-4">
             @yield('content')
         </main>

@@ -44,7 +44,7 @@ Route::get('/checkout{id}', 'CustomersController@checkout');
 
 
 //*****Administrator*****
-//Route::get('/admin', 'AdminController@index');
+Route::get('/admin', 'AdminController@index');
 Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function () {
     Route::get('/admin', 'AdminController@index')->name('home');
     Route::namespace('Auth')->group(function () {
@@ -68,15 +68,15 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function () {
 Route::get('admin/categories', 'CategoriesController@index');
 Route::get('admin/categories/create', 'CategoriesController@create');
 Route::post('admin/categories/create', 'CategoriesController@store');
-Route::get('admin/categories/edit{id}', 'CategoriesController@edit');
-Route::post('admin/categories/edit{id}', 'CategoriesController@update');
-Route::get('admin/categories/show{id}', 'CategoriesController@show');
-Route::get('admin/categories/delete{id}', 'CategoriesController@destroy');
+Route::get('admin/categories/edit/{id}', 'CategoriesController@edit');
+Route::post('admin/categories/edit/{id}', 'CategoriesController@update');
+Route::get('admin/categories/show/{id}', 'CategoriesController@show');
+Route::get('admin/categories/delete/{id}', 'CategoriesController@destroy');
 //product
 Route::get('admin/products', 'ProductsController@index');
 Route::get('admin/products/create', 'ProductsController@create');
 Route::post('admin/products/create', 'ProductsController@store');
-Route::get('admin/products/show{id}', 'ProductsController@show');
+Route::get('admin/products/show/{id}', 'ProductsController@show');
 Route::get('admin/products/edit/{id}', 'ProductsController@edit');
 Route::post('admin/products/update/{id}', 'ProductsController@update');
 Route::get('admin/products/delete/{id}', 'ProductsController@destroy');

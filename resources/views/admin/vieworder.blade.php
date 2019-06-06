@@ -1,14 +1,11 @@
 @extends('admin.layouts.app')
 @section('content')
     <div class="container">
-        <div class="row pt-5 justify-content-center">
-
-            <div class="col-md-12">
-                <div class="card card-body">
-                    <div class="card-header">
-                        <h1>My orders</h1>
-                    </div>
-                    <div class="row pt-3 justify-content-center">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header"><h1>My orders</h1></div>
+                    <div class="card-body">
                         <table class="table table-striped">
                             <tr>
                                 <th>id</th>
@@ -33,5 +30,8 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
 
 @stop
