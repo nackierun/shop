@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header"><h1>Products<a class="badge badge-success"
                                                             href="{{  url('admin/products/create')  }}">Add</a>
-                        <a href="{{ url('') }}" class="badge badge-info"></a>
+                        <a href="{{ url('admin/slideshow') }}" class="badge badge-info">Slideshow</a>
                         </h1>
                     </div>
                     <div class="card-body">
@@ -48,7 +48,7 @@
                                             {{  $product->price  }}
                                         </td>
                                         <td>
-                                            <img src="{{ asset($product->image) }}" alt="">
+                                            <a href="{{ url('/storage/'.$product->image) }}"><img src="{{ url('/storage/'.$product->image) }}" alt="" style="width: 100px"></a>
                                         </td>
                                         <td>
                                             <a href="{{ url('admin/products/show/'.$product->id) }}"
