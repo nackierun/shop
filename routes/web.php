@@ -13,6 +13,7 @@
 
 
 //*****Customers*****
+Route::get('/test', 'CustomersController@test');
 Route::get('/', 'CustomersController@index');
 Route::get('/customers', 'CustomersController@index')->name('home');
 //category
@@ -44,7 +45,7 @@ Route::get('/checkout{id}', 'CustomersController@checkout');
 
 
 //*****Administrator*****
-Route::get('/admin', 'AdminController@index');
+//Route::get('/admin', 'AdminController@index');
 //category
 Route::get('admin/categories', 'CategoriesController@index');
 Route::get('admin/categories/create', 'CategoriesController@create');
@@ -70,3 +71,8 @@ Route::post('/admin/slideshow', 'AdminController@addslide');
 //End Admin
 
 Auth::routes();
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

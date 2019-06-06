@@ -32,6 +32,10 @@ class CustomersController extends Controller
         $products = Product::paginate(20);
         return view('customers.index', compact('products', 'categories', 'slideshow'));
     }
+    public function test()
+    {
+        return view('customers.test');
+    }
 
     public function products()
     {

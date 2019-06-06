@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 {
     public function orders()
     {
