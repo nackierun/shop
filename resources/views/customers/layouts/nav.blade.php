@@ -14,7 +14,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cart') }}">Cart({{ \App\Cart::where('session_id', session()->get('session_id'))->count() }})</a>
+                    <a class="nav-link"
+                       href="{{ route('cart') }}">Cart({{ \App\Cart::where('session_id', session()->get('session_id'))->count() }}
+                        )</a>
                 </li>
                 @guest
                     <li class="nav-item">

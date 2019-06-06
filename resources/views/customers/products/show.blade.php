@@ -8,6 +8,7 @@
                     <div class="card-body">
                         <table class="table table-bordered table-striped">
                             <tr>
+                                <th>Picture</th>
                                 <th>Name</th>
                                 <th>Brand</th>
                                 <th>Title</th>
@@ -16,12 +17,13 @@
                                 <th>Price</th>
                             </tr>
                             <tr>
+                                <td><img src="{{ url('/storage/'.$products->image) }}" style="width: 100px"></td>
                                 <td>{{ $products->name }}</td>
                                 <td>{{ $products->category->name }}</td>
                                 <td>{{ $products->title }}</td>
                                 <td>{{ $products->description }}</td>
                                 <td>{{ $products->qty }}</td>
-                                <td>{{ $products->price }}</td>
+                                <td>{{ number_format($products->price) }}</td>
                             </tr>
 
                         </table>

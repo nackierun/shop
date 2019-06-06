@@ -8,6 +8,7 @@
                     <div class="card-body">
                         <table class="table table-striped">
                             <tr>
+                                <th>Picture</th>
                                 <th>ชื้อสินค้า</th>
                                 <th>ราคา</th>
                                 <th>จำนวน</th>
@@ -21,6 +22,7 @@
                                     $product = \App\Product::find($data->product_id);
                                 @endphp
                                 <tr>
+                                    <td><img src="{{ url('/storage/'.$product->image) }}" style="width: 100px"> </td>
                                     <td>{{ $product->name }}</td>
                                     <td>{{ number_format($product->price) }}</td>
                                     <td>{{ $data->quantity }}</td>
