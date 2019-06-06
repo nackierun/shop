@@ -45,8 +45,6 @@ Route::get('/checkout{id}', 'CustomersController@checkout');
 
 //*****Administrator*****
 Route::get('/admin', 'AdminController@index');
-Route::get('/admin', 'AdminController@index')->middleware('admin');
-
 //category
 Route::get('admin/categories', 'CategoriesController@index');
 Route::get('admin/categories/create', 'CategoriesController@create');
