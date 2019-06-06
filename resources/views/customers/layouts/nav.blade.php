@@ -14,13 +14,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('customers/categories') }}">หมวดหมู่</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cart') }}">Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">#</a>
+                    <a class="nav-link"
+                       href="{{ route('cart') }}">Cart({{ \App\Cart::where('session_id', session()->get('session_id'))->count() }}
+                        )</a>
                 </li>
                 @guest
                     <li class="nav-item">
@@ -32,6 +28,9 @@
                         </li>
                     @endif
                 @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/') }}">Order</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown"

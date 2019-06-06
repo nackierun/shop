@@ -13,6 +13,6 @@ class Product extends Model
     }
     public function cart()
     {
-        return $this ->belongto('App\Cart');
+        return $this->belongto('App\Cart');
     }
 }

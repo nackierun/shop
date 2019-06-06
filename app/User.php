@@ -5,12 +5,17 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 
-class User extends \TCG\Voyager\Models\User
+class User extends Authenticatable
 {
-    public  function order()
+    public function orders()
     {
         $this->hasMany('App\Order');
+    }
+    public function cart()
+    {
+        $this->hasOne('App\Cart');
     }
     use Notifiable;
 

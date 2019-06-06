@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Order;
+use App\Order_details;
 use App\User;
 use App\Product;
 use Illuminate\Http\Request;
@@ -27,7 +28,8 @@ class CheckoutController extends Controller
 
         $total_price = 0;
         foreach ($datas as $data) {
-            $total_price += $data->price * $data->quantity;
+            $product = Product::find($data->product_id);
+            $total_price += $product->price * $data->quantity;
         }
 
         $user_login = User::where('id', Auth::id())->first();
@@ -36,26 +38,30 @@ class CheckoutController extends Controller
 
     public function confirm(Request $request)
     {
-        $this->validate($request, [
+        $session_id = session()->get('session_id');
+        $carts = Cart::where('session_id', $session_id)->get();
+        
+        $order = Order::create([
+                'customer_id' => Auth::user()->id,
+                'address'     => request()->address,
+                'phone'       => request()->phone,
+                'total'       => 0,
+                'status'      => 'pending',
+            ]);
 
+        foreach ($carts as $cart) {
 
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'grand_total' => 'required',
+            $product = Product::find($cart['product_id']);
+            \App\OrderDetail::create([
+                'order_id'   => $order->id,
+                'product_id' => $cart['product_id'],
+                'price'      => $product->price,
+                'qty'        => $cart['quantity'],
+                'total' => $product->price * $cart['quantity'],
+            ]);
+        }
+        Cart::where('session_id', $session_id)->delete();
 
-        ]);
-        $data = [
-            'users_id' => request()->users_id,
-            'product_id' => request()->product_id,
-            'users_email' => request()->users_email,
-            'name' => request()->name,
-            'address' => request()->address,
-            'phone' => request()->phone,
-            'total_qty' => request()->total_qty,
-            'grand_total' => request()->grand_total,
-        ];
-        Order::create($data);
         return redirect()->action('CustomersController@index');
     }
 
