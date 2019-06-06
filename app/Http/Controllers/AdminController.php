@@ -38,9 +38,9 @@ class AdminController extends Controller
 
     public function vieworderdetail($id)
     {
-        $order= Order::where('id',$id)->first();
-            $orderdetail = $order->orderdetail;
-            return view('admin.orderdetail', compact('order','orderdetail'));
+        $order = Order::where('id', $id)->first();
+        $orderdetail = $order->orderdetail;
+        return view('admin.orderdetail', compact('order', 'orderdetail'));
 
 
     }
@@ -58,6 +58,14 @@ class AdminController extends Controller
                 'image' => $request->file('slideshow')->store('images', 'public'),
             ]
         );
+        return redirect('admin/slideshow');
+    }
+
+    public function delslide($id)
+    {
+        $slideshows = SlideShow::find($id);
+        $slideshows->delete();
+        session()->flash('status', 'ลบแล้ว');
         return redirect('admin/slideshow');
     }
 
