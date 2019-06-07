@@ -38,9 +38,8 @@ class AdminController extends Controller
 
     public function vieworderdetail($id)
     {
-        $order = Order::where('id', $id)->first();
-        $orderdetail = $order->orderdetail;
-        return view('admin.orderdetail', compact('order', 'orderdetail'));
+        $orderdetail = OrderDetail::find($id);
+        return view('admin.orderdetail', compact('orderdetail'));
 
 
     }
