@@ -8,8 +8,12 @@ class OrderDetail extends Model
 {
     //
     protected $guarded = [];
-    public function orders()
+    public function order()
     {
-        $this->belongsTo('App\Orders');
+        $this->belongsTo('App\Order');
+    }
+    public function products()
+    {
+        $this->belongsTo('App\Product');
     }
 }

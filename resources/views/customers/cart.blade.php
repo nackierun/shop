@@ -4,17 +4,17 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Cart</div>
+                    <div class="card-header">ตะกร้า</div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <tr>
-                                <th>Picture</th>
+                                <th>ภาพสินค้า</th>
                                 <th>ชื้อสินค้า</th>
                                 <th>ราคา</th>
                                 <th>จำนวน</th>
-                                <th>up</th>
-                                <th>price</th>
-                                <th>del</th>
+                                <th>เพิ่ม</th>
+                                <th>ราคารวมต่อรายการ</th>
+                                <th>เอาออกจากตะกร้า</th>
                             </tr>
                             @foreach($datas as $data)
 

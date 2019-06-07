@@ -20,6 +20,7 @@
                         <form method="POST" action="{{ route('confirm') }}">
 
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="total" value="{{ $total_price }}">
                             <div class="form-group row">
                                 <label for="customer_name"
                                        class="col-md-4 col-form-label text-md-right">ชื่อ-นามสกุล</label>
@@ -52,7 +53,7 @@
                             <div class="form-group row justify-content-center">
                                 <div class="col-md-6">
                                     <button type="submit" class="btn btn-warning">ยืนยัน</button>
-                                    <a href="{{ url('/customers') }}" class="btn btn-dark">Cancel</a>
+                                    <a href="{{ url('/customers') }}" class="btn btn-dark">ยกเลิก</a>
                                 </div>
                             </div>
                             @csrf

@@ -9,7 +9,7 @@ use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 
 class User extends \TCG\Voyager\Models\User
 {
-    public function orders()
+    public function order()
     {
         $this->hasMany('App\Order');
     }
