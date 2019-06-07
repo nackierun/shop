@@ -10,7 +10,7 @@ class Order extends Model
     //
     public  function user()
     {
-        $this->belongsToMany('App\User');
+        $this->belongsTo('App\User');
     }
     public  function orderdetail()
     {

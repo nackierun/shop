@@ -45,7 +45,7 @@ class CheckoutController extends Controller
                 'customer_id' => Auth::user()->id,
                 'address'     => request()->address,
                 'phone'       => request()->phone,
-                'total'       => 0,
+                'total'       => request()->total,
                 'status'      => 'pending',
             ]);
 

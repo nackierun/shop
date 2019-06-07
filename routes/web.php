@@ -32,7 +32,7 @@ Route::get('customers/cart', 'CartController@index')->name('cart');
 Route::get('customers/cart/update-quantity/{id}/{quantity}', 'CartController@updatequantity');
 Route::get('delete{id}', 'CartController@delete');
 
-Route::resource('customer/order', 'OrderController');
+Route::get('customers/orders/{id}', 'OrderController@index');
 
 //Route::get('/cart/','CartController');
 //Route::get('/cart/','CartController');

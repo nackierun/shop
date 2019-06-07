@@ -5,11 +5,11 @@
             <h1>My orders</h1>
             <table class="table table-striped">
                 <tr>
-                    <th>detail_id</th>
-                    <th>o_id</th>
-                    <th>p_id</th>
-                    <th>price</th>
-                    <th>qty</th>
+                    <th>#</th>
+                    <th>รหัสคำสั่งซื้อ</th>
+                    <th>สินค้า</th>
+                    <th>ราคา</th>
+                    <th>จำนวน</th>
                 </tr>
                 @foreach($datas as $view)
                     <tr>
@@ -25,12 +25,12 @@
         <div class="row pt-3 justify-content-center">
             <table class="table table-striped">
                 <tr>
-                    <th>id</th>
-                    <th>customer_name</th>
-                    <th>address</th>
-                    <th>phone</th>
-                    <th>create_at</th>
-                    <th>update_at</th>
+                    <th>รหัสคำสั่งซื้อ</th>
+                    <th>ชื่อ</th>
+                    <th>ที่อยู่</th>
+                    <th>เบอร์โทร</th>
+                    <th>สั่งเมื่อ</th>
+                    <th>สถานะ</th>
                 </tr>
                 @foreach($datas2 as $view2)
                     <tr>
