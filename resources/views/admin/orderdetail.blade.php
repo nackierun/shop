@@ -14,18 +14,17 @@
                                 <th>ราคา</th>
                                 <th>จำนวน</th>
                             </tr>
-                            @foreach ($orderdetail as $data)
-                                <tr>
-                                    <td>{{ $data->id }}</td>
-                                    <td>{{ $data->order_id }}</td>
-                                    <td>{{ $data->product_id }}</td>
-                                    <td>{{ $data->price }}</td>
-                                    <td>{{ $data->qty }}</td>
-                                </tr>
-                            @endforeach
+                            <tr>
+                                <td>{{ $orderdetail->id }}</td>
+                                <td>{{ $orderdetail->order_id }}</td>
+                                <td>{{ $orderdetail->product_id }}</td>
+                                <td>{{ number_format($orderdetail->price) }}</td>
+                                <td>{{ $orderdetail->qty }}</td>
+                            </tr>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@stop

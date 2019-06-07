@@ -68,6 +68,7 @@ Route::get('admin/orderdetail/{id}', 'AdminController@vieworderdetail');
 //slideshow
 Route::get('/admin/slideshow', 'AdminController@slideshow');
 Route::post('/admin/slideshow', 'AdminController@addslide');
+Route::get('/admin/slideshow/delete/{id}', 'AdminController@delslide');
 //End Admin
 
 Auth::routes();
