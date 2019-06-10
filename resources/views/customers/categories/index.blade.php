@@ -1,4 +1,5 @@
 @extends('customers.layouts.app')
+@section('title','Category')
 @section('content')
     <div class="col-sm-6 pt-5">
         <h1>Categories</h1>

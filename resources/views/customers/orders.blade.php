@@ -1,5 +1,5 @@
 @extends('customers.layouts.app')
-
+@section('title,Order')
 @section('content')
     <div class="container">
 

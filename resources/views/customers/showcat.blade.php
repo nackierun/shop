@@ -1,4 +1,5 @@
 @extends('customers.layouts.app')
+@section('title','List')
 @section('content')
     <div class="py-5">
         <div class="container">
