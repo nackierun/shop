@@ -7,14 +7,14 @@
 
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">คำสั่งซื้อ</div>
+                    <div class="card-header text-white bg-info">คำสั่งซื้อ</div>
                     <div class="card-body">
                         <div class=”row”>
                             <div class=”col-md-8 col-md-offset-2
                             ">
                             <div class=”panel panel-default”>
                                 <div class=”panel-heading btn-primary”>
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <table class="table table-striped table-bordered">
                                             <tr>
                                                 <th>หมายเลขใบสั่งซื้อ</th>

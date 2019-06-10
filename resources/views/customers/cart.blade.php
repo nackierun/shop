@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">ตะกร้า</div>
+                    <div class="card-header text-white bg-info">ตะกร้า</div>
                     <div class="card-body">
                         <table class="table table-striped">
                             <tr>
@@ -18,7 +18,6 @@
                                 <th>เอาออกจากตะกร้า</th>
                             </tr>
                             @foreach($datas as $data)
-
                                 @php
                                     $product = \App\Product::find($data->product_id);
                                 @endphp
