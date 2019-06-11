@@ -1,14 +1,19 @@
 @extends('customers.layouts.app')
+@section('title','show')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header"><h1>รายละเอียด</h1></div>
+                    <div class="card-header text-white bg-info">
+                        <h1>รายละเอียด</h1>
+                    </div>
                     <div class="card-body">
                         <div class="jumbotron">
-                            <h1 class="display-4"><img src="{{ url('/storage/'.$products->image) }}"
-                                                       style="width: 200px"></h1>
+                            <h1 class="display-4">
+                                <img src="{{ url('/storage/'.$products->image) }}"
+                                     style="width: 200px">
+                            </h1>
                             <h2>{{ $products->name }}</h2>
                             <hr class="my-4">
                             <h2>{{ $products->category->name }}</h2>
@@ -23,11 +28,15 @@
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <input type="hidden" name="product_id" value="{{ $products->id }}">
                                 <input type="hidden" name="quantity" value="1">
-                                <button class="btn btn-primary">ใส่ตะกร้า</button>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <button class="btn btn-primary">ใส่ตะกร้า</button>
+                                    </div>
+                                    <div class="col-sm-3"><a href="{{ url('customers/') }}"
+                                                             class="btn btn-dark">กลับ</a></div>
+                                </div>
                             </form>
-                            <div class="row pt-3 pl-3">
-                                <a href="{{ url('customers/') }}" class="btn btn-dark">กลับ</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>

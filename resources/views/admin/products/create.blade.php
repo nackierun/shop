@@ -1,4 +1,5 @@
 @extends('voyager::master')
+@section('title','Create')
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

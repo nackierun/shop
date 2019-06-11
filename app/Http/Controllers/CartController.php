@@ -14,6 +14,11 @@ use vendor\project\StatusTest;
 
 class CartController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -21,17 +26,17 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
         $session_id = session()->get('session_id');
         $datas = Cart::where('session_id', $session_id)->get();
+
         $qty_sum = Cart::where('session_id', $session_id)->sum('quantity');
         $total_price = 0;
         foreach ($datas as $data) {
             $product = Product::find($data->product_id);
             $total_price += $product->price * $data->quantity;
         }
-
-        return view('customers.cart', compact('datas', 'total_price', 'qty_sum'));
+        $p_name = Product::find($data->product_id);
+        return view('customers.cart', compact('datas', 'total_price', 'qty_sum', 'p_name'));
     }
 
     public function addToCart(Request $request)

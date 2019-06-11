@@ -11,7 +11,7 @@ class User extends \TCG\Voyager\Models\User
 {
     public function order()
     {
-        $this->hasMany('App\Order');
+        $this->hasOne('App\Order');
     }
     public function cart()
     {
