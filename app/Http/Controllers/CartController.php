@@ -35,8 +35,7 @@ class CartController extends Controller
             $product = Product::find($data->product_id);
             $total_price += $product->price * $data->quantity;
         }
-        $p_name = Product::find($data->product_id);
-        return view('customers.cart', compact('datas', 'total_price', 'qty_sum', 'p_name'));
+        return view('customers.cart', compact('datas', 'total_price', 'qty_sum'));
     }
 
     public function addToCart(Request $request)

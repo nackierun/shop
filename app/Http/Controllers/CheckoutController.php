@@ -40,7 +40,6 @@ class CheckoutController extends Controller
     {
         $session_id = session()->get('session_id');
         $carts = Cart::where('session_id', $session_id)->get();
-        
         $order = Order::create([
                 'customer_id' => Auth::user()->id,
                 'address'     => request()->address,
@@ -48,20 +47,19 @@ class CheckoutController extends Controller
                 'total'       => request()->total,
                 'status'      => 'pending',
             ]);
-
         foreach ($carts as $cart) {
-
             $product = Product::find($cart['product_id']);
             \App\OrderDetail::create([
+                'customer_id' => Auth::user()->id,
                 'order_id'   => $order->id,
                 'product_id' => $cart['product_id'],
                 'price'      => $product->price,
                 'qty'        => $cart['quantity'],
                 'total' => $product->price * $cart['quantity'],
+                'status'      => 'pending',
             ]);
         }
         Cart::where('session_id', $session_id)->delete();
-
         return redirect()->action('CustomersController@index');
     }
 
