@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use App\OrderDetail;
+use App\Product;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,11 +18,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('customer_id', Auth::user()->id)->get();
-        foreach ($orders as $order) {
-            $user = \App\User::find($order->customer_id);
-        }
-        return view('customers.orders', compact('orders', 'user'));
+        $orders = OrderDetail::where('customer_id', Auth::user()->id)->paginate(5);
+        return view('customers.orders', compact('orders'));
     }
 
     /**
