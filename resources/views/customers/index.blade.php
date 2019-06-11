@@ -5,8 +5,8 @@
     <div class="container">
         <div class="row pt-3">
             <div class="col-lg-3">
-                <h1 class="my-4">หมวดหมู่</h1>
                 <div class="list-group position-fixed">
+                    <h1 class="my-4">หมวดหมู่</h1>
                     @foreach($categories as $category)
                         <a href="{{ url('customers/showcat'.$category->id) }}"
                            class="list-group-item">{{ $category->name }}</a>
@@ -26,8 +26,8 @@
                     <div class="carousel-inner" role="listbox">
 
                         <div class="carousel-item active">
-                            <img class="d-block img-fluid"
-                                 src="{{ url('https://ippcdn-ippawards.netdna-ssl.com/wp-content/uploads/2018/07/34-1st-PANORAMA-Mateusz-Piesiak-1.jpg') }}"
+                            <img class="d-block img-fluid rounded"
+                                 src="{{ asset('/storage/images/firstslide.png') }}"
                                  style=" width: 100%" alt="First slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Mobile Shop</h5>
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         @foreach ($slideshow as $item)
-                            <div class="carousel-item">
+                            <div class="carousel-item rounded">
                                 <img class="d-block img-fluid" src="{{ url('/storage/'.$item->image) }}"
                                      style=" width: 100%" alt="First slide">
                                 <div class="carousel-caption d-none d-md-block">
@@ -62,12 +62,14 @@
                 <div class="row pt-3">
                     @foreach($products as $product)
                         <div class="col-lg-4 col-md-6 mb-4">
-                            <div class="card h-100">
-                                <a href="#"><img class="card-img-top" src="{{ url('/storage/'.$product->image) }}"
-                                                 style="width: 200px" alt=""></a>
+                            <div class="card h-100 rounded">
+                                <a href="{{ url('customers/products/show'.$product->id) }}"><img class="card-img-top"
+                                                                                                 src="{{ url('/storage/'.$product->image) }}"
+                                                                                                 style="width: 200px"
+                                                                                                 alt=""></a>
                                 <div class="card-body">
                                     <h4 class="card-title">
-                                        <a href="#">{{ $product->name }}</a>
+                                        <a href="{{ url('customers/products/show'.$product->id) }}">{{ $product->name }}</a>
                                     </h4>
                                     <h5>{{ number_format($product->price) }} บาท</h5>
                                     <p class="card-text">{{ $product->title }}</p>

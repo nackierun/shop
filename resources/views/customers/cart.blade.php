@@ -18,13 +18,10 @@
                                 <th>เอาออกจากตะกร้า</th>
                             </tr>
                             @foreach($datas as $data)
-                                @php
-                                    $product = \App\Product::find($data->product_id);
-                                @endphp
                                 <tr>
-                                    <td><img src="{{ url('/storage/'.$product->image) }}" style="width: 100px"> </td>
-                                    <td>{{ $product->name }}</td>
-                                    <td>{{ number_format($product->price) }}</td>
+                                    <td><img src="{{ url('/storage/'.$p_name->image) }}" style="width: 100px"> </td>
+                                    <td>{{ $p_name->name }}</td>
+                                    <td>{{ number_format($p_name->price) }}</td>
                                     <td>{{ $data->quantity }}</td>
                                     <td>
                                         <a class="badge badge-success"
@@ -39,7 +36,7 @@
                                     </td>
                                     <td class="cart_total">
                                         <p class="cart_total_price">
-                                            $ {{ number_format($product->price*$data->quantity,0)}}</p>
+                                            $ {{ number_format($p_name->price*$data->quantity,0)}}</p>
                                     </td>
                                     <td><a href="{{ url('delete'.$data->id) }}" class="btn btn-warning">del</a></td>
                                 </tr>

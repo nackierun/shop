@@ -4,7 +4,6 @@
         <div class="row justify-content-center pt-5">
             <div class="col-md-6">
                 <h1>สินค้า</h1>
-
                 <strong>จำนวน: {{ $qty_sum }}
                     ชิ้น </strong><strong>ราคาทั้งสิ้น: {{ number_format($total_price) }}</strong>
             </div>
@@ -14,7 +13,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">ยืนยันการสั่งซื้อ</div>
+                    <div class="card-header text-white bg-info">ยืนยันการสั่งซื้อ</div>
                     <div class="card-body">
                         <!--*********************************Form**************************************** -->
                         <form method="POST" action="{{ route('confirm') }}">

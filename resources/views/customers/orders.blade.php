@@ -2,9 +2,7 @@
 @section('title,Order')
 @section('content')
     <div class="container">
-
         <div class="row pt-5 justify-content-center">
-
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header text-white bg-info">คำสั่งซื้อ</div>
@@ -25,9 +23,6 @@
                                                 <th>สถานะ</th>
                                             </tr>
                                             @foreach($orders as $order)
-                                                @php
-                                                    $user = \App\User::find($order->customer_id);
-                                                @endphp
                                                 <tr>
                                                     <td>{{ $order->id }}</td>
                                                     <td>{{ $user->name }}</td>
@@ -38,7 +33,7 @@
                                                 </tr>
                                             @endforeach
                                         </table>
-                                        {{ $orders->render() }}
+                                        {{-- $orders->render() --}}
                                     </div>
                                 </div>
                             </div>
