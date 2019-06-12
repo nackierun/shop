@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2019 at 04:00 AM
+-- Generation Time: Jun 12, 2019 at 04:09 AM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.3.5
 
@@ -150,7 +150,14 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (52, 7, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 6),
 (53, 6, 'order_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customer_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"admins\",\"pivot\":\"0\",\"taggable\":null}', 9),
 (54, 5, 'order_detail_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customer_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"admins\",\"pivot\":\"0\",\"taggable\":null}', 11),
-(55, 5, 'order_detail_belongsto_product_relationship', 'relationship', 'products', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Product\",\"table\":\"products\",\"type\":\"belongsTo\",\"column\":\"product_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"admins\",\"pivot\":\"0\",\"taggable\":null}', 12);
+(55, 5, 'order_detail_belongsto_product_relationship', 'relationship', 'products', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Product\",\"table\":\"products\",\"type\":\"belongsTo\",\"column\":\"product_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"admins\",\"pivot\":\"0\",\"taggable\":null}', 12),
+(56, 8, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(57, 8, 'product_id', 'text', 'Product Id', 1, 1, 1, 1, 1, 1, '{}', 2),
+(58, 8, 'customer_id', 'text', 'Customer Id', 1, 1, 1, 1, 1, 1, '{}', 3),
+(59, 8, 'quantity', 'text', 'Quantity', 1, 1, 1, 1, 1, 1, '{}', 4),
+(60, 8, 'session_id', 'text', 'Session Id', 1, 1, 1, 1, 1, 1, '{}', 5),
+(61, 8, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 6),
+(62, 8, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 7);
 
 -- --------------------------------------------------------
 
@@ -186,7 +193,8 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (3, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, '', '', 1, 0, NULL, '2019-06-11 03:55:10', '2019-06-11 03:55:10'),
 (5, 'order_details', 'order-details', 'Order Detail', 'Order Details', NULL, 'App\\OrderDetail', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 03:59:38', '2019-06-11 03:59:38'),
 (6, 'orders', 'orders', 'Order', 'Orders', NULL, 'App\\Order', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 04:14:37', '2019-06-11 04:14:37'),
-(7, 'categories', 'categories', 'Category', 'Categories', NULL, 'App\\Category', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 18:41:30', '2019-06-11 18:41:30');
+(7, 'categories', 'categories', 'Category', 'Categories', NULL, 'App\\Category', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 18:41:30', '2019-06-11 18:41:30'),
+(8, 'carts', 'carts', 'Cart', 'Carts', NULL, 'App\\Cart', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 19:07:22', '2019-06-11 19:07:22');
 
 -- --------------------------------------------------------
 
@@ -248,7 +256,7 @@ INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class
 (12, 1, 'Order Details', '', '_self', NULL, NULL, 20, 5, '2019-06-11 03:59:38', '2019-06-11 18:42:51', 'voyager.order-details.index', NULL),
 (14, 1, 'หมวดหมู่', '/admin/categories', '_self', NULL, '#000000', 20, 1, '2019-06-11 04:12:42', '2019-06-11 18:42:57', NULL, ''),
 (15, 1, 'สินค้า', '/admin/products', '_self', NULL, '#000000', 20, 2, '2019-06-11 04:12:54', '2019-06-11 18:42:59', NULL, ''),
-(16, 1, 'ตะกร้า', '/admin/cart', '_self', NULL, '#000000', 20, 3, '2019-06-11 04:13:06', '2019-06-11 18:43:01', NULL, ''),
+(16, 1, 'ตะกร้า', '/admin/carts', '_self', NULL, '#000000', 20, 3, '2019-06-11 04:13:06', '2019-06-11 19:08:41', NULL, ''),
 (18, 1, 'Orders', '', '_self', NULL, NULL, 20, 4, '2019-06-11 04:14:37', '2019-06-11 18:43:01', 'voyager.orders.index', NULL),
 (20, 1, 'ร้านค้า', '', '_self', NULL, '#000000', NULL, 1, '2019-06-11 18:42:31', '2019-06-11 18:43:13', NULL, '');
 
@@ -455,7 +463,12 @@ INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`
 (42, 'read_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
 (43, 'edit_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
 (44, 'add_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
-(45, 'delete_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31');
+(45, 'delete_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
+(46, 'browse_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22'),
+(47, 'read_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22'),
+(48, 'edit_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22'),
+(49, 'add_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22'),
+(50, 'delete_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22');
 
 -- --------------------------------------------------------
 
@@ -512,7 +525,12 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (42, 1),
 (43, 1),
 (44, 1),
-(45, 1);
+(45, 1),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(50, 1);
 
 -- --------------------------------------------------------
 
@@ -889,13 +907,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `menus`
@@ -907,7 +925,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `menu_items`
 --
 ALTER TABLE `menu_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -937,7 +955,7 @@ ALTER TABLE `pages`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `posts`
