@@ -27,7 +27,7 @@
 
                         <div class="carousel-item active">
                             <img class="d-block img-fluid rounded"
-                                 src="{{ asset('/storage/images/firstslide.png') }}"
+                                 src="{{ url('https://www.pngkey.com/png/full/81-814548_hands-holding-the-galaxy-note8-in-landscape-mode.png') }}"
                                  style=" width: 100%" alt="First slide">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Mobile Shop</h5>
