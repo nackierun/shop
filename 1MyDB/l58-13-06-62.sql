@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2019 at 04:09 AM
+-- Generation Time: Jun 13, 2019 at 12:01 PM
 -- Server version: 10.1.39-MariaDB
 -- PHP Version: 7.3.5
 
@@ -25,18 +25,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admins`
+-- Table structure for table `cancels`
 --
 
-CREATE TABLE `admins` (
+CREATE TABLE `cancels` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `orderdetail_id` int(11) NOT NULL,
+  `customers_id` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cancels`
+--
+
+INSERT INTO `cancels` (`id`, `orderdetail_id`, `customers_id`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, '2019-06-13 02:48:34', '2019-06-13 02:48:34');
 
 -- --------------------------------------------------------
 
@@ -74,7 +79,8 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `created_at`, `updated_at`) VALUES
-(1, NULL, 1, 'Apple', '2019-06-11 04:19:02', '2019-06-11 04:19:02');
+(2, NULL, 1, 'Apple', '2019-06-13 02:36:33', '2019-06-13 02:36:33'),
+(3, NULL, 1, 'Samsung', '2019-06-13 02:40:42', '2019-06-13 02:40:42');
 
 -- --------------------------------------------------------
 
@@ -124,40 +130,54 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (19, 3, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, NULL, 4),
 (20, 3, 'display_name', 'text', 'Display Name', 1, 1, 1, 1, 1, 1, NULL, 5),
 (21, 1, 'role_id', 'text', 'Role', 1, 1, 1, 1, 1, 1, NULL, 9),
-(29, 5, 'id', 'text', 'Id', 1, 1, 1, 1, 1, 1, '{}', 0),
-(30, 5, 'customer_id', 'text', 'Customer Id', 1, 1, 1, 1, 1, 1, '{}', 2),
-(31, 5, 'order_id', 'text', 'Order Id', 1, 1, 1, 1, 1, 1, '{}', 3),
-(32, 5, 'product_id', 'text', 'Product Id', 1, 1, 1, 1, 1, 1, '{}', 4),
-(33, 5, 'price', 'text', 'Price', 1, 1, 1, 1, 1, 1, '{}', 5),
-(34, 5, 'qty', 'text', 'Qty', 1, 1, 1, 1, 1, 1, '{}', 6),
-(35, 5, 'total', 'text', 'Total', 1, 1, 1, 1, 1, 1, '{}', 7),
-(36, 5, 'status', 'text', 'Status', 1, 1, 1, 1, 1, 1, '{}', 8),
-(37, 5, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 1, 1, '{}', 9),
-(38, 5, 'updated_at', 'timestamp', 'Updated At', 0, 1, 1, 1, 1, 1, '{}', 10),
-(39, 6, 'id', 'text', 'Id', 1, 1, 1, 1, 1, 1, '{}', 1),
-(40, 6, 'customer_id', 'text', 'Customer Id', 1, 1, 1, 1, 1, 1, '{}', 2),
-(41, 6, 'address', 'text', 'Address', 1, 1, 1, 1, 1, 1, '{}', 3),
-(42, 6, 'phone', 'text', 'Phone', 1, 1, 1, 1, 1, 1, '{}', 4),
-(43, 6, 'total', 'text', 'Total', 1, 1, 1, 1, 1, 1, '{}', 5),
-(44, 6, 'status', 'text', 'Status', 1, 1, 1, 1, 1, 1, '{}', 6),
-(45, 6, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 1, 1, '{}', 7),
-(46, 6, 'updated_at', 'timestamp', 'Updated At', 0, 1, 1, 1, 1, 1, '{}', 8),
-(47, 7, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(48, 7, 'parent_id', 'text', 'Parent Id', 0, 1, 1, 1, 1, 1, '{}', 2),
-(49, 7, 'order', 'text', 'Order', 1, 1, 1, 1, 1, 1, '{}', 3),
-(50, 7, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 4),
-(51, 7, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 5),
-(52, 7, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 6),
-(53, 6, 'order_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customer_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"admins\",\"pivot\":\"0\",\"taggable\":null}', 9),
-(54, 5, 'order_detail_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customer_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"admins\",\"pivot\":\"0\",\"taggable\":null}', 11),
-(55, 5, 'order_detail_belongsto_product_relationship', 'relationship', 'products', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Product\",\"table\":\"products\",\"type\":\"belongsTo\",\"column\":\"product_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"admins\",\"pivot\":\"0\",\"taggable\":null}', 12),
-(56, 8, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
-(57, 8, 'product_id', 'text', 'Product Id', 1, 1, 1, 1, 1, 1, '{}', 2),
-(58, 8, 'customer_id', 'text', 'Customer Id', 1, 1, 1, 1, 1, 1, '{}', 3),
-(59, 8, 'quantity', 'text', 'Quantity', 1, 1, 1, 1, 1, 1, '{}', 4),
-(60, 8, 'session_id', 'text', 'Session Id', 1, 1, 1, 1, 1, 1, '{}', 5),
-(61, 8, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 6),
-(62, 8, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 7);
+(29, 6, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(30, 6, 'customer_id', 'text', 'Customer Id', 1, 1, 1, 1, 1, 1, '{}', 2),
+(31, 6, 'orderdetail_id', 'text', 'Orderdetail Id', 1, 1, 1, 1, 1, 1, '{}', 3),
+(32, 6, 'image', 'image', 'Image', 1, 1, 1, 1, 1, 1, '{}', 4),
+(33, 6, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 5),
+(34, 6, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 6),
+(35, 7, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(36, 7, 'name', 'text', 'Name', 1, 1, 1, 1, 1, 1, '{}', 2),
+(37, 7, 'bank_number', 'text', 'Bank Number', 1, 1, 1, 1, 1, 1, '{}', 3),
+(38, 7, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 4),
+(39, 7, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 5),
+(40, 8, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(41, 8, 'customer_id', 'text', 'Customer Id', 1, 1, 1, 1, 1, 1, '{}', 2),
+(42, 8, 'pay_id', 'text', 'Pay Id', 1, 1, 1, 1, 1, 1, '{}', 3),
+(43, 8, 'address', 'text', 'Address', 1, 1, 1, 1, 1, 1, '{}', 4),
+(44, 8, 'phone', 'text', 'Phone', 1, 1, 1, 1, 1, 1, '{}', 5),
+(45, 8, 'total', 'text', 'Total', 1, 1, 1, 1, 1, 1, '{}', 6),
+(46, 8, 'status', 'text', 'เปลี่ยนสถานะคำสั่งซื้อ', 1, 1, 1, 1, 1, 1, '{}', 7),
+(47, 8, 'created_at', 'timestamp', 'สั่งเมื่อ', 0, 1, 1, 1, 0, 1, '{}', 8),
+(48, 8, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 9),
+(49, 9, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 0),
+(50, 9, 'customer_id', 'text', 'Customer Id', 1, 1, 1, 1, 1, 1, '{}', 2),
+(51, 9, 'order_id', 'text', 'Order Id', 1, 1, 1, 1, 1, 1, '{}', 3),
+(52, 9, 'product_id', 'text', 'Product Id', 1, 1, 1, 1, 1, 1, '{}', 4),
+(53, 9, 'price', 'text', 'Price', 1, 1, 1, 1, 1, 1, '{}', 5),
+(54, 9, 'qty', 'text', 'Qty', 1, 1, 1, 1, 1, 1, '{}', 6),
+(55, 9, 'total', 'text', 'Total', 1, 1, 1, 1, 1, 1, '{}', 7),
+(56, 9, 'status', 'text', 'เปลี่ยนสถานะคำสั่งซื้อ', 1, 1, 1, 1, 1, 1, '{}', 8),
+(57, 9, 'created_at', 'timestamp', 'สั่งเมื่อ', 0, 1, 1, 1, 0, 1, '{}', 9),
+(58, 9, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 10),
+(59, 10, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(60, 10, 'product_id', 'text', 'Product Id', 1, 1, 1, 1, 1, 1, '{}', 2),
+(61, 10, 'customer_id', 'text', 'Customer Id', 1, 1, 1, 1, 1, 1, '{}', 3),
+(62, 10, 'quantity', 'text', 'Quantity', 1, 1, 1, 1, 1, 1, '{}', 4),
+(63, 10, 'session_id', 'text', 'Session Id', 1, 1, 1, 1, 1, 1, '{}', 5),
+(64, 10, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 6),
+(65, 10, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 7),
+(66, 11, 'id', 'text', 'Id', 1, 0, 0, 0, 0, 0, '{}', 1),
+(67, 11, 'orderdetail_id', 'text', 'Orderdetail Id', 1, 1, 1, 1, 1, 1, '{}', 2),
+(68, 11, 'customers_id', 'text', 'Customers Id', 1, 1, 1, 1, 1, 1, '{}', 3),
+(69, 11, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 4),
+(70, 11, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 5),
+(71, 8, 'order_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customer_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 10),
+(72, 8, 'order_belongsto_payment_relationship', 'relationship', 'payments', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Payment\",\"table\":\"payments\",\"type\":\"belongsTo\",\"column\":\"pay_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 11),
+(73, 9, 'order_detail_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customer_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 11),
+(74, 9, 'order_detail_belongsto_product_relationship', 'relationship', 'products', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\Product\",\"table\":\"products\",\"type\":\"belongsTo\",\"column\":\"product_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 12),
+(75, 6, 'report_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customer_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 7),
+(76, 11, 'cancel_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customers_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 6);
 
 -- --------------------------------------------------------
 
@@ -188,13 +208,15 @@ CREATE TABLE `data_types` (
 --
 
 INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `display_name_plural`, `icon`, `model_name`, `policy_name`, `controller`, `description`, `generate_permissions`, `server_side`, `details`, `created_at`, `updated_at`) VALUES
-(1, 'users', 'users', 'User', 'Users', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', '', 1, 0, NULL, '2019-06-11 03:55:10', '2019-06-11 03:55:10'),
-(2, 'menus', 'menus', 'Menu', 'Menus', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, '', '', 1, 0, NULL, '2019-06-11 03:55:10', '2019-06-11 03:55:10'),
-(3, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, '', '', 1, 0, NULL, '2019-06-11 03:55:10', '2019-06-11 03:55:10'),
-(5, 'order_details', 'order-details', 'Order Detail', 'Order Details', NULL, 'App\\OrderDetail', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 03:59:38', '2019-06-11 03:59:38'),
-(6, 'orders', 'orders', 'Order', 'Orders', NULL, 'App\\Order', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 04:14:37', '2019-06-11 04:14:37'),
-(7, 'categories', 'categories', 'Category', 'Categories', NULL, 'App\\Category', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 18:41:30', '2019-06-11 18:41:30'),
-(8, 'carts', 'carts', 'Cart', 'Carts', NULL, 'App\\Cart', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-11 19:07:22', '2019-06-11 19:07:22');
+(1, 'users', 'users', 'User', 'Users', 'voyager-person', 'TCG\\Voyager\\Models\\User', 'TCG\\Voyager\\Policies\\UserPolicy', 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController', '', 1, 0, NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(2, 'menus', 'menus', 'Menu', 'Menus', 'voyager-list', 'TCG\\Voyager\\Models\\Menu', NULL, '', '', 1, 0, NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(3, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, '', '', 1, 0, NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(6, 'reports', 'reports', 'Report', 'Reports', NULL, 'App\\Report', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:25:16', '2019-06-13 02:57:36'),
+(7, 'payments', 'payments', 'Payment', 'Payments', NULL, 'App\\Payment', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-13 02:25:30', '2019-06-13 02:25:30'),
+(8, 'orders', 'orders', 'Order', 'Orders', NULL, 'App\\Order', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:25:40', '2019-06-13 02:53:36'),
+(9, 'order_details', 'order-details', 'Order Detail', 'Order Details', NULL, 'App\\OrderDetail', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:26:11', '2019-06-13 02:55:15'),
+(10, 'carts', 'carts', 'Cart', 'Carts', NULL, 'App\\Cart', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null}', '2019-06-13 02:29:19', '2019-06-13 02:29:19'),
+(11, 'cancels', 'cancels', 'Cancel', 'Cancels', NULL, 'App\\Cancel', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:30:37', '2019-06-13 02:59:06');
 
 -- --------------------------------------------------------
 
@@ -214,7 +236,7 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '2019-06-11 03:55:10', '2019-06-11 03:55:10');
+(1, 'admin', '2019-06-13 02:17:43', '2019-06-13 02:17:43');
 
 -- --------------------------------------------------------
 
@@ -243,22 +265,24 @@ CREATE TABLE `menu_items` (
 --
 
 INSERT INTO `menu_items` (`id`, `menu_id`, `title`, `url`, `target`, `icon_class`, `color`, `parent_id`, `order`, `created_at`, `updated_at`, `route`, `parameters`) VALUES
-(1, 1, 'Dashboard', '', '_self', 'voyager-boat', NULL, NULL, 2, '2019-06-11 03:55:10', '2019-06-11 18:43:13', 'voyager.dashboard', NULL),
-(2, 1, 'Media', '', '_self', 'voyager-images', NULL, NULL, 5, '2019-06-11 03:55:10', '2019-06-11 18:43:13', 'voyager.media.index', NULL),
-(3, 1, 'Users', '', '_self', 'voyager-person', NULL, NULL, 4, '2019-06-11 03:55:10', '2019-06-11 18:43:13', 'voyager.users.index', NULL),
-(4, 1, 'Roles', '', '_self', 'voyager-lock', NULL, NULL, 3, '2019-06-11 03:55:10', '2019-06-11 18:43:13', 'voyager.roles.index', NULL),
-(5, 1, 'Tools', '', '_self', 'voyager-tools', NULL, NULL, 6, '2019-06-11 03:55:10', '2019-06-11 18:43:07', NULL, NULL),
-(6, 1, 'Menu Builder', '', '_self', 'voyager-list', NULL, 5, 1, '2019-06-11 03:55:10', '2019-06-11 04:15:18', 'voyager.menus.index', NULL),
-(7, 1, 'Database', '', '_self', 'voyager-data', NULL, 5, 2, '2019-06-11 03:55:10', '2019-06-11 04:15:18', 'voyager.database.index', NULL),
-(8, 1, 'Compass', '', '_self', 'voyager-compass', NULL, 5, 3, '2019-06-11 03:55:10', '2019-06-11 04:15:18', 'voyager.compass.index', NULL),
-(9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2019-06-11 03:55:10', '2019-06-11 04:15:18', 'voyager.bread.index', NULL),
-(10, 1, 'Settings', '', '_self', 'voyager-settings', NULL, NULL, 7, '2019-06-11 03:55:10', '2019-06-11 18:43:07', 'voyager.settings.index', NULL),
-(12, 1, 'Order Details', '', '_self', NULL, NULL, 20, 5, '2019-06-11 03:59:38', '2019-06-11 18:42:51', 'voyager.order-details.index', NULL),
-(14, 1, 'หมวดหมู่', '/admin/categories', '_self', NULL, '#000000', 20, 1, '2019-06-11 04:12:42', '2019-06-11 18:42:57', NULL, ''),
-(15, 1, 'สินค้า', '/admin/products', '_self', NULL, '#000000', 20, 2, '2019-06-11 04:12:54', '2019-06-11 18:42:59', NULL, ''),
-(16, 1, 'ตะกร้า', '/admin/carts', '_self', NULL, '#000000', 20, 3, '2019-06-11 04:13:06', '2019-06-11 19:08:41', NULL, ''),
-(18, 1, 'Orders', '', '_self', NULL, NULL, 20, 4, '2019-06-11 04:14:37', '2019-06-11 18:43:01', 'voyager.orders.index', NULL),
-(20, 1, 'ร้านค้า', '', '_self', NULL, '#000000', NULL, 1, '2019-06-11 18:42:31', '2019-06-11 18:43:13', NULL, '');
+(1, 1, 'Dashboard', '', '_self', 'voyager-boat', NULL, NULL, 10, '2019-06-13 02:17:43', '2019-06-13 02:34:46', 'voyager.dashboard', NULL),
+(2, 1, 'Media', '', '_self', 'voyager-images', NULL, NULL, 13, '2019-06-13 02:17:43', '2019-06-13 02:34:46', 'voyager.media.index', NULL),
+(3, 1, 'Users', '', '_self', 'voyager-person', NULL, NULL, 12, '2019-06-13 02:17:43', '2019-06-13 02:34:46', 'voyager.users.index', NULL),
+(4, 1, 'Roles', '', '_self', 'voyager-lock', NULL, NULL, 11, '2019-06-13 02:17:43', '2019-06-13 02:34:46', 'voyager.roles.index', NULL),
+(5, 1, 'Tools', '', '_self', 'voyager-tools', NULL, NULL, 14, '2019-06-13 02:17:43', '2019-06-13 02:34:46', NULL, NULL),
+(6, 1, 'Menu Builder', '', '_self', 'voyager-list', NULL, 5, 1, '2019-06-13 02:17:43', '2019-06-13 02:33:51', 'voyager.menus.index', NULL),
+(7, 1, 'Database', '', '_self', 'voyager-data', NULL, 5, 2, '2019-06-13 02:17:43', '2019-06-13 02:33:51', 'voyager.database.index', NULL),
+(8, 1, 'Compass', '', '_self', 'voyager-compass', NULL, 5, 3, '2019-06-13 02:17:43', '2019-06-13 02:33:51', 'voyager.compass.index', NULL),
+(9, 1, 'BREAD', '', '_self', 'voyager-bread', NULL, 5, 4, '2019-06-13 02:17:43', '2019-06-13 02:33:51', 'voyager.bread.index', NULL),
+(10, 1, 'Settings', '', '_self', 'voyager-settings', NULL, NULL, 15, '2019-06-13 02:17:43', '2019-06-13 02:34:46', 'voyager.settings.index', NULL),
+(12, 1, 'ยืนยันการชำระเงิน', '', '_self', NULL, '#000000', NULL, 7, '2019-06-13 02:25:17', '2019-06-13 02:35:17', 'voyager.reports.index', 'null'),
+(13, 1, 'ตัวเลือกการชำระ', '', '_self', NULL, '#000000', NULL, 6, '2019-06-13 02:25:30', '2019-06-13 02:35:17', 'voyager.payments.index', 'null'),
+(14, 1, 'คำสั่งซื้อ', '', '_self', NULL, '#000000', NULL, 4, '2019-06-13 02:25:40', '2019-06-13 02:35:08', 'voyager.orders.index', 'null'),
+(15, 1, 'รายระเอียดคำสั่งซื้อ', '', '_self', NULL, '#000000', NULL, 5, '2019-06-13 02:26:11', '2019-06-13 02:35:15', 'voyager.order-details.index', 'null'),
+(16, 1, 'สินค้า', 'admin/products', '_self', NULL, '#000000', NULL, 2, '2019-06-13 02:26:38', '2019-06-13 02:34:54', NULL, ''),
+(17, 1, 'หมวดหมู่', 'admin/categories', '_self', NULL, '#000000', NULL, 1, '2019-06-13 02:26:49', '2019-06-13 02:34:50', NULL, ''),
+(19, 1, 'ตะกร้า', '', '_self', NULL, '#000000', NULL, 3, '2019-06-13 02:29:19', '2019-06-13 02:35:00', 'voyager.carts.index', 'null'),
+(20, 1, 'รายการที่ยกเลิก', '', '_self', NULL, '#000000', NULL, 8, '2019-06-13 02:30:37', '2019-06-13 02:35:11', 'voyager.cancels.index', 'null');
 
 -- --------------------------------------------------------
 
@@ -308,7 +332,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (29, '2019_05_23_081458_create_carts_table', 1),
 (30, '2019_05_29_125924_create_order_details_table', 1),
 (31, '2019_06_04_132415_create_slide_shows_table', 1),
-(32, '2019_06_05_201501_create_admins_table', 1);
+(32, '2019_06_12_085151_create_payments_table', 1),
+(33, '2019_06_12_094913_create_reports_table', 1),
+(34, '2019_06_12_125949_create_cancels_table', 1);
 
 -- --------------------------------------------------------
 
@@ -319,6 +345,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `orders` (
   `id` int(10) UNSIGNED NOT NULL,
   `customer_id` int(11) NOT NULL,
+  `pay_id` int(11) NOT NULL,
   `address` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `total` int(11) NOT NULL,
@@ -331,13 +358,10 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `customer_id`, `address`, `phone`, `total`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'asdasd, das', '42434', 59000, 'pending', '2019-06-11 04:19:58', '2019-06-11 04:19:58'),
-(2, 2, 'asdasd, das', '42434', 118000, 'pending', '2019-06-11 04:23:18', '2019-06-11 04:23:18'),
-(3, 2, 'asdasd, das', '42434', 118000, 'pending', '2019-06-11 04:23:38', '2019-06-11 04:23:38'),
-(4, 2, 'asdasd, das', '42434', 103444, 'pending', '2019-06-11 04:26:41', '2019-06-11 04:26:41'),
-(5, 2, 'asdasd, das', '42434', 103444, 'pending', '2019-06-11 04:32:28', '2019-06-11 04:32:28'),
-(6, 2, 'asdasd, das', '42434', 103444, 'pending', '2019-06-11 04:32:48', '2019-06-11 04:32:48');
+INSERT INTO `orders` (`id`, `customer_id`, `pay_id`, `address`, `phone`, `total`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 'asdasd, das', '42434', 59000, 'pending', '2019-06-13 02:43:47', '2019-06-13 02:43:47'),
+(2, 1, 1, 'asdasd, das', '42434', 59000, 'pending', '2019-06-13 02:44:18', '2019-06-13 02:44:18'),
+(3, 1, 2, 'asdasd, das', '42434', 118000, 'pending', '2019-06-13 02:44:42', '2019-06-13 02:44:42');
 
 -- --------------------------------------------------------
 
@@ -363,14 +387,10 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `customer_id`, `order_id`, `product_id`, `price`, `qty`, `total`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 1, 59000.00, 1, 59000, 'pending', '2019-06-11 04:19:58', '2019-06-11 04:19:58'),
-(2, 2, 2, 1, 59000.00, 2, 118000, 'pending', '2019-06-11 04:23:18', '2019-06-11 04:23:18'),
-(3, 2, 3, 1, 59000.00, 1, 59000, 'pending', '2019-06-11 04:23:38', '2019-06-11 04:23:38'),
-(4, 2, 3, 1, 59000.00, 1, 59000, 'pending', '2019-06-11 04:23:38', '2019-06-11 04:23:38'),
-(5, 2, 4, 2, 44444.00, 1, 44444, 'pending', '2019-06-11 04:26:41', '2019-06-11 04:26:41'),
-(6, 2, 4, 1, 59000.00, 1, 59000, 'pending', '2019-06-11 04:26:41', '2019-06-11 04:26:41'),
-(7, 2, 5, 2, 44444.00, 1, 44444, 'pending', '2019-06-11 04:32:28', '2019-06-11 04:32:28'),
-(8, 2, 5, 1, 59000.00, 1, 59000, 'pending', '2019-06-11 04:32:28', '2019-06-11 04:32:28');
+(1, 1, 1, 1, 59000.00, 1, 59000, 'pending', '2019-06-13 02:43:47', '2019-06-13 02:43:47'),
+(2, 1, 2, 2, 59000.00, 1, 59000, 'pending', '2019-06-13 02:44:18', '2019-06-13 02:44:18'),
+(3, 1, 3, 1, 59000.00, 1, 59000, 'pending', '2019-06-13 02:44:00', '2019-06-13 03:00:02'),
+(4, 1, 3, 2, 59000.00, 1, 59000, 'pending', '2019-06-13 02:44:42', '2019-06-13 02:44:42');
 
 -- --------------------------------------------------------
 
@@ -408,6 +428,28 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bank_number` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `name`, `bank_number`, `created_at`, `updated_at`) VALUES
+(1, 'Bank A', '123-4567-4567', '2019-06-13 02:43:26', '2019-06-13 02:43:26'),
+(2, 'Bank B', '45678-45670-56', '2019-06-13 02:43:37', '2019-06-13 02:43:37');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `permissions`
 --
 
@@ -424,51 +466,61 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`) VALUES
-(1, 'browse_admin', NULL, '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(2, 'browse_bread', NULL, '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(3, 'browse_database', NULL, '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(4, 'browse_media', NULL, '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(5, 'browse_compass', NULL, '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(6, 'browse_menus', 'menus', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(7, 'read_menus', 'menus', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(8, 'edit_menus', 'menus', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(9, 'add_menus', 'menus', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(10, 'delete_menus', 'menus', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(11, 'browse_roles', 'roles', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(12, 'read_roles', 'roles', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(13, 'edit_roles', 'roles', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(14, 'add_roles', 'roles', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(15, 'delete_roles', 'roles', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(16, 'browse_users', 'users', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(17, 'read_users', 'users', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(18, 'edit_users', 'users', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(19, 'add_users', 'users', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(20, 'delete_users', 'users', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(21, 'browse_settings', 'settings', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(22, 'read_settings', 'settings', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(23, 'edit_settings', 'settings', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(24, 'add_settings', 'settings', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(25, 'delete_settings', 'settings', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(31, 'browse_order_details', 'order_details', '2019-06-11 03:59:38', '2019-06-11 03:59:38'),
-(32, 'read_order_details', 'order_details', '2019-06-11 03:59:38', '2019-06-11 03:59:38'),
-(33, 'edit_order_details', 'order_details', '2019-06-11 03:59:38', '2019-06-11 03:59:38'),
-(34, 'add_order_details', 'order_details', '2019-06-11 03:59:38', '2019-06-11 03:59:38'),
-(35, 'delete_order_details', 'order_details', '2019-06-11 03:59:38', '2019-06-11 03:59:38'),
-(36, 'browse_orders', 'orders', '2019-06-11 04:14:37', '2019-06-11 04:14:37'),
-(37, 'read_orders', 'orders', '2019-06-11 04:14:37', '2019-06-11 04:14:37'),
-(38, 'edit_orders', 'orders', '2019-06-11 04:14:37', '2019-06-11 04:14:37'),
-(39, 'add_orders', 'orders', '2019-06-11 04:14:37', '2019-06-11 04:14:37'),
-(40, 'delete_orders', 'orders', '2019-06-11 04:14:37', '2019-06-11 04:14:37'),
-(41, 'browse_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
-(42, 'read_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
-(43, 'edit_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
-(44, 'add_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
-(45, 'delete_categories', 'categories', '2019-06-11 18:41:31', '2019-06-11 18:41:31'),
-(46, 'browse_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22'),
-(47, 'read_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22'),
-(48, 'edit_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22'),
-(49, 'add_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22'),
-(50, 'delete_carts', 'carts', '2019-06-11 19:07:22', '2019-06-11 19:07:22');
+(1, 'browse_admin', NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(2, 'browse_bread', NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(3, 'browse_database', NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(4, 'browse_media', NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(5, 'browse_compass', NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(6, 'browse_menus', 'menus', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(7, 'read_menus', 'menus', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(8, 'edit_menus', 'menus', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(9, 'add_menus', 'menus', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(10, 'delete_menus', 'menus', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(11, 'browse_roles', 'roles', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(12, 'read_roles', 'roles', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(13, 'edit_roles', 'roles', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(14, 'add_roles', 'roles', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(15, 'delete_roles', 'roles', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(16, 'browse_users', 'users', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(17, 'read_users', 'users', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(18, 'edit_users', 'users', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(19, 'add_users', 'users', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(20, 'delete_users', 'users', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(21, 'browse_settings', 'settings', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(22, 'read_settings', 'settings', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(23, 'edit_settings', 'settings', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(24, 'add_settings', 'settings', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(25, 'delete_settings', 'settings', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(31, 'browse_reports', 'reports', '2019-06-13 02:25:16', '2019-06-13 02:25:16'),
+(32, 'read_reports', 'reports', '2019-06-13 02:25:16', '2019-06-13 02:25:16'),
+(33, 'edit_reports', 'reports', '2019-06-13 02:25:16', '2019-06-13 02:25:16'),
+(34, 'add_reports', 'reports', '2019-06-13 02:25:17', '2019-06-13 02:25:17'),
+(35, 'delete_reports', 'reports', '2019-06-13 02:25:17', '2019-06-13 02:25:17'),
+(36, 'browse_payments', 'payments', '2019-06-13 02:25:30', '2019-06-13 02:25:30'),
+(37, 'read_payments', 'payments', '2019-06-13 02:25:30', '2019-06-13 02:25:30'),
+(38, 'edit_payments', 'payments', '2019-06-13 02:25:30', '2019-06-13 02:25:30'),
+(39, 'add_payments', 'payments', '2019-06-13 02:25:30', '2019-06-13 02:25:30'),
+(40, 'delete_payments', 'payments', '2019-06-13 02:25:30', '2019-06-13 02:25:30'),
+(41, 'browse_orders', 'orders', '2019-06-13 02:25:40', '2019-06-13 02:25:40'),
+(42, 'read_orders', 'orders', '2019-06-13 02:25:40', '2019-06-13 02:25:40'),
+(43, 'edit_orders', 'orders', '2019-06-13 02:25:40', '2019-06-13 02:25:40'),
+(44, 'add_orders', 'orders', '2019-06-13 02:25:40', '2019-06-13 02:25:40'),
+(45, 'delete_orders', 'orders', '2019-06-13 02:25:40', '2019-06-13 02:25:40'),
+(46, 'browse_order_details', 'order_details', '2019-06-13 02:26:11', '2019-06-13 02:26:11'),
+(47, 'read_order_details', 'order_details', '2019-06-13 02:26:11', '2019-06-13 02:26:11'),
+(48, 'edit_order_details', 'order_details', '2019-06-13 02:26:11', '2019-06-13 02:26:11'),
+(49, 'add_order_details', 'order_details', '2019-06-13 02:26:11', '2019-06-13 02:26:11'),
+(50, 'delete_order_details', 'order_details', '2019-06-13 02:26:11', '2019-06-13 02:26:11'),
+(51, 'browse_carts', 'carts', '2019-06-13 02:29:19', '2019-06-13 02:29:19'),
+(52, 'read_carts', 'carts', '2019-06-13 02:29:19', '2019-06-13 02:29:19'),
+(53, 'edit_carts', 'carts', '2019-06-13 02:29:19', '2019-06-13 02:29:19'),
+(54, 'add_carts', 'carts', '2019-06-13 02:29:19', '2019-06-13 02:29:19'),
+(55, 'delete_carts', 'carts', '2019-06-13 02:29:19', '2019-06-13 02:29:19'),
+(56, 'browse_cancels', 'cancels', '2019-06-13 02:30:37', '2019-06-13 02:30:37'),
+(57, 'read_cancels', 'cancels', '2019-06-13 02:30:37', '2019-06-13 02:30:37'),
+(58, 'edit_cancels', 'cancels', '2019-06-13 02:30:37', '2019-06-13 02:30:37'),
+(59, 'add_cancels', 'cancels', '2019-06-13 02:30:37', '2019-06-13 02:30:37'),
+(60, 'delete_cancels', 'cancels', '2019-06-13 02:30:37', '2019-06-13 02:30:37');
 
 -- --------------------------------------------------------
 
@@ -530,7 +582,17 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (47, 1),
 (48, 1),
 (49, 1),
-(50, 1);
+(50, 1),
+(51, 1),
+(52, 1),
+(53, 1),
+(54, 1),
+(55, 1),
+(56, 1),
+(57, 1),
+(58, 1),
+(59, 1),
+(60, 1);
 
 -- --------------------------------------------------------
 
@@ -580,9 +642,30 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `title`, `description`, `qty`, `price`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, 'ix', 'สินค้า', 'xxxxxx\r\nxxxxxxxxxx\r\nxxxxxxxxxx\r\nxxxxxxxxxx\r\nxxxxxxxx\r\nxxxxxxxx', 807, 59000.00, 'images/w7g5sZzSWVTd6R6AHigTP5VCIsYhaopZDHMwDpjF.jpeg', '2019-06-11 04:19:45', '2019-06-11 04:19:45'),
-(2, 1, 'i4', 'สินค้า', 'dadawadaw\r\nad\r\n\r\nwd\r\nad\r\na\r\n\r\nw\r\naw\r\nd\r\naw\r\ndadaw', 22223, 44444.00, 'images/aksx5a9pGX4lX1oAo8emAj23prYQVprFWLAVOXEJ.jpeg', '2019-06-11 04:26:20', '2019-06-11 04:26:20'),
-(3, 1, 'Android', 'สินค้า', 'daw\r\nadwwadwa\r\ndawdaw', 22223, 29888.00, 'images/fIwPtgrze32oVskG0tvpIDHr1ZQmtvstU3PzdpUi.jpeg', '2019-06-11 04:37:29', '2019-06-11 04:37:29');
+(1, 2, 'Iphone x', 'Ipone x ,abc', 'สมาร์ทโฟน (โทรศัพท์มือถือพร้อมระบบปฏิบัติการ)\r\nจอแสดงผล Super Retina HD 24-bit (16 ล้านสี) \r\n- ระบบสัมผัส Multi-Touch\r\n- กว้าง 5.8 นิ้ว (แนวทะแยง)\r\n- ความละเอียด 1125 x 2436 พิกเซล (458 ppi) \r\n- Capacitive \r\n- Corning Gorilla Glass 5 \r\n- ระบบป้องกัน - ฝุ่นละออง (Resistance to dust) \r\n- ป้องกันรอยนิ้วมือ (Anti-fingerprint display coating)\r\nระบบเซ็นเซอร์ (Sensor) \r\n- การยืนยันตัวตนด้วยใบหน้า (Face ID)	\r\n- ระบบหมุนภาพอัตโนมัติ (Accelerometer) \r\n- ตรวจจับแสงปรับความสว่างอัตโนมัติ (Ambient light) \r\n- ระบบเปิด/ปิดหน้าจออัตโนมัติขณะสนทนา (Proximity) \r\n- ระบบเซนเซอร์หมุนภาพ 3 แกน (Three-axis gyroscope) \r\n- ระบบวัดความกดอากาศ (Barometer)\r\nคุณสมบัติการกันน้ำ (Waterproof)\r\n- กันน้ำได้ชั่วคราว\r\n- กันน้ำที่ความลึกไม่เกิน 1 เมตร\r\nมีสีให้เลือก (Colors) : Space Gray, Silver', 300, 59000.00, 'images/SJgZQuXz8V6KmpnHopydxgKupsrny9P8WVmf8MBl.jpeg', '2019-06-13 02:40:06', '2019-06-13 02:40:06'),
+(2, 3, 'Galaxy S10', 'สินค้า', 'ระบบปฏิบัติการ: Android 9.0 (Pie)\r\nหน่วยประมวลผล : Exynos 9820 Octa Core\r\n- ความเร็ว : 2.7 MHz\r\nหน่วยความจำ 128/512 GB (ตัวเครื่อง)\r\n- RAM 8GB\r\nการ์ดหน่วยความจำ\r\n  - microSD สูงสุด 512 GB', 807, 59000.00, 'images/Kj3k0lHJsHU57KIxQZOrg3Lk74kbefjyV3PyKfn9.jpeg', '2019-06-13 02:41:46', '2019-06-13 02:41:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `orderdetail_id` int(11) NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `customer_id`, `orderdetail_id`, `image`, `created_at`, `updated_at`) VALUES
+(1, 1, 3, 'images/NkGxl2gOXwuMXGvLsAfQXSxQgQr1J98bhcW8kp2m.jpeg', '2019-06-13 02:48:11', '2019-06-13 02:48:11');
 
 -- --------------------------------------------------------
 
@@ -603,8 +686,8 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `display_name`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'Administrator', '2019-06-11 03:51:13', '2019-06-11 03:51:13'),
-(2, 'user', 'Normal User', '2019-06-11 03:51:13', '2019-06-11 03:51:13');
+(1, 'admin', 'Administrator', '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
+(2, 'user', 'Normal User', '2019-06-13 02:17:43', '2019-06-13 02:17:43');
 
 -- --------------------------------------------------------
 
@@ -631,13 +714,13 @@ INSERT INTO `settings` (`id`, `key`, `display_name`, `value`, `details`, `type`,
 (1, 'site.title', 'Site Title', 'Site Title', '', 'text', 1, 'Site'),
 (2, 'site.description', 'Site Description', 'Site Description', '', 'text', 2, 'Site'),
 (3, 'site.logo', 'Site Logo', '', '', 'image', 3, 'Site'),
-(4, 'site.google_analytics_tracking_id', 'Google Analytics Tracking ID', NULL, '', 'text', 4, 'Site'),
+(4, 'site.google_analytics_tracking_id', 'Google Analytics Tracking ID', '', '', 'text', 4, 'Site'),
 (5, 'admin.bg_image', 'Admin Background Image', '', '', 'image', 5, 'Admin'),
-(6, 'admin.title', 'Admin Title', 'My Shop', '', 'text', 1, 'Admin'),
+(6, 'admin.title', 'Admin Title', 'Voyager', '', 'text', 1, 'Admin'),
 (7, 'admin.description', 'Admin Description', 'Welcome to Voyager. The Missing Admin for Laravel', '', 'text', 2, 'Admin'),
 (8, 'admin.loader', 'Admin Loader', '', '', 'image', 3, 'Admin'),
 (9, 'admin.icon_image', 'Admin Icon Image', '', '', 'image', 4, 'Admin'),
-(10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', NULL, '', 'text', 1, 'Admin');
+(10, 'admin.google_analytics_client_id', 'Google Analytics Client ID (used for admin dashboard)', '', '', 'text', 1, 'Admin');
 
 -- --------------------------------------------------------
 
@@ -651,14 +734,6 @@ CREATE TABLE `slide_shows` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `slide_shows`
---
-
-INSERT INTO `slide_shows` (`id`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'images/GQQ1IhGMIHLOXHkhWkmF80LSWt3hVsnRt9qFPwNw.png', '2019-06-11 18:49:41', '2019-06-11 18:49:41'),
-(2, 'images/BeTUevfh5ySDLZ0PfT6o6iWo55HrVovwQZkEkKWF.png', '2019-06-11 18:49:57', '2019-06-11 18:49:57');
 
 -- --------------------------------------------------------
 
@@ -702,9 +777,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`) VALUES
-(1, NULL, 'nack', 'thanasak_nack@hotmail.com', 'users/default.png', NULL, '$2y$10$GdXQN7SoozfvFY0hKbGw.OfbmOI0XdeWxaAedTsDVnkcg7xZd/fyS', NULL, NULL, '2019-06-11 03:47:45', '2019-06-11 03:47:45'),
-(2, 2, 'username', 'srisuwan2538@gmail.com', 'users/default.png', NULL, '$2y$10$DxRaKT7jgEIpWXVOSqeOKu5pYgEvD0WwC6SVPG453glEjvKIdTmky', NULL, NULL, '2019-06-11 03:53:27', '2019-06-11 03:53:27'),
-(3, 2, 'admin', 'admin@admin.com', 'users/default.png', NULL, '$2y$10$HIyQ.Mlyz9TIGppreFocZuDMRBy9dUGi9TDmzwKXwWpKzTuIoMATq', NULL, NULL, '2019-06-11 18:39:47', '2019-06-11 18:39:47');
+(1, 1, 'คุณAdmin', 'admin@admin.com', 'users/default.png', NULL, '$2y$10$d/Y7k7oAcmgSLP6psVSMkOAvazHT.JvI.Lm/gD85LWBR7A1M68VYW', 'QnlMxSXa06OOtevKwKBCi3TqIeeadoj2LhFV7uOYt9t0uGED3XnDccgDsU5X', NULL, '2019-06-13 02:18:57', '2019-06-13 02:18:57');
 
 -- --------------------------------------------------------
 
@@ -722,20 +795,17 @@ CREATE TABLE `user_roles` (
 --
 
 INSERT INTO `user_roles` (`user_id`, `role_id`) VALUES
-(1, 1),
-(2, 1),
-(3, 1);
+(1, 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `admins`
+-- Indexes for table `cancels`
 --
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `admins_email_unique` (`email`);
+ALTER TABLE `cancels`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `carts`
@@ -811,6 +881,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
@@ -836,6 +912,12 @@ ALTER TABLE `posts`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -886,34 +968,34 @@ ALTER TABLE `user_roles`
 --
 
 --
--- AUTO_INCREMENT for table `admins`
+-- AUTO_INCREMENT for table `cancels`
 --
-ALTER TABLE `admins`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cancels`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT for table `data_types`
 --
 ALTER TABLE `data_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `menus`
@@ -931,19 +1013,19 @@ ALTER TABLE `menu_items`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -952,10 +1034,16 @@ ALTER TABLE `pages`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -967,7 +1055,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -985,7 +1079,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `slide_shows`
 --
 ALTER TABLE `slide_shows`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `translations`
@@ -997,7 +1091,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

@@ -17,7 +17,10 @@
                     <div class="card-body">
                         <!--*********************************Form**************************************** -->
                         <form method="POST" action="{{ route('confirm') }}">
-
+<p>Please select your payment</p>
+@foreach ($payments as $item)
+<input type="radio" name="payments" value="{{ $item->id }}">{{ $item->name }} :{{ $item->bank_number }} </br>
+@endforeach
                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                             <input type="hidden" name="total" value="{{ $total_price }}">
                             <div class="form-group row">

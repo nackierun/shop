@@ -31,16 +31,20 @@ Route::post('/AddToCart', 'CartController@AddToCart')->name('AddToCart');
 Route::get('customers/cart', 'CartController@index')->name('cart');
 Route::get('customers/cart/update-quantity/{id}/{quantity}', 'CartController@updatequantity');
 Route::get('delete{id}', 'CartController@delete');
-
+// view order
 Route::get('customers/orders/{id}', 'OrderController@index');
-
-//Route::get('/cart/','CartController');
-//Route::get('/cart/','CartController');
 
 //checkout
 Route::get('checkout/', 'CheckoutController@index')->name('checkout');
 Route::post('confirm/', 'CheckoutController@confirm')->name('confirm');
 Route::get('/checkout{id}', 'CustomersController@checkout');
+
+// report payment
+Route::get('customers/report/{id}','ReportController@index');
+Route::post('confirm-pay/','ReportController@confirm')->name('send-report');
+//cancel
+Route::get('customers/canceled-order/{id}','CustomersController@canceledorder');
+Route::post('customers/canceled-order','CustomersController@confirm');
 //end Customers
 
 
@@ -69,7 +73,15 @@ Route::get('admin/orderdetail/{id}', 'AdminController@vieworderdetail');
 Route::get('/admin/slideshow', 'AdminController@slideshow');
 Route::post('/admin/slideshow', 'AdminController@addslide');
 Route::get('/admin/slideshow/delete/{id}', 'AdminController@delslide');
+//view paid order
+Route::get('admin/paid-order','AdminController@paidorder');
+//view canceled order
+Route::get('admin/canceled-order','AdminController@canceledorder');
 //End Admin
+
+//strip
+Route::get('customers/stripe', 'StripePaymentController@stripe');
+Route::post('customers/stripe', 'StripePaymentController@stripePost')->name('stripe.post');
 
 Auth::routes();
 

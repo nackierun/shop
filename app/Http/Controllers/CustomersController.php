@@ -111,6 +111,20 @@ class CustomersController extends Controller
         $datas2 = Order::all();
         return view('checkout.vieworder', compact('datas', 'datas2'));
     }
+    public function canceledorder($id)
+    {
+        $o_id = \App\OrderDetail::find($id);
+        $product = \App\Product::find($o_id->product_id);
+        return view('customers.canceled-order',compact('product','o_id'));
+    }
+    public function confirm(Request $request)
+    {
+        \App\Cancel::create([
+            'customers_id'    => Auth::user()->id,
+            'orderdetail_id' => $request->orderdetail_id,
+        ]);
+        return redirect()->action('CustomersController@index');
+    }
 
     /**
      * Show the form for editing the specified resource.

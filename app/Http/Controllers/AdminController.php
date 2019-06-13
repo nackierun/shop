@@ -29,6 +29,15 @@ class AdminController extends Controller
         //$this->authorize('index', Admin::class);
         return view('admin.index');
     }
+    public function paidorder(){
+        $paid = \App\Report::paginate(5);
+        return view('admin.paid-order',compact('paid'));
+    }
+
+    public function canceledorder(){
+
+        return view('admin.canceled-order');
+    }
 
     public function vieworder()
     {
