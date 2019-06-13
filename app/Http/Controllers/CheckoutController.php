@@ -7,6 +7,7 @@ use App\Order;
 use App\Order_details;
 use App\User;
 use App\Product;
+use App\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +23,7 @@ class CheckoutController extends Controller
     public function index()
     {
         //
+        $payments = Payment::all();
         $session_id = session()->get('session_id');
         $datas = Cart::where('session_id', $session_id)->get();
         $qty_sum = Cart::where('session_id', $session_id)->sum('quantity');
@@ -33,7 +35,7 @@ class CheckoutController extends Controller
         }
 
         $user_login = User::where('id', Auth::id())->first();
-        return view('checkout.index', compact('user_login', 'datas', 'qty_sum', 'total_price'));
+        return view('checkout.index', compact('user_login', 'datas', 'qty_sum', 'total_price','payments'));
     }
 
     public function confirm(Request $request)
@@ -42,6 +44,7 @@ class CheckoutController extends Controller
         $carts = Cart::where('session_id', $session_id)->get();
         $order = Order::create([
                 'customer_id' => Auth::user()->id,
+                'pay_id'      => request()->payments,
                 'address'     => request()->address,
                 'phone'       => request()->phone,
                 'total'       => request()->total,

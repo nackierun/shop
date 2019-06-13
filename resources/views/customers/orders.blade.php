@@ -15,12 +15,13 @@
                                     <div class="col-md-12">
                                         <table class="table table-striped table-bordered">
                                             <tr>
-                                                <th>หมายเลขใบสั่งซื้อของคุณ</th>
+                                                <th>หมายเลขคำสั่งซื้อ</th>
                                                 <th>รูป</th>
                                                 <th>สินค้า</th>
                                                 <th>จำนวน</th>
                                                 <th>ราคา</th>
                                                 <th>สถานะ</th>
+                                                <th>แจ้งชำระ</th>
                                             </tr>
                                             @foreach($orders as $order)
                                             @php
@@ -33,6 +34,8 @@
                                                     <td>{{ $order->qty }}</td>
                                                     <td>{{ number_format($order->total) }}</td>
                                                     <td>{{ $order->status }}</td>
+                                                    <td><a href="{{ url('customers/report/'.$order->id) }}" class="badge badge-warning">ชำระเงิน</a>
+                                                    <a href="{{ url('customers/canceled-order/'.$order->id) }}" class="badge badge-danger">ยกเลิก</a></td>
                                                 </tr>
                                             @endforeach
                                         </table>
