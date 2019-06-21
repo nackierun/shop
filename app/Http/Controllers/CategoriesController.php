@@ -48,7 +48,7 @@ class CategoriesController extends Controller
     {
         \App\Category::create([
             'name' => request()->name,
-            //'image' => $request->file('image')->store('images', 'public'),
+            'image' => $request->file('image')->store('images', 'public'),
         ]);
         return redirect('admin/categories');
     }

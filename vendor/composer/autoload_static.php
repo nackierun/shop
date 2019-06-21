@@ -84,6 +84,7 @@ class ComposerStaticInit2eb9b8cfc32601f6573c9c0e59777070
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Container\\' => 14,
+            'Prophecy\\' => 9,
             'PhpParser\\' => 10,
         ),
         'O' => 
@@ -135,6 +136,7 @@ class ComposerStaticInit2eb9b8cfc32601f6573c9c0e59777070
             'Dotenv\\' => 7,
             'Doctrine\\Instantiator\\' => 22,
             'Doctrine\\DBAL\\' => 14,
+            'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Inflector\\' => 26,
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\' => 16,
@@ -316,6 +318,10 @@ class ComposerStaticInit2eb9b8cfc32601f6573c9c0e59777070
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'Prophecy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
+        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
@@ -400,6 +406,10 @@ class ComposerStaticInit2eb9b8cfc32601f6573c9c0e59777070
         array (
             0 => __DIR__ . '/..' . '/doctrine/dbal/lib/Doctrine/DBAL',
         ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/lib/Doctrine/Common/Lexer',
+        ),
         'Doctrine\\Common\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
@@ -461,10 +471,6 @@ class ComposerStaticInit2eb9b8cfc32601f6573c9c0e59777070
     public static $prefixesPsr0 = array (
         'P' => 
         array (
-            'Prophecy\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
-            ),
             'PhpOption\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpoption/phpoption/src',
@@ -479,13 +485,6 @@ class ComposerStaticInit2eb9b8cfc32601f6573c9c0e59777070
             'Mockery' => 
             array (
                 0 => __DIR__ . '/..' . '/mockery/mockery/library',
-            ),
-        ),
-        'D' => 
-        array (
-            'Doctrine\\Common\\Lexer\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/lexer/lib',
             ),
         ),
     );
@@ -4205,6 +4204,7 @@ class ComposerStaticInit2eb9b8cfc32601f6573c9c0e59777070
         'Stripe\\Coupon' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Coupon.php',
         'Stripe\\CreditNote' => __DIR__ . '/..' . '/stripe/stripe-php/lib/CreditNote.php',
         'Stripe\\Customer' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Customer.php',
+        'Stripe\\CustomerBalanceTransaction' => __DIR__ . '/..' . '/stripe/stripe-php/lib/CustomerBalanceTransaction.php',
         'Stripe\\Discount' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Discount.php',
         'Stripe\\Dispute' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Dispute.php',
         'Stripe\\EphemeralKey' => __DIR__ . '/..' . '/stripe/stripe-php/lib/EphemeralKey.php',

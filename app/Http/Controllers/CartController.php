@@ -14,10 +14,7 @@ use vendor\project\StatusTest;
 
 class CartController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     /**
      * Display a listing of the resource.
@@ -38,6 +35,20 @@ class CartController extends Controller
         return view('customers.cart', compact('datas', 'total_price', 'qty_sum'));
     }
 
+    public function mycart()
+    {
+      $session_id = session()->get('session_id');
+      $datas = Cart::where('session_id', $session_id)->get();
+
+      $qty_sum = Cart::where('session_id', $session_id)->sum('quantity');
+      $total_price = 0;
+      foreach ($datas as $data) {
+          $product = Product::find($data->product_id);
+          $total_price += $product->price * $data->quantity;
+      }
+      return view('customers.mycart', compact('datas', 'total_price', 'qty_sum'));
+    }
+
     public function addToCart(Request $request)
     {
         $data = $request->all();
@@ -47,10 +58,9 @@ class CartController extends Controller
             Session::put('session_id', $session_id);
         }
         $data['session_id'] = $session_id;
-        $data['customer_id'] = Auth::user()->id;
         Cart::create($data);
         session()->flash('message', 'เพิ่มแล้ว');
-        return redirect()->action('CartController@index');
+        return redirect()->action('CartController@mycart');
     }
 
     public function delete($id = null)

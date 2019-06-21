@@ -3720,6 +3720,7 @@ return array(
     'Stripe\\Coupon' => $vendorDir . '/stripe/stripe-php/lib/Coupon.php',
     'Stripe\\CreditNote' => $vendorDir . '/stripe/stripe-php/lib/CreditNote.php',
     'Stripe\\Customer' => $vendorDir . '/stripe/stripe-php/lib/Customer.php',
+    'Stripe\\CustomerBalanceTransaction' => $vendorDir . '/stripe/stripe-php/lib/CustomerBalanceTransaction.php',
     'Stripe\\Discount' => $vendorDir . '/stripe/stripe-php/lib/Discount.php',
     'Stripe\\Dispute' => $vendorDir . '/stripe/stripe-php/lib/Dispute.php',
     'Stripe\\EphemeralKey' => $vendorDir . '/stripe/stripe-php/lib/EphemeralKey.php',
