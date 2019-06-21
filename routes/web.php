@@ -14,21 +14,29 @@
 
 //*****Customers*****
 Route::get('/test', 'CustomersController@test');
-Route::get('/', 'CustomersController@index');
-Route::get('/customers', 'CustomersController@index')->name('home');
+Route::get('/', 'CustomersController@home');
+Route::get('/customers', 'CustomersController@home')->name('home');
+Route::get('customers/home', 'CustomersController@home');
+
 //category
 Route::get('customers/categories', 'CustomersController@cat');
 Route::get('customers/categories/show{id}', 'CustomersController@showcat');
+Route::get('customers/brand-listing', 'CustomersController@brandlisting');
+
 Route::get('customers/showcat{id}', 'CustomersController@showcatproducts');
 //product
 Route::get('customers/products', 'CustomersController@products');
 Route::get('customers/products/show{id}', 'CustomersController@show');
+Route::get('customers/product-detail/{id}', 'CustomersController@detail');
+Route::get('customers/listing/{id}', 'CustomersController@listing');
+Route::get('customers/products-listing', 'CustomersController@productslisting');
 //view order
 Route::get('checkout/vieworder{id}', 'CustomersController@vieworder');
 
 //Cart
 Route::post('/AddToCart', 'CartController@AddToCart')->name('AddToCart');
 Route::get('customers/cart', 'CartController@index')->name('cart');
+Route::get('customers/mycart', 'CartController@mycart');
 Route::get('customers/cart/update-quantity/{id}/{quantity}', 'CartController@updatequantity');
 Route::get('delete{id}', 'CartController@delete');
 // view order
@@ -41,10 +49,10 @@ Route::get('/checkout{id}', 'CustomersController@checkout');
 
 // report payment
 Route::get('customers/report/{id}','ReportController@index');
-Route::post('confirm-pay/','ReportController@confirm')->name('send-report');
+Route::post('confirm-pay/','ReportController@confirmReport')->name('send-report');
 //cancel
 Route::get('customers/canceled-order/{id}','CustomersController@canceledorder');
-Route::post('customers/canceled-order','CustomersController@confirm');
+Route::post('customers/canceled-order','CustomersController@confirmcancel');
 //end Customers
 
 

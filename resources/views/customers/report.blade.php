@@ -1,10 +1,10 @@
-@extends('customers.layouts.app')
+@extends('customers.layouts.mytemp')
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center pb-5 pt-5">
         <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-white bg-info">แจ้งชำระเงิน</div>
+                    <div class="card-header text-white bg-warning">แจ้งชำระเงิน</div>
                     <div class="card-body">
                         <div class=”row”>
                             <div class=”col-md-8 col-md-offset-2
@@ -43,5 +43,7 @@
                 </div>
             </div>
     </div>
+</div>
+</div>
 </div>
 @endsection

@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
+
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
+
     /**
      * Display a listing of the resource.
      *
@@ -63,7 +69,7 @@ class CheckoutController extends Controller
             ]);
         }
         Cart::where('session_id', $session_id)->delete();
-        return redirect()->action('CustomersController@index');
+        return redirect('customers/orders/. Auth::user()->id )');
     }
 
     /**

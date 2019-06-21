@@ -19,14 +19,14 @@ class ReportController extends Controller
         $product = \App\Product::find($o_id->product_id);
         return view('customers.report',compact('o_id','product'));
     }
-    public function confirm(Request $request)
+    public function confirmReport(Request $request)
     {
         \App\Report::create([
             'customer_id'    => Auth::user()->id,
             'orderdetail_id' => $request->orderdetail_id,
             'image'          => $request->file('image')->store('images', 'public'),
         ]);
-        return redirect()->action('CustomersController@index');
+        return redirect('customers/orders/. Auth::user()->id )');
     }
 
     /**

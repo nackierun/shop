@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Product;
 use App\Category;
 use App\SlideShow;
-
+use DB;
 class CustomersController extends Controller
 {
     public function __construct()
@@ -31,6 +31,15 @@ class CustomersController extends Controller
         $categories = Category::all();
         $products = Product::paginate(20);
         return view('customers.index', compact('products', 'categories', 'slideshow'));
+    }
+    public function home()
+    {
+        //
+        $slideshow = SlideShow::all();
+        $categories = Category::paginate(5);
+        $products = Product::paginate(12);
+        $top = Product::paginate(3);
+        return view('customers.home', compact('products', 'categories', 'slideshow','top'));
     }
     public function test()
     {
@@ -99,6 +108,36 @@ class CustomersController extends Controller
         return view('customers.products.show', compact('products'));
     }
 
+    public function detail($id)
+    {
+        $products = Product::find($id);
+        $top = Product::paginate(3);
+        return view('customers.product-detail', compact('products','top'));
+    }
+
+    public function brandlisting()
+    {
+        //
+        $categories = Category::paginate(20);
+        return view('customers.brand-listing', compact('categories'));
+    }
+    public function productslisting()
+    {
+        //
+        $products = Product::paginate(20);
+        return view('customers.products-listing', compact('products'));
+    }
+
+    public function listing($id)
+    {
+        //
+        $categories = Category::find($id);
+        if ($categories !== null) {
+            $products = $categories->products;
+          }
+        return view('customers.listing',compact('categories','products'));
+    }
+
     public function showcat($id)
     {
         $categories = Category::find($id);
@@ -117,13 +156,13 @@ class CustomersController extends Controller
         $product = \App\Product::find($o_id->product_id);
         return view('customers.canceled-order',compact('product','o_id'));
     }
-    public function confirm(Request $request)
+    public function confirmcancel(Request $request)
     {
         \App\Cancel::create([
             'customers_id'    => Auth::user()->id,
             'orderdetail_id' => $request->orderdetail_id,
         ]);
-        return redirect()->action('CustomersController@index');
+        return redirect('customers/orders/. Auth::user()->id )');
     }
 
     /**
