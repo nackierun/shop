@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2019 at 01:44 PM
--- Server version: 10.1.39-MariaDB
--- PHP Version: 7.3.5
+-- Generation Time: Jun 21, 2019 at 05:27 PM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.1.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -41,8 +41,7 @@ CREATE TABLE `cancels` (
 --
 
 INSERT INTO `cancels` (`id`, `orderdetail_id`, `customers_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, '2019-06-13 02:48:34', '2019-06-13 02:48:34'),
-(2, 5, 1, '2019-06-13 04:32:57', '2019-06-13 04:32:57');
+(7, 15, 2, '2019-06-21 08:13:12', '2019-06-21 08:13:12');
 
 -- --------------------------------------------------------
 
@@ -53,12 +52,18 @@ INSERT INTO `cancels` (`id`, `orderdetail_id`, `customers_id`, `created_at`, `up
 CREATE TABLE `carts` (
   `id` int(10) UNSIGNED NOT NULL,
   `product_id` int(11) NOT NULL,
-  `customer_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `session_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `product_id`, `quantity`, `session_id`, `created_at`, `updated_at`) VALUES
+(22, 32, 1, 'febVcUSYI2TPYgCwwjprimKoxJjs4IzDUCecW6MS', '2019-06-21 08:22:56', '2019-06-21 08:22:56');
 
 -- --------------------------------------------------------
 
@@ -69,20 +74,21 @@ CREATE TABLE `carts` (
 CREATE TABLE `categories` (
   `id` int(10) UNSIGNED NOT NULL,
   `parent_id` int(10) UNSIGNED DEFAULT NULL,
-  `order` int(11) NOT NULL DEFAULT '1',
+  `order` int(11) NOT NULL DEFAULT 1,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
-INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `created_at`, `updated_at`) VALUES
-(2, NULL, 1, 'Apple', '2019-06-13 02:36:33', '2019-06-13 02:36:33'),
-(3, NULL, 1, 'Samsung', '2019-06-13 02:40:42', '2019-06-13 02:40:42'),
-(4, NULL, 1, 'MIUI', '2019-06-13 04:24:14', '2019-06-13 04:24:14');
+INSERT INTO `categories` (`id`, `parent_id`, `order`, `name`, `created_at`, `updated_at`, `image`) VALUES
+(2, NULL, 1, 'Apple', '2019-06-13 02:36:00', '2019-06-18 05:46:51', 'categories\\June2019\\oOkG8R0UCudBBCRqY53a.png'),
+(3, NULL, 1, 'Samsung', '2019-06-13 02:40:00', '2019-06-18 05:51:16', 'categories\\June2019\\YatF02kVCt3ZtQqXofjP.png'),
+(4, NULL, 1, 'Xiaumi', '2019-06-13 04:24:00', '2019-06-21 07:54:44', 'categories\\June2019\\QBMZc1BbzSrTtiYgQ8yb.png');
 
 -- --------------------------------------------------------
 
@@ -96,14 +102,14 @@ CREATE TABLE `data_rows` (
   `field` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `display_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `required` tinyint(1) NOT NULL DEFAULT '0',
-  `browse` tinyint(1) NOT NULL DEFAULT '1',
-  `read` tinyint(1) NOT NULL DEFAULT '1',
-  `edit` tinyint(1) NOT NULL DEFAULT '1',
-  `add` tinyint(1) NOT NULL DEFAULT '1',
-  `delete` tinyint(1) NOT NULL DEFAULT '1',
-  `details` text COLLATE utf8mb4_unicode_ci,
-  `order` int(11) NOT NULL DEFAULT '1'
+  `required` tinyint(1) NOT NULL DEFAULT 0,
+  `browse` tinyint(1) NOT NULL DEFAULT 1,
+  `read` tinyint(1) NOT NULL DEFAULT 1,
+  `edit` tinyint(1) NOT NULL DEFAULT 1,
+  `add` tinyint(1) NOT NULL DEFAULT 1,
+  `delete` tinyint(1) NOT NULL DEFAULT 1,
+  `details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `order` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -149,7 +155,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (43, 8, 'address', 'text', 'Address', 1, 1, 1, 0, 0, 0, '{}', 4),
 (44, 8, 'phone', 'number', 'Phone', 1, 1, 1, 0, 0, 0, '{}', 5),
 (45, 8, 'total', 'number', 'Total', 1, 1, 1, 0, 0, 0, '{}', 6),
-(46, 8, 'status', 'text', 'เปลี่ยนสถานะคำสั่งซื้อ', 1, 1, 1, 0, 0, 0, '{}', 7),
+(46, 8, 'status', 'text', 'สถานะ[pending,shipped,success,cancel]', 1, 1, 1, 0, 0, 0, '{}', 7),
 (47, 8, 'created_at', 'timestamp', 'สั่งเมื่อ', 0, 1, 1, 1, 0, 1, '{}', 8),
 (48, 8, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 9),
 (49, 9, 'id', 'text', 'Id', 1, 1, 1, 0, 0, 1, '{}', 0),
@@ -159,7 +165,7 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (53, 9, 'price', 'number', 'Price', 1, 1, 1, 0, 0, 1, '{}', 5),
 (54, 9, 'qty', 'number', 'Qty', 1, 1, 1, 0, 0, 1, '{}', 6),
 (55, 9, 'total', 'number', 'Total', 1, 0, 0, 0, 0, 0, '{}', 7),
-(56, 9, 'status', 'text', 'เปลี่ยนสถานะคำสั่งซื้อ', 1, 1, 1, 1, 1, 1, '{}', 8),
+(56, 9, 'status', 'text', 'สถานะ[pending,shipped,success,cancel]', 1, 1, 1, 1, 1, 1, 'null', 8),
 (57, 9, 'created_at', 'timestamp', 'สั่งเมื่อ', 0, 1, 1, 1, 0, 1, '{}', 9),
 (58, 9, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 10),
 (59, 10, 'id', 'text', 'Id', 1, 1, 1, 0, 0, 1, '{}', 1),
@@ -198,12 +204,12 @@ INSERT INTO `data_rows` (`id`, `data_type_id`, `field`, `type`, `display_name`, 
 (92, 13, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 6),
 (93, 12, 'product_belongsto_category_relationship', 'relationship', 'categories', 0, 1, 1, 1, 1, 1, '{\"model\":\"App\\\\category\",\"table\":\"categories\",\"type\":\"belongsTo\",\"column\":\"category_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 11),
 (94, 10, 'cart_belongsto_product_relationship', 'relationship', 'products', 0, 1, 1, 0, 0, 1, '{\"model\":\"App\\\\Product\",\"table\":\"products\",\"type\":\"belongsTo\",\"column\":\"product_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 8),
-(95, 10, 'cart_belongsto_user_relationship', 'relationship', 'users', 0, 1, 1, 0, 0, 1, '{\"model\":\"App\\\\user\",\"table\":\"users\",\"type\":\"belongsTo\",\"column\":\"customer_id\",\"key\":\"id\",\"label\":\"name\",\"pivot_table\":\"cancels\",\"pivot\":\"0\",\"taggable\":\"0\"}', 9),
 (96, 1, 'email_verified_at', 'timestamp', 'Email Verified At', 0, 1, 1, 1, 1, 1, '{}', 6),
 (97, 14, 'id', 'text', 'Id', 1, 1, 1, 0, 0, 0, '{}', 1),
 (98, 14, 'image', 'image', 'Image', 1, 1, 1, 1, 1, 1, '{}', 2),
 (99, 14, 'created_at', 'timestamp', 'Created At', 0, 1, 1, 1, 0, 1, '{}', 3),
-(100, 14, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 4);
+(100, 14, 'updated_at', 'timestamp', 'Updated At', 0, 0, 0, 0, 0, 0, '{}', 4),
+(101, 13, 'image', 'image', 'Image', 0, 1, 1, 1, 1, 1, '{}', 7);
 
 -- --------------------------------------------------------
 
@@ -222,9 +228,9 @@ CREATE TABLE `data_types` (
   `policy_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `controller` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `generate_permissions` tinyint(1) NOT NULL DEFAULT '0',
-  `server_side` tinyint(4) NOT NULL DEFAULT '0',
-  `details` text COLLATE utf8mb4_unicode_ci,
+  `generate_permissions` tinyint(1) NOT NULL DEFAULT 0,
+  `server_side` tinyint(4) NOT NULL DEFAULT 0,
+  `details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -239,12 +245,12 @@ INSERT INTO `data_types` (`id`, `name`, `slug`, `display_name_singular`, `displa
 (3, 'roles', 'roles', 'Role', 'Roles', 'voyager-lock', 'TCG\\Voyager\\Models\\Role', NULL, '', '', 1, 0, NULL, '2019-06-13 02:17:43', '2019-06-13 02:17:43'),
 (6, 'reports', 'reports', 'Report', 'Reports', NULL, 'App\\Report', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:25:16', '2019-06-13 04:36:28'),
 (7, 'payments', 'payments', 'Payment', 'Payments', NULL, 'App\\Payment', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:25:30', '2019-06-13 04:35:30'),
-(8, 'orders', 'orders', 'Order', 'Orders', NULL, 'App\\Order', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:25:40', '2019-06-13 04:27:41'),
-(9, 'order_details', 'order-details', 'Order Detail', 'Order Details', NULL, 'App\\OrderDetail', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:26:11', '2019-06-13 04:35:16'),
+(8, 'orders', 'orders', 'Order', 'Orders', NULL, 'App\\Order', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:25:40', '2019-06-21 08:21:54'),
+(9, 'order_details', 'order-details', 'Order Detail', 'Order Details', NULL, 'App\\OrderDetail', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:26:11', '2019-06-21 08:21:36'),
 (10, 'carts', 'carts', 'Cart', 'Carts', NULL, 'App\\Cart', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:29:19', '2019-06-13 04:34:17'),
 (11, 'cancels', 'cancels', 'Cancel', 'Cancels', NULL, 'App\\Cancel', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 02:30:37', '2019-06-13 04:33:53'),
 (12, 'products', 'products', 'Product', 'Products', NULL, 'App\\Product', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 04:10:11', '2019-06-13 04:35:58'),
-(13, 'categories', 'categories', 'Category', 'Categories', NULL, 'App\\Category', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 04:11:16', '2019-06-13 04:34:35'),
+(13, 'categories', 'categories', 'Category', 'Categories', NULL, 'App\\Category', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 04:11:16', '2019-06-18 05:45:20'),
 (14, 'slide_shows', 'slide-shows', 'Slide Show', 'Slide Shows', NULL, 'App\\SlideShow', NULL, NULL, NULL, 1, 0, '{\"order_column\":null,\"order_display_column\":null,\"order_direction\":\"asc\",\"default_search_key\":null,\"scope\":null}', '2019-06-13 04:36:50', '2019-06-13 04:37:05');
 
 -- --------------------------------------------------------
@@ -286,7 +292,7 @@ CREATE TABLE `menu_items` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `route` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parameters` text COLLATE utf8mb4_unicode_ci
+  `parameters` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -389,10 +395,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `customer_id`, `pay_id`, `address`, `phone`, `total`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 'asdasd, das', '42434', 59000, 'pending', '2019-06-13 02:43:47', '2019-06-13 02:43:47'),
-(2, 1, 1, 'asdasd, das', '42434', 59000, 'pending', '2019-06-13 02:44:18', '2019-06-13 02:44:18'),
-(3, 1, 2, 'asdasd, das', '42434', 118000, 'pending', '2019-06-13 02:44:42', '2019-06-13 02:44:42'),
-(4, 1, 2, 'asdasd, das', '42434', 29888, 'pending', '2019-06-13 04:32:42', '2019-06-13 04:32:42');
+(14, 2, 1, 'asdasd, das', '42434', 161887, 'pending', '2019-06-21 08:12:40', '2019-06-21 08:12:40');
 
 -- --------------------------------------------------------
 
@@ -418,11 +421,9 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`id`, `customer_id`, `order_id`, `product_id`, `price`, `qty`, `total`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 59000.00, 1, 59000, 'pending', '2019-06-13 02:43:47', '2019-06-13 02:43:47'),
-(2, 1, 2, 2, 59000.00, 1, 59000, 'pending', '2019-06-13 02:44:18', '2019-06-13 02:44:18'),
-(3, 1, 3, 1, 59000.00, 1, 59000, 'pending', '2019-06-13 02:44:00', '2019-06-13 03:00:02'),
-(4, 1, 3, 2, 59000.00, 1, 59000, 'pending', '2019-06-13 02:44:42', '2019-06-13 02:44:42'),
-(5, 1, 4, 3, 29888.00, 1, 29888, 'pending', '2019-06-13 04:32:42', '2019-06-13 04:32:42');
+(13, 2, 14, 26, 13999.00, 1, 13999, 'pending', '2019-06-21 08:12:40', '2019-06-21 08:12:40'),
+(14, 2, 14, 33, 59000.00, 2, 118000, 'success', '2019-06-21 08:12:00', '2019-06-21 08:14:57'),
+(15, 2, 14, 29, 29888.00, 1, 29888, 'cancel', '2019-06-21 08:12:00', '2019-06-21 08:17:52');
 
 -- --------------------------------------------------------
 
@@ -434,12 +435,12 @@ CREATE TABLE `pages` (
   `id` int(10) UNSIGNED NOT NULL,
   `author_id` int(11) NOT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
-  `body` text COLLATE utf8mb4_unicode_ci,
+  `excerpt` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
+  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('ACTIVE','INACTIVE') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'INACTIVE',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -668,14 +669,14 @@ CREATE TABLE `posts` (
   `category_id` int(11) DEFAULT NULL,
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `seo_title` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci,
+  `excerpt` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
+  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('PUBLISHED','DRAFT','PENDING') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
-  `featured` tinyint(1) NOT NULL DEFAULT '0',
+  `featured` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -690,8 +691,8 @@ CREATE TABLE `products` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category_id` bigint(20) NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` text COLLATE utf8mb4_unicode_ci,
-  `description` text COLLATE utf8mb4_unicode_ci,
+  `title` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `qty` int(11) NOT NULL,
   `price` double(8,2) NOT NULL,
   `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -704,9 +705,30 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `name`, `title`, `description`, `qty`, `price`, `image`, `created_at`, `updated_at`) VALUES
-(1, 2, 'Iphone x', 'Ipone x ,abc', 'สมาร์ทโฟน (โทรศัพท์มือถือพร้อมระบบปฏิบัติการ)\r\nจอแสดงผล Super Retina HD 24-bit (16 ล้านสี) \r\n- ระบบสัมผัส Multi-Touch\r\n- กว้าง 5.8 นิ้ว (แนวทะแยง)\r\n- ความละเอียด 1125 x 2436 พิกเซล (458 ppi) \r\n- Capacitive \r\n- Corning Gorilla Glass 5 \r\n- ระบบป้องกัน - ฝุ่นละออง (Resistance to dust) \r\n- ป้องกันรอยนิ้วมือ (Anti-fingerprint display coating)\r\nระบบเซ็นเซอร์ (Sensor) \r\n- การยืนยันตัวตนด้วยใบหน้า (Face ID)	\r\n- ระบบหมุนภาพอัตโนมัติ (Accelerometer) \r\n- ตรวจจับแสงปรับความสว่างอัตโนมัติ (Ambient light) \r\n- ระบบเปิด/ปิดหน้าจออัตโนมัติขณะสนทนา (Proximity) \r\n- ระบบเซนเซอร์หมุนภาพ 3 แกน (Three-axis gyroscope) \r\n- ระบบวัดความกดอากาศ (Barometer)\r\nคุณสมบัติการกันน้ำ (Waterproof)\r\n- กันน้ำได้ชั่วคราว\r\n- กันน้ำที่ความลึกไม่เกิน 1 เมตร\r\nมีสีให้เลือก (Colors) : Space Gray, Silver', 300, 59000.00, 'images/SJgZQuXz8V6KmpnHopydxgKupsrny9P8WVmf8MBl.jpeg', '2019-06-13 02:40:06', '2019-06-13 02:40:06'),
-(2, 3, 'Galaxy S10', 'สินค้า', 'ระบบปฏิบัติการ: Android 9.0 (Pie)\r\nหน่วยประมวลผล : Exynos 9820 Octa Core\r\n- ความเร็ว : 2.7 MHz\r\nหน่วยความจำ 128/512 GB (ตัวเครื่อง)\r\n- RAM 8GB\r\nการ์ดหน่วยความจำ\r\n  - microSD สูงสุด 512 GB', 807, 59000.00, 'images/Kj3k0lHJsHU57KIxQZOrg3Lk74kbefjyV3PyKfn9.jpeg', '2019-06-13 02:41:46', '2019-06-13 02:41:46'),
-(3, 4, 'XIAUMI', 'MI', 'MIPHONE', 807, 29888.00, 'products\\June2019\\kUVlNzxDhR1F9dq9E9nL.jpg', '2019-06-13 04:31:35', '2019-06-13 04:31:35');
+(25, 3, 'Samsung Galaxy S9+', 'Samsung Galaxy S9+ 6 GB RAM 6.2 นิ้ว 3 กล้อง สูงสุด 12 MP FF (F1.5) - โทรศัพท์มือถือ', 'รายละเอียดสินค้า Samsung Galaxy S9+ 6 GB RAM 6.2 นิ้ว 3 กล้อง สูงสุด 12 MP FF (F1.5) - โทรศัพท์มือถือ\r\nขนาดหน้าจอ 6.2\" ความละเอียด 529ppi\r\nการปฏิวัติกล้องที่ฉลาดเหมือนดวงตาของมนุษย์ด้วยรูรับแสงคู่ปรับตามสภาพแสงต่างๆได้อย่างง่ายดาย\r\nแต่งเติมทุกอารมณ์ด้วยสติกเกอร์ AR Emoji สร้างตัวการ์ตูนเสมือนจริงจากตัวคุณเอง\r\nIntelligent Scan เทคโนโลยีที่รวมการจดจำใบหน้า และการสแกนม่านตาเพื่อให้การปลดล็อค\r\nLive Translation อ่านสิ่งที่ดวงตาของคุณไม่สามารถอ่านได้ทันที\r\nพลังเสียงคมชัดจากลำโพงสเตอริโอที่ปรับแต่งเสียงโดย AKG\r\nคุณสมบัติเด่น\r\n\r\n\r\n\r\nการปฏิวัติกล้อง ที่ฉลาดเหมือนดวงตาของมนุษย์ด้วยรูรับแสงคู่ โดยปรับตามสภาพแสงต่างๆได้อย่างง่ายดาย ให้คุณสามารถถ่ายภาพสวยแม้ในที่แสงมากและในที่แสงน้อย\r\nSuper Slow-mo ช่วยบันทึกสิ่งต่างๆที่คุณอาจพลาดได้ในช่วงพริบตา ใส่เพลงหรือเปลี่ยนให้เป็นไฟล์ GIF แบบเล่นวนซ้ำ และแชร์ได้ทันที\r\nแต่งเติมทุกอารมณ์ด้วยสติกเกอร์ AR Emoji สร้างตัวการ์ตูนเสมือนจริงจากตัวคุณเองได้ง่ายๆ เพียงถ่ายภาพตัวเอง จากนั้นแชร์ความรู้สึกของคุณเป็นสติกเกอร์และวิดีโออีโมจิ\r\nIntelligent Scan เทคโนโลยีที่รวมการจดจำใบหน้า และการสแกนม่านตาเพื่อให้การปลดล็อคง่ายขึ้นแม้ในที่แสงน้อย\r\nLive Translation อ่านสิ่งที่ดวงตาของคุณไม่สามารถอ่านได้ทันที แปลภาษาทันที ทุกครั้งที่ต้องการ Live Translation ช่วยให้คุณเปิดโลกใบใหม่\r\nMulti Device Experience แชร์รูปภาพและวิดีโอของคุณอย่างง่ายดาย โดยการซิงค์อุปกรณ์ต่างๆด้วยซัมซุงแอคเคาน์\r\nพลังเสียงคมชัดจากลำโพงสเตอริโอที่ปรับแต่งเสียงโดย AKG ให้เสียงที่ทรงพลังมากถึง 1.4 เท่าเมื่อเทียบกับโทรศัพท์กาแล็กซี่รุ่นก่อน', 500, 59000.00, 'products\\June2019\\mi4Cj4Vm3kEHWgwCgyPd.png', '2019-06-21 07:27:46', '2019-06-21 07:27:46'),
+(26, 2, 'Apple iPad', 'Apple iPad 9.7-inch with WiFi, 32GB (2018 model)', 'จอภาพ Multi-Touch แบ็คไลท์แบบ LED ขนาด9.7 นิ้ว(แนวทแยง) พร้อมเทคโนโลยี IPS\r\nชิพ A10 Fusion พร้อมสถาปัตยกรรม64 บิต โปรเซสเซอร์ร่วม M10 ในตัว\r\nกล้องความละเอียด8 เมกะพิกเซล\r\nบันทึกวิดีโอระดับ HD 1080p', 766, 13999.00, 'products\\June2019\\RFIvWFTCwxNjsIuAlo8j.PNG', '2019-06-21 07:36:46', '2019-06-21 07:36:46'),
+(27, 2, 'Apple iPhone X', 'Apple iPhone X 256GB Space Grey', 'รายละเอียดสินค้า Apple iPhone X 256GB Space Grey\r\nหน้าจอ Super Retina ขนาด 5.8 นิ้วไม่ใช่แค่ทั้งใหญ่เต็มมือ แต่ยังสวยเต็มตาด้วยเช่นกัน\r\nจอภาพโค้งรับกับดีไซน์แบบโค้งอย่างแม่นยำ ไปจนจรดมุมมนทั้งสี่อย่างสวยงามลงตัว\r\nดีไซน์ใหม่หมดด้วยกระจกที่แข็งแกร่งที่สุดเท่าที่เคยมีมา\r\nกล้องหลังทั้งสองตัวมาพร้อมระบบป้องกันภาพสั่นไหวแบบออปติคอลและเลนส์ไวแสง\r\nชิพ A11 Bionic คือชิพที่ทรงพลังและฉลาดที่สุดเท่าที่เคยมีมาในสมาร์ทโฟน', 400, 59000.00, 'products\\June2019\\b7L05TfI3rmKhC9ZB1qV.PNG', '2019-06-21 07:41:02', '2019-06-21 07:41:02'),
+(28, 4, 'Xiaomi Redmi Note 7', 'Xiaomi Redmi Note 7 4GB RAM 128GB ROM', 'รายละเอียดสินค้า Xiaomi Mi 8 Pro EU 8+128G (Transparent Titanium)\r\nDisplay: 6.21 inch, 2248 x 1080 Pixel Screen\r\nCPU: Qualcomm Snapdragon 845 Octa Core 2.8GHz\r\nSystem: Android 8.1\r\nRAM + ROM: 8GB RAM + 128GB ROM\r\nCamera: 12.0MP + 12.0MP rear camera + 20.0MP front camera', 299, 21000.00, 'products\\June2019\\cw1Zdi5XEbkq8n4lyNV7.PNG', '2019-06-21 07:50:32', '2019-06-21 07:50:32'),
+(29, 4, 'Xiaomi Redmi K20 Pro', '【Xiaomi Redmi K20 Pro】【Mi 9T Pro】 【Global ROM】【Global version 】', 'สมาร์ทโฟน (โทรศัพท์มือถือพร้อมระบบปฏิบัติการ)\r\nจอแสดงผล AMOLED 24-bit (16 ล้านสี) \r\n- จอแสดงผล HDR\r\n- ระบบสัมผัส Multi-Touch\r\n- กว้าง 6.39 นิ้ว (แนวทะแยง)\r\n- ความละเอียด 2340 x 1080 พิกเซล (403 ppi) \r\n- Capacitive \r\n- Corning Gorilla Glass 5\r\nระบบเซ็นเซอร์ (Sensor) \r\n- ระบบสแกนลายนิ้วมือใต้หน้าจอ (Fingerprint Under Display)	\r\n- ระบบหมุนภาพอัตโนมัติ (Accelerometer) \r\n- ตรวจจับแสงปรับความสว่างอัตโนมัติ (Ambient light) \r\n- ระบบเปิด/ปิดหน้าจออัตโนมัติขณะสนทนา (Proximity) \r\n- ระบบเซนเซอร์หมุนภาพ (Gyroscope) \r\n- ปรับมุมมองการแสดงผลอัตโนมัติ (Orientation)', 800, 29888.00, 'products\\June2019\\J6flYQ2o7z9lbbq31Y3S.PNG', '2019-06-21 07:54:22', '2019-06-21 07:54:22'),
+(30, 3, 'Samsung Galaxy Tab A 8.0', 'Samsung Galaxy Tab A 8.0\" with S Pen (Sandy White)', 'Product details of Samsung Galaxy Tab A 8.0\" with S Pen (White)\r\nคุณสมบัติเด่น\r\n\r\nขับเคลื่อนด้วยโปรเซสเซอร์ 1.2 GHz Quad Core, 2 GB RAM\r\nระบบปฏิบัติการรุ่นล่าสุด Lollipop\r\nมีความหนาเพียงแค่ 7.5 มม. และน้ำหนักเพียง 490 กรัมเท่านั้น\r\nเหมาะสมอย่างมากสำหรับผู้ที่ชอบอ่านหนังสือ\r\nกล้องหลัง 5 ล้านพิกเซล โฟกัสอัตโนมัติช่วยเพิ่มความสะดวกในการถ่ายภาพ\r\nปากกาอัจฉริยะ เขียนได้เหมือนจริง\r\nจัดการทุกอย่างได้ง่ายขึ้น ด้วยฟังก์ชั่น Air Command', 789, 8799.00, 'products\\June2019\\ScPU77vrnZkGeYTf7Mxc.PNG', '2019-06-21 07:59:46', '2019-06-21 07:59:46'),
+(31, 3, 'Samsung Galaxy S9+', 'Samsung Galaxy S9+ 6 GB RAM 6.2 นิ้ว 3 กล้อง สูงสุด 12 MP FF (F1.5) - โทรศัพท์มือถือ', 'รายละเอียดสินค้า Samsung Galaxy S9+ 6 GB RAM 6.2 นิ้ว 3 กล้อง สูงสุด 12 MP FF (F1.5) - โทรศัพท์มือถือ\r\nขนาดหน้าจอ 6.2\" ความละเอียด 529ppi\r\nการปฏิวัติกล้องที่ฉลาดเหมือนดวงตาของมนุษย์ด้วยรูรับแสงคู่ปรับตามสภาพแสงต่างๆได้อย่างง่ายดาย\r\nแต่งเติมทุกอารมณ์ด้วยสติกเกอร์ AR Emoji สร้างตัวการ์ตูนเสมือนจริงจากตัวคุณเอง\r\nIntelligent Scan เทคโนโลยีที่รวมการจดจำใบหน้า และการสแกนม่านตาเพื่อให้การปลดล็อค\r\nLive Translation อ่านสิ่งที่ดวงตาของคุณไม่สามารถอ่านได้ทันที\r\nพลังเสียงคมชัดจากลำโพงสเตอริโอที่ปรับแต่งเสียงโดย AKG\r\nคุณสมบัติเด่น\r\n\r\n\r\n\r\nการปฏิวัติกล้อง ที่ฉลาดเหมือนดวงตาของมนุษย์ด้วยรูรับแสงคู่ โดยปรับตามสภาพแสงต่างๆได้อย่างง่ายดาย ให้คุณสามารถถ่ายภาพสวยแม้ในที่แสงมากและในที่แสงน้อย\r\nSuper Slow-mo ช่วยบันทึกสิ่งต่างๆที่คุณอาจพลาดได้ในช่วงพริบตา ใส่เพลงหรือเปลี่ยนให้เป็นไฟล์ GIF แบบเล่นวนซ้ำ และแชร์ได้ทันที\r\nแต่งเติมทุกอารมณ์ด้วยสติกเกอร์ AR Emoji สร้างตัวการ์ตูนเสมือนจริงจากตัวคุณเองได้ง่ายๆ เพียงถ่ายภาพตัวเอง จากนั้นแชร์ความรู้สึกของคุณเป็นสติกเกอร์และวิดีโออีโมจิ\r\nIntelligent Scan เทคโนโลยีที่รวมการจดจำใบหน้า และการสแกนม่านตาเพื่อให้การปลดล็อคง่ายขึ้นแม้ในที่แสงน้อย\r\nLive Translation อ่านสิ่งที่ดวงตาของคุณไม่สามารถอ่านได้ทันที แปลภาษาทันที ทุกครั้งที่ต้องการ Live Translation ช่วยให้คุณเปิดโลกใบใหม่\r\nMulti Device Experience แชร์รูปภาพและวิดีโอของคุณอย่างง่ายดาย โดยการซิงค์อุปกรณ์ต่างๆด้วยซัมซุงแอคเคาน์\r\nพลังเสียงคมชัดจากลำโพงสเตอริโอที่ปรับแต่งเสียงโดย AKG ให้เสียงที่ทรงพลังมากถึง 1.4 เท่าเมื่อเทียบกับโทรศัพท์กาแล็กซี่รุ่นก่อน', 500, 59000.00, 'products\\June2019\\mi4Cj4Vm3kEHWgwCgyPd.png', '2019-06-21 07:27:46', '2019-06-21 07:27:46'),
+(32, 2, 'Apple iPad', 'Apple iPad 9.7-inch with WiFi, 32GB (2018 model)', 'จอภาพ Multi-Touch แบ็คไลท์แบบ LED ขนาด9.7 นิ้ว(แนวทแยง) พร้อมเทคโนโลยี IPS\r\nชิพ A10 Fusion พร้อมสถาปัตยกรรม64 บิต โปรเซสเซอร์ร่วม M10 ในตัว\r\nกล้องความละเอียด8 เมกะพิกเซล\r\nบันทึกวิดีโอระดับ HD 1080p', 766, 13999.00, 'products\\June2019\\RFIvWFTCwxNjsIuAlo8j.PNG', '2019-06-21 07:36:46', '2019-06-21 07:36:46'),
+(33, 2, 'Apple iPhone X', 'Apple iPhone X 256GB Space Grey', 'รายละเอียดสินค้า Apple iPhone X 256GB Space Grey\r\nหน้าจอ Super Retina ขนาด 5.8 นิ้วไม่ใช่แค่ทั้งใหญ่เต็มมือ แต่ยังสวยเต็มตาด้วยเช่นกัน\r\nจอภาพโค้งรับกับดีไซน์แบบโค้งอย่างแม่นยำ ไปจนจรดมุมมนทั้งสี่อย่างสวยงามลงตัว\r\nดีไซน์ใหม่หมดด้วยกระจกที่แข็งแกร่งที่สุดเท่าที่เคยมีมา\r\nกล้องหลังทั้งสองตัวมาพร้อมระบบป้องกันภาพสั่นไหวแบบออปติคอลและเลนส์ไวแสง\r\nชิพ A11 Bionic คือชิพที่ทรงพลังและฉลาดที่สุดเท่าที่เคยมีมาในสมาร์ทโฟน', 400, 59000.00, 'products\\June2019\\b7L05TfI3rmKhC9ZB1qV.PNG', '2019-06-21 07:41:02', '2019-06-21 07:41:02'),
+(34, 4, 'Xiaomi Redmi Note 7', 'Xiaomi Redmi Note 7 4GB RAM 128GB ROM', 'รายละเอียดสินค้า Xiaomi Mi 8 Pro EU 8+128G (Transparent Titanium)\r\nDisplay: 6.21 inch, 2248 x 1080 Pixel Screen\r\nCPU: Qualcomm Snapdragon 845 Octa Core 2.8GHz\r\nSystem: Android 8.1\r\nRAM + ROM: 8GB RAM + 128GB ROM\r\nCamera: 12.0MP + 12.0MP rear camera + 20.0MP front camera', 299, 21000.00, 'products\\June2019\\cw1Zdi5XEbkq8n4lyNV7.PNG', '2019-06-21 07:50:32', '2019-06-21 07:50:32'),
+(35, 4, 'Xiaomi Redmi K20 Pro', '【Xiaomi Redmi K20 Pro】【Mi 9T Pro】 【Global ROM】【Global version 】', 'สมาร์ทโฟน (โทรศัพท์มือถือพร้อมระบบปฏิบัติการ)\r\nจอแสดงผล AMOLED 24-bit (16 ล้านสี) \r\n- จอแสดงผล HDR\r\n- ระบบสัมผัส Multi-Touch\r\n- กว้าง 6.39 นิ้ว (แนวทะแยง)\r\n- ความละเอียด 2340 x 1080 พิกเซล (403 ppi) \r\n- Capacitive \r\n- Corning Gorilla Glass 5\r\nระบบเซ็นเซอร์ (Sensor) \r\n- ระบบสแกนลายนิ้วมือใต้หน้าจอ (Fingerprint Under Display)	\r\n- ระบบหมุนภาพอัตโนมัติ (Accelerometer) \r\n- ตรวจจับแสงปรับความสว่างอัตโนมัติ (Ambient light) \r\n- ระบบเปิด/ปิดหน้าจออัตโนมัติขณะสนทนา (Proximity) \r\n- ระบบเซนเซอร์หมุนภาพ (Gyroscope) \r\n- ปรับมุมมองการแสดงผลอัตโนมัติ (Orientation)', 800, 29888.00, 'products\\June2019\\J6flYQ2o7z9lbbq31Y3S.PNG', '2019-06-21 07:54:22', '2019-06-21 07:54:22'),
+(36, 3, 'Samsung Galaxy Tab A 8.0', 'Samsung Galaxy Tab A 8.0\" with S Pen (Sandy White)', 'Product details of Samsung Galaxy Tab A 8.0\" with S Pen (White)\r\nคุณสมบัติเด่น\r\n\r\nขับเคลื่อนด้วยโปรเซสเซอร์ 1.2 GHz Quad Core, 2 GB RAM\r\nระบบปฏิบัติการรุ่นล่าสุด Lollipop\r\nมีความหนาเพียงแค่ 7.5 มม. และน้ำหนักเพียง 490 กรัมเท่านั้น\r\nเหมาะสมอย่างมากสำหรับผู้ที่ชอบอ่านหนังสือ\r\nกล้องหลัง 5 ล้านพิกเซล โฟกัสอัตโนมัติช่วยเพิ่มความสะดวกในการถ่ายภาพ\r\nปากกาอัจฉริยะ เขียนได้เหมือนจริง\r\nจัดการทุกอย่างได้ง่ายขึ้น ด้วยฟังก์ชั่น Air Command', 789, 8799.00, 'products\\June2019\\ScPU77vrnZkGeYTf7Mxc.PNG', '2019-06-21 07:59:46', '2019-06-21 07:59:46'),
+(37, 3, 'Samsung Galaxy S9+', 'Samsung Galaxy S9+ 6 GB RAM 6.2 นิ้ว 3 กล้อง สูงสุด 12 MP FF (F1.5) - โทรศัพท์มือถือ', 'รายละเอียดสินค้า Samsung Galaxy S9+ 6 GB RAM 6.2 นิ้ว 3 กล้อง สูงสุด 12 MP FF (F1.5) - โทรศัพท์มือถือ\r\nขนาดหน้าจอ 6.2\" ความละเอียด 529ppi\r\nการปฏิวัติกล้องที่ฉลาดเหมือนดวงตาของมนุษย์ด้วยรูรับแสงคู่ปรับตามสภาพแสงต่างๆได้อย่างง่ายดาย\r\nแต่งเติมทุกอารมณ์ด้วยสติกเกอร์ AR Emoji สร้างตัวการ์ตูนเสมือนจริงจากตัวคุณเอง\r\nIntelligent Scan เทคโนโลยีที่รวมการจดจำใบหน้า และการสแกนม่านตาเพื่อให้การปลดล็อค\r\nLive Translation อ่านสิ่งที่ดวงตาของคุณไม่สามารถอ่านได้ทันที\r\nพลังเสียงคมชัดจากลำโพงสเตอริโอที่ปรับแต่งเสียงโดย AKG\r\nคุณสมบัติเด่น\r\n\r\n\r\n\r\nการปฏิวัติกล้อง ที่ฉลาดเหมือนดวงตาของมนุษย์ด้วยรูรับแสงคู่ โดยปรับตามสภาพแสงต่างๆได้อย่างง่ายดาย ให้คุณสามารถถ่ายภาพสวยแม้ในที่แสงมากและในที่แสงน้อย\r\nSuper Slow-mo ช่วยบันทึกสิ่งต่างๆที่คุณอาจพลาดได้ในช่วงพริบตา ใส่เพลงหรือเปลี่ยนให้เป็นไฟล์ GIF แบบเล่นวนซ้ำ และแชร์ได้ทันที\r\nแต่งเติมทุกอารมณ์ด้วยสติกเกอร์ AR Emoji สร้างตัวการ์ตูนเสมือนจริงจากตัวคุณเองได้ง่ายๆ เพียงถ่ายภาพตัวเอง จากนั้นแชร์ความรู้สึกของคุณเป็นสติกเกอร์และวิดีโออีโมจิ\r\nIntelligent Scan เทคโนโลยีที่รวมการจดจำใบหน้า และการสแกนม่านตาเพื่อให้การปลดล็อคง่ายขึ้นแม้ในที่แสงน้อย\r\nLive Translation อ่านสิ่งที่ดวงตาของคุณไม่สามารถอ่านได้ทันที แปลภาษาทันที ทุกครั้งที่ต้องการ Live Translation ช่วยให้คุณเปิดโลกใบใหม่\r\nMulti Device Experience แชร์รูปภาพและวิดีโอของคุณอย่างง่ายดาย โดยการซิงค์อุปกรณ์ต่างๆด้วยซัมซุงแอคเคาน์\r\nพลังเสียงคมชัดจากลำโพงสเตอริโอที่ปรับแต่งเสียงโดย AKG ให้เสียงที่ทรงพลังมากถึง 1.4 เท่าเมื่อเทียบกับโทรศัพท์กาแล็กซี่รุ่นก่อน', 500, 59000.00, 'products\\June2019\\mi4Cj4Vm3kEHWgwCgyPd.png', '2019-06-21 07:27:46', '2019-06-21 07:27:46'),
+(38, 2, 'Apple iPad', 'Apple iPad 9.7-inch with WiFi, 32GB (2018 model)', 'จอภาพ Multi-Touch แบ็คไลท์แบบ LED ขนาด9.7 นิ้ว(แนวทแยง) พร้อมเทคโนโลยี IPS\r\nชิพ A10 Fusion พร้อมสถาปัตยกรรม64 บิต โปรเซสเซอร์ร่วม M10 ในตัว\r\nกล้องความละเอียด8 เมกะพิกเซล\r\nบันทึกวิดีโอระดับ HD 1080p', 766, 13999.00, 'products\\June2019\\RFIvWFTCwxNjsIuAlo8j.PNG', '2019-06-21 07:36:46', '2019-06-21 07:36:46'),
+(39, 2, 'Apple iPhone X', 'Apple iPhone X 256GB Space Grey', 'รายละเอียดสินค้า Apple iPhone X 256GB Space Grey\r\nหน้าจอ Super Retina ขนาด 5.8 นิ้วไม่ใช่แค่ทั้งใหญ่เต็มมือ แต่ยังสวยเต็มตาด้วยเช่นกัน\r\nจอภาพโค้งรับกับดีไซน์แบบโค้งอย่างแม่นยำ ไปจนจรดมุมมนทั้งสี่อย่างสวยงามลงตัว\r\nดีไซน์ใหม่หมดด้วยกระจกที่แข็งแกร่งที่สุดเท่าที่เคยมีมา\r\nกล้องหลังทั้งสองตัวมาพร้อมระบบป้องกันภาพสั่นไหวแบบออปติคอลและเลนส์ไวแสง\r\nชิพ A11 Bionic คือชิพที่ทรงพลังและฉลาดที่สุดเท่าที่เคยมีมาในสมาร์ทโฟน', 400, 59000.00, 'products\\June2019\\b7L05TfI3rmKhC9ZB1qV.PNG', '2019-06-21 07:41:02', '2019-06-21 07:41:02'),
+(40, 4, 'Xiaomi Redmi Note 7', 'Xiaomi Redmi Note 7 4GB RAM 128GB ROM', 'รายละเอียดสินค้า Xiaomi Mi 8 Pro EU 8+128G (Transparent Titanium)\r\nDisplay: 6.21 inch, 2248 x 1080 Pixel Screen\r\nCPU: Qualcomm Snapdragon 845 Octa Core 2.8GHz\r\nSystem: Android 8.1\r\nRAM + ROM: 8GB RAM + 128GB ROM\r\nCamera: 12.0MP + 12.0MP rear camera + 20.0MP front camera', 299, 21000.00, 'products\\June2019\\cw1Zdi5XEbkq8n4lyNV7.PNG', '2019-06-21 07:50:32', '2019-06-21 07:50:32'),
+(41, 4, 'Xiaomi Redmi K20 Pro', '【Xiaomi Redmi K20 Pro】【Mi 9T Pro】 【Global ROM】【Global version 】', 'สมาร์ทโฟน (โทรศัพท์มือถือพร้อมระบบปฏิบัติการ)\r\nจอแสดงผล AMOLED 24-bit (16 ล้านสี) \r\n- จอแสดงผล HDR\r\n- ระบบสัมผัส Multi-Touch\r\n- กว้าง 6.39 นิ้ว (แนวทะแยง)\r\n- ความละเอียด 2340 x 1080 พิกเซล (403 ppi) \r\n- Capacitive \r\n- Corning Gorilla Glass 5\r\nระบบเซ็นเซอร์ (Sensor) \r\n- ระบบสแกนลายนิ้วมือใต้หน้าจอ (Fingerprint Under Display)	\r\n- ระบบหมุนภาพอัตโนมัติ (Accelerometer) \r\n- ตรวจจับแสงปรับความสว่างอัตโนมัติ (Ambient light) \r\n- ระบบเปิด/ปิดหน้าจออัตโนมัติขณะสนทนา (Proximity) \r\n- ระบบเซนเซอร์หมุนภาพ (Gyroscope) \r\n- ปรับมุมมองการแสดงผลอัตโนมัติ (Orientation)', 800, 29888.00, 'products\\June2019\\J6flYQ2o7z9lbbq31Y3S.PNG', '2019-06-21 07:54:22', '2019-06-21 07:54:22'),
+(42, 3, 'Samsung Galaxy Tab A 8.0', 'Samsung Galaxy Tab A 8.0\" with S Pen (Sandy White)', 'Product details of Samsung Galaxy Tab A 8.0\" with S Pen (White)\r\nคุณสมบัติเด่น\r\n\r\nขับเคลื่อนด้วยโปรเซสเซอร์ 1.2 GHz Quad Core, 2 GB RAM\r\nระบบปฏิบัติการรุ่นล่าสุด Lollipop\r\nมีความหนาเพียงแค่ 7.5 มม. และน้ำหนักเพียง 490 กรัมเท่านั้น\r\nเหมาะสมอย่างมากสำหรับผู้ที่ชอบอ่านหนังสือ\r\nกล้องหลัง 5 ล้านพิกเซล โฟกัสอัตโนมัติช่วยเพิ่มความสะดวกในการถ่ายภาพ\r\nปากกาอัจฉริยะ เขียนได้เหมือนจริง\r\nจัดการทุกอย่างได้ง่ายขึ้น ด้วยฟังก์ชั่น Air Command', 789, 8799.00, 'products\\June2019\\ScPU77vrnZkGeYTf7Mxc.PNG', '2019-06-21 07:59:46', '2019-06-21 07:59:46'),
+(43, 3, 'Samsung Galaxy S9+', 'Samsung Galaxy S9+ 6 GB RAM 6.2 นิ้ว 3 กล้อง สูงสุด 12 MP FF (F1.5) - โทรศัพท์มือถือ', 'รายละเอียดสินค้า Samsung Galaxy S9+ 6 GB RAM 6.2 นิ้ว 3 กล้อง สูงสุด 12 MP FF (F1.5) - โทรศัพท์มือถือ\r\nขนาดหน้าจอ 6.2\" ความละเอียด 529ppi\r\nการปฏิวัติกล้องที่ฉลาดเหมือนดวงตาของมนุษย์ด้วยรูรับแสงคู่ปรับตามสภาพแสงต่างๆได้อย่างง่ายดาย\r\nแต่งเติมทุกอารมณ์ด้วยสติกเกอร์ AR Emoji สร้างตัวการ์ตูนเสมือนจริงจากตัวคุณเอง\r\nIntelligent Scan เทคโนโลยีที่รวมการจดจำใบหน้า และการสแกนม่านตาเพื่อให้การปลดล็อค\r\nLive Translation อ่านสิ่งที่ดวงตาของคุณไม่สามารถอ่านได้ทันที\r\nพลังเสียงคมชัดจากลำโพงสเตอริโอที่ปรับแต่งเสียงโดย AKG\r\nคุณสมบัติเด่น\r\n\r\n\r\n\r\nการปฏิวัติกล้อง ที่ฉลาดเหมือนดวงตาของมนุษย์ด้วยรูรับแสงคู่ โดยปรับตามสภาพแสงต่างๆได้อย่างง่ายดาย ให้คุณสามารถถ่ายภาพสวยแม้ในที่แสงมากและในที่แสงน้อย\r\nSuper Slow-mo ช่วยบันทึกสิ่งต่างๆที่คุณอาจพลาดได้ในช่วงพริบตา ใส่เพลงหรือเปลี่ยนให้เป็นไฟล์ GIF แบบเล่นวนซ้ำ และแชร์ได้ทันที\r\nแต่งเติมทุกอารมณ์ด้วยสติกเกอร์ AR Emoji สร้างตัวการ์ตูนเสมือนจริงจากตัวคุณเองได้ง่ายๆ เพียงถ่ายภาพตัวเอง จากนั้นแชร์ความรู้สึกของคุณเป็นสติกเกอร์และวิดีโออีโมจิ\r\nIntelligent Scan เทคโนโลยีที่รวมการจดจำใบหน้า และการสแกนม่านตาเพื่อให้การปลดล็อคง่ายขึ้นแม้ในที่แสงน้อย\r\nLive Translation อ่านสิ่งที่ดวงตาของคุณไม่สามารถอ่านได้ทันที แปลภาษาทันที ทุกครั้งที่ต้องการ Live Translation ช่วยให้คุณเปิดโลกใบใหม่\r\nMulti Device Experience แชร์รูปภาพและวิดีโอของคุณอย่างง่ายดาย โดยการซิงค์อุปกรณ์ต่างๆด้วยซัมซุงแอคเคาน์\r\nพลังเสียงคมชัดจากลำโพงสเตอริโอที่ปรับแต่งเสียงโดย AKG ให้เสียงที่ทรงพลังมากถึง 1.4 เท่าเมื่อเทียบกับโทรศัพท์กาแล็กซี่รุ่นก่อน', 500, 59000.00, 'products\\June2019\\mi4Cj4Vm3kEHWgwCgyPd.png', '2019-06-21 07:27:46', '2019-06-21 07:27:46'),
+(44, 2, 'Apple iPad', 'Apple iPad 9.7-inch with WiFi, 32GB (2018 model)', 'จอภาพ Multi-Touch แบ็คไลท์แบบ LED ขนาด9.7 นิ้ว(แนวทแยง) พร้อมเทคโนโลยี IPS\r\nชิพ A10 Fusion พร้อมสถาปัตยกรรม64 บิต โปรเซสเซอร์ร่วม M10 ในตัว\r\nกล้องความละเอียด8 เมกะพิกเซล\r\nบันทึกวิดีโอระดับ HD 1080p', 766, 13999.00, 'products\\June2019\\RFIvWFTCwxNjsIuAlo8j.PNG', '2019-06-21 07:36:46', '2019-06-21 07:36:46'),
+(45, 2, 'Apple iPhone X', 'Apple iPhone X 256GB Space Grey', 'รายละเอียดสินค้า Apple iPhone X 256GB Space Grey\r\nหน้าจอ Super Retina ขนาด 5.8 นิ้วไม่ใช่แค่ทั้งใหญ่เต็มมือ แต่ยังสวยเต็มตาด้วยเช่นกัน\r\nจอภาพโค้งรับกับดีไซน์แบบโค้งอย่างแม่นยำ ไปจนจรดมุมมนทั้งสี่อย่างสวยงามลงตัว\r\nดีไซน์ใหม่หมดด้วยกระจกที่แข็งแกร่งที่สุดเท่าที่เคยมีมา\r\nกล้องหลังทั้งสองตัวมาพร้อมระบบป้องกันภาพสั่นไหวแบบออปติคอลและเลนส์ไวแสง\r\nชิพ A11 Bionic คือชิพที่ทรงพลังและฉลาดที่สุดเท่าที่เคยมีมาในสมาร์ทโฟน', 400, 59000.00, 'products\\June2019\\b7L05TfI3rmKhC9ZB1qV.PNG', '2019-06-21 07:41:02', '2019-06-21 07:41:02'),
+(46, 4, 'Xiaomi Redmi Note 7', 'Xiaomi Redmi Note 7 4GB RAM 128GB ROM', 'รายละเอียดสินค้า Xiaomi Mi 8 Pro EU 8+128G (Transparent Titanium)\r\nDisplay: 6.21 inch, 2248 x 1080 Pixel Screen\r\nCPU: Qualcomm Snapdragon 845 Octa Core 2.8GHz\r\nSystem: Android 8.1\r\nRAM + ROM: 8GB RAM + 128GB ROM\r\nCamera: 12.0MP + 12.0MP rear camera + 20.0MP front camera', 299, 21000.00, 'products\\June2019\\cw1Zdi5XEbkq8n4lyNV7.PNG', '2019-06-21 07:50:32', '2019-06-21 07:50:32'),
+(47, 4, 'Xiaomi Redmi K20 Pro', '【Xiaomi Redmi K20 Pro】【Mi 9T Pro】 【Global ROM】【Global version 】', 'สมาร์ทโฟน (โทรศัพท์มือถือพร้อมระบบปฏิบัติการ)\r\nจอแสดงผล AMOLED 24-bit (16 ล้านสี) \r\n- จอแสดงผล HDR\r\n- ระบบสัมผัส Multi-Touch\r\n- กว้าง 6.39 นิ้ว (แนวทะแยง)\r\n- ความละเอียด 2340 x 1080 พิกเซล (403 ppi) \r\n- Capacitive \r\n- Corning Gorilla Glass 5\r\nระบบเซ็นเซอร์ (Sensor) \r\n- ระบบสแกนลายนิ้วมือใต้หน้าจอ (Fingerprint Under Display)	\r\n- ระบบหมุนภาพอัตโนมัติ (Accelerometer) \r\n- ตรวจจับแสงปรับความสว่างอัตโนมัติ (Ambient light) \r\n- ระบบเปิด/ปิดหน้าจออัตโนมัติขณะสนทนา (Proximity) \r\n- ระบบเซนเซอร์หมุนภาพ (Gyroscope) \r\n- ปรับมุมมองการแสดงผลอัตโนมัติ (Orientation)', 800, 29888.00, 'products\\June2019\\J6flYQ2o7z9lbbq31Y3S.PNG', '2019-06-21 07:54:22', '2019-06-21 07:54:22'),
+(48, 3, 'Samsung Galaxy Tab A 8.0', 'Samsung Galaxy Tab A 8.0\" with S Pen (Sandy White)', 'Product details of Samsung Galaxy Tab A 8.0\" with S Pen (White)\r\nคุณสมบัติเด่น\r\n\r\nขับเคลื่อนด้วยโปรเซสเซอร์ 1.2 GHz Quad Core, 2 GB RAM\r\nระบบปฏิบัติการรุ่นล่าสุด Lollipop\r\nมีความหนาเพียงแค่ 7.5 มม. และน้ำหนักเพียง 490 กรัมเท่านั้น\r\nเหมาะสมอย่างมากสำหรับผู้ที่ชอบอ่านหนังสือ\r\nกล้องหลัง 5 ล้านพิกเซล โฟกัสอัตโนมัติช่วยเพิ่มความสะดวกในการถ่ายภาพ\r\nปากกาอัจฉริยะ เขียนได้เหมือนจริง\r\nจัดการทุกอย่างได้ง่ายขึ้น ด้วยฟังก์ชั่น Air Command', 789, 8799.00, 'products\\June2019\\ScPU77vrnZkGeYTf7Mxc.PNG', '2019-06-21 07:59:46', '2019-06-21 07:59:46');
 
 -- --------------------------------------------------------
 
@@ -728,7 +750,7 @@ CREATE TABLE `reports` (
 --
 
 INSERT INTO `reports` (`id`, `customer_id`, `orderdetail_id`, `image`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 'images/NkGxl2gOXwuMXGvLsAfQXSxQgQr1J98bhcW8kp2m.jpeg', '2019-06-13 02:48:11', '2019-06-13 02:48:11');
+(4, 2, 14, 'images/2iZyk0MdkbRufmRqro0Lk7H56vc5RHxtzrPY3miA.jpeg', '2019-06-21 08:13:00', '2019-06-21 08:13:00');
 
 -- --------------------------------------------------------
 
@@ -762,10 +784,10 @@ CREATE TABLE `settings` (
   `id` int(10) UNSIGNED NOT NULL,
   `key` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `display_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` text COLLATE utf8mb4_unicode_ci,
-  `details` text COLLATE utf8mb4_unicode_ci,
+  `value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `details` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `order` int(11) NOT NULL DEFAULT '1',
+  `order` int(11) NOT NULL DEFAULT 1,
   `group` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -803,7 +825,8 @@ CREATE TABLE `slide_shows` (
 --
 
 INSERT INTO `slide_shows` (`id`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'slide-shows\\June2019\\ecqPkF2XFd6Wt9xlP9tW.png', '2019-06-13 04:38:13', '2019-06-13 04:38:13');
+(2, 'slide-shows\\June2019\\WdA391hnPwKGV53uFPno.jpg', '2019-06-20 23:52:59', '2019-06-20 23:52:59'),
+(3, 'slide-shows\\June2019\\juWkN5y3L4QHtxUwjaaF.png', '2019-06-20 23:54:01', '2019-06-20 23:54:01');
 
 -- --------------------------------------------------------
 
@@ -837,7 +860,7 @@ CREATE TABLE `users` (
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `settings` text COLLATE utf8mb4_unicode_ci,
+  `settings` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -847,7 +870,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `avatar`, `email_verified_at`, `password`, `remember_token`, `settings`, `created_at`, `updated_at`) VALUES
-(1, 1, 'คุณAdmin', 'admin@admin.com', 'users/default.png', NULL, '$2y$10$d/Y7k7oAcmgSLP6psVSMkOAvazHT.JvI.Lm/gD85LWBR7A1M68VYW', '2t9BNclCgVSukddTixBBOJiJqDTeq8RFON4FXC3L9u1ogbSJkzxMJJN7OWa5', NULL, '2019-06-13 02:18:57', '2019-06-13 02:18:57');
+(2, 1, 'admin', 'admin@admin.com', 'users/default.png', NULL, '$2y$10$4n2NTU3Cmikn1n0Yq3TrTuTuyI7IfSLkQXvygiXMWIo8L2nP2ZD8i', 'Yp8RlW5xJWytTFaepXAIm0uFwROIT5EZ1nd6I30WPqO7O1h9R5AkhBGo2jsa', NULL, '2019-06-20 04:48:10', '2019-06-20 04:48:10');
 
 -- --------------------------------------------------------
 
@@ -865,7 +888,7 @@ CREATE TABLE `user_roles` (
 --
 
 INSERT INTO `user_roles` (`user_id`, `role_id`) VALUES
-(1, 1);
+(2, 1);
 
 --
 -- Indexes for dumped tables
@@ -1041,13 +1064,13 @@ ALTER TABLE `user_roles`
 -- AUTO_INCREMENT for table `cancels`
 --
 ALTER TABLE `cancels`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -1059,7 +1082,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `data_rows`
 --
 ALTER TABLE `data_rows`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `data_types`
@@ -1089,13 +1112,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -1125,13 +1148,13 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1149,7 +1172,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `slide_shows`
 --
 ALTER TABLE `slide_shows`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `translations`
@@ -1161,7 +1184,7 @@ ALTER TABLE `translations`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
