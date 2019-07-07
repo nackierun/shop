@@ -4263,6 +4263,7 @@ class ComposerStaticInit2eb9b8cfc32601f6573c9c0e59777070
         'Stripe\\RequestTelemetry' => __DIR__ . '/..' . '/stripe/stripe-php/lib/RequestTelemetry.php',
         'Stripe\\Review' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Review.php',
         'Stripe\\SKU' => __DIR__ . '/..' . '/stripe/stripe-php/lib/SKU.php',
+        'Stripe\\SetupIntent' => __DIR__ . '/..' . '/stripe/stripe-php/lib/SetupIntent.php',
         'Stripe\\Sigma\\ScheduledQueryRun' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Sigma/ScheduledQueryRun.php',
         'Stripe\\SingletonApiResource' => __DIR__ . '/..' . '/stripe/stripe-php/lib/SingletonApiResource.php',
         'Stripe\\Source' => __DIR__ . '/..' . '/stripe/stripe-php/lib/Source.php',

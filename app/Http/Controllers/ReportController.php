@@ -26,7 +26,7 @@ class ReportController extends Controller
             'orderdetail_id' => $request->orderdetail_id,
             'image'          => $request->file('image')->store('images', 'public'),
         ]);
-        return redirect('customers/orders/. Auth::user()->id )');
+        return redirect('done');
     }
 
     /**
