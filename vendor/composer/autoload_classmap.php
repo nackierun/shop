@@ -3779,6 +3779,7 @@ return array(
     'Stripe\\RequestTelemetry' => $vendorDir . '/stripe/stripe-php/lib/RequestTelemetry.php',
     'Stripe\\Review' => $vendorDir . '/stripe/stripe-php/lib/Review.php',
     'Stripe\\SKU' => $vendorDir . '/stripe/stripe-php/lib/SKU.php',
+    'Stripe\\SetupIntent' => $vendorDir . '/stripe/stripe-php/lib/SetupIntent.php',
     'Stripe\\Sigma\\ScheduledQueryRun' => $vendorDir . '/stripe/stripe-php/lib/Sigma/ScheduledQueryRun.php',
     'Stripe\\SingletonApiResource' => $vendorDir . '/stripe/stripe-php/lib/SingletonApiResource.php',
     'Stripe\\Source' => $vendorDir . '/stripe/stripe-php/lib/Source.php',
