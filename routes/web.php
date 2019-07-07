@@ -53,6 +53,10 @@ Route::post('confirm-pay/','ReportController@confirmReport')->name('send-report'
 //cancel
 Route::get('customers/canceled-order/{id}','CustomersController@canceledorder');
 Route::post('customers/canceled-order','CustomersController@confirmcancel');
+//done
+Route::get('done', function(){
+    return view('checkout/done');
+});
 //end Customers
 
 

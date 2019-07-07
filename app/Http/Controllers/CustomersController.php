@@ -162,7 +162,7 @@ class CustomersController extends Controller
             'customers_id'    => Auth::user()->id,
             'orderdetail_id' => $request->orderdetail_id,
         ]);
-        return redirect('customers/orders/. Auth::user()->id )');
+        return redirect('done');
     }
 
     /**

@@ -69,7 +69,7 @@ class CheckoutController extends Controller
             ]);
         }
         Cart::where('session_id', $session_id)->delete();
-        return redirect('customers/orders/. Auth::user()->id )');
+        return redirect('done');
     }
 
     /**
